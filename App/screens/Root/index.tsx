@@ -34,6 +34,7 @@ const RootScreen = () => {
             <HomeIcon
               width={27}
               height={27}
+              stroke={focused ? '#4A0E5C' : '#ccc'}
             />
           ),
         }}
@@ -43,7 +44,7 @@ const RootScreen = () => {
         name={SCREEN_NAME.ROOT.ADD_CARD_SCREEN}
         component={AddCardScreen}
         options={{
-          tabBarIcon: ({focused}) =>(<AddIcon />),
+          tabBarIcon: ({focused}) => <AddIcon />,
         }}
       />
 
@@ -51,7 +52,9 @@ const RootScreen = () => {
         name={SCREEN_NAME.ROOT.ACCOUNT_SCREEN}
         component={AccountScreen}
         options={{
-          tabBarIcon: ({focused}) => (<AccountIcon/>),
+          tabBarIcon: ({focused}) => (
+            <AccountIcon strokeColor={focused ? '#4A0E5C' : 'red'} />
+          ),
         }}
       />
     </Tab.Navigator>
