@@ -1,10 +1,12 @@
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import styles from './style';
-import SearchIcon from '../../assets/svg/searchIcon';
+import SearchIcon from '../../assets/svg/common/searchIcon';
 import Category from '../../components/category';
 import ScreenName from '../../navigation/ScreenName';
-import HomeIcon from '../../assets/svg/homeIcon';
+import AccountIcon from '../../assets/svg/common/accountIcon';
+import {AppText} from '../../components';
+import {colors} from '../../themes/color';
 
 const HomeScreenView = () => {
   return (
@@ -18,20 +20,22 @@ const HomeScreenView = () => {
             />
           </View>
           <View style={styles.userNameBox}>
-            <Text style={styles.userName}> Welcome back Long</Text>
+            <AppText style={styles.userName}> Welcome back Long</AppText>
           </View>
         </View>
       </View>
       <View style={styles.searchBox}>
         <View>
-          <Text style={styles.searchBoxTitle}>Search Flashcard</Text>
+          <AppText color={colors.black} style={styles.searchBoxTitle}>
+            Search Flashcard
+          </AppText>
         </View>
         <View>
-          <Text style={styles.searchBoxDesc}>
+          <AppText color={colors.black} style={styles.searchBoxDesc}>
             Search through our collection by typing keywords or phrases. Find
             exactly what you're looking for quickly and easily. Simply enter
             your query and browse through the relevant results.
-          </Text>
+          </AppText>
         </View>
         <View style={styles.searchBoxInput}>
           <View style={styles.icon}>
@@ -43,23 +47,25 @@ const HomeScreenView = () => {
       <View style={styles.categories}>
         <View style={styles.categoriesHeader}>
           <View>
-            <Text style={styles.categoriesTitle}>Flashcard categories</Text>
+            <AppText color={colors.black} style={styles.categoriesTitle}>
+              Flashcard categories
+            </AppText>
           </View>
 
           <View style={styles.categoriesBtn}>
             <TouchableOpacity>
-              <Text style={styles.categoriesBtnText}>View all</Text>
+              <AppText style={styles.categoriesBtnText}>View all</AppText>
             </TouchableOpacity>
           </View>
         </View>
         <View style={styles.categoriesContainer}>
           <Category
-            icon={<HomeIcon />}
+            icon={<AccountIcon />}
             title={'Math'}
             categoryScreen={ScreenName.ROOT.ADD_CARD_SCREEN}
           />
           <Category
-            icon={<HomeIcon />}
+            icon={<AccountIcon />}
             title={'Math'}
             categoryScreen={ScreenName.ROOT.ADD_CARD_SCREEN}
           />

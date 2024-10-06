@@ -3,9 +3,9 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {HomeScreen, AddCardScreen, AccountScreen} from '../../screens/index'; // Import các màn hình
 import SCREEN_NAME from '../../navigation/ScreenName'; // Import tên của các màn hình
 import {View} from 'react-native';
-import HomeIcon from '../../assets/svg/homeIcon';
-import AddIcon from '../../assets/svg/addIcon';
-import AccountIcon from '../../assets/svg/accountIcon';
+import HomeIcon from '../../assets/svg/common/homeIcon';
+import AddIcon from '../../assets/svg/common/addIcon';
+import AccountIcon from '../../assets/svg/common/accountIcon';
 
 // Khai báo type cho Bottom Tab Navigator
 export type BottomTabsStackParamList = {

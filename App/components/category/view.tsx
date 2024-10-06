@@ -13,8 +13,6 @@ const categoryComponentView = ({
   title,
   categoryScreen,
 }: categoryComponentViewProps) => {
-  console.log('iconnn', icon);
-
   return (
     <View>
       <TouchableOpacity
