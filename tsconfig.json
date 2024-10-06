@@ -1,10 +1,16 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es5",
     "allowJs": true,
     "jsx": "react-native",
     "noEmit": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "paths":{
+      "@app/*":["App/*"],
+      "@screens/*":["App/screens/*"],
+      "@components":["App/components/index.ts"]
+    },
   },
   "include": ["App"],
   "exclude": [
