@@ -1,19 +1,21 @@
-import {View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import React from 'react';
 import styles from './style';
 import {AppText} from '../../components';
 import {colors} from '../../themes/color';
 import LanguageCategory from '../../components/languageCategory';
-import HomeIcon from '../../assets/svg/common/homeIcon';
-import SubmitButton from '../../components/submitButton';
+import {TCategory} from '../../types/Category';
 
-const AddCardScreenView = () => {
+interface AddCardScreenViewProps {
+  data: TCategory[];
+}
+const AddCardScreenView = ({data}: AddCardScreenViewProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.titleBox}>
           <AppText fontWeight={900} color={colors.white} fontSize={21}>
-            ADD CATEGORY
+            ADD FLASHCARD
           </AppText>
         </View>
       </View>
@@ -22,12 +24,14 @@ const AddCardScreenView = () => {
           <AppText fontSize={21} color={colors.black} align="center">
             Choose a language card
           </AppText>
-          <LanguageCategory icon={<HomeIcon />} title="English" />
-          <LanguageCategory icon={<HomeIcon />} title="English" />
-          <LanguageCategory icon={<HomeIcon />} title="English" />
-          <LanguageCategory icon={<HomeIcon />} title="English" />
-          <LanguageCategory icon={<HomeIcon />} title="English" />
-          <LanguageCategory icon={<HomeIcon />} title="English" />
+          <FlatList
+            data={data}
+            renderItem={({item}) => (
+              <LanguageCategory icon={item.icon} title={item.title} />
+            )}
+          />
+
+          {/* <LanguageCategory icon={data[0].icon} title="English" /> */}
         </View>
       </View>
     </View>

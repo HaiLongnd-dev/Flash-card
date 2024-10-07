@@ -1,6 +1,6 @@
 import React from 'react';
 import {SVG_LIST} from './svgList';
-import { colors } from '../../themes/color';
+import {colors} from '../../themes/color';
 
 export type SvgName = keyof typeof SVG_LIST;
 
@@ -10,7 +10,11 @@ interface SvgComponentProps {
   color?: string;
 }
 
-function SvgComponent({name, size = 24, color = colors.white}: SvgComponentProps) {
+function SvgComponent({
+  name,
+  size = 24,
+  color = colors.black,
+}: SvgComponentProps) {
   let SvgIcon = SVG_LIST[name];
 
   if (!SvgIcon) {

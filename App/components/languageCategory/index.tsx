@@ -1,7 +1,8 @@
 import React from 'react';
 import CategoryComponentView from './view';
+import {SvgName} from '../../assets/svg';
 interface categoryComponentProps {
-  icon: any;
+  icon: SvgName;
   title: string;
 }
 const LanguageCategory = ({icon, title}: categoryComponentProps) => {

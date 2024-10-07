@@ -1,5 +1,7 @@
+import {SvgName} from '../assets/svg';
+
 export type TCategory = {
   id?: string;
-  icon: React.ReactNode;
+  icon: SvgName;
   title: string;
 };
