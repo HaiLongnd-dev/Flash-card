@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
   container: {flex: 1},
   header: {
     paddingTop: 20,
-    paddingLeft: 15,
     backgroundColor: '#4A0E5C',
     height: '30%',
     borderBottomLeftRadius: 25,
@@ -14,7 +13,7 @@ const styles = StyleSheet.create({
 
   titleBox: {
     flexDirection: 'row',
-    marginHorizontal: 10,
+    marginHorizontal: 30,
     marginBottom: 20,
   },
   backBtn: {
@@ -36,9 +35,17 @@ const styles = StyleSheet.create({
     shadowColor: colors.black,
     elevation: 10,
   },
-  addLanguage: {
-    paddingHorizontal: 20,
-    paddingVertical: 20,
+  addTopic: {
+    marginHorizontal: 20,
+    marginVertical: 20,
+  },
+  inputTopic: {
+    borderWidth: 1,
+    backgroundColor: colors.white,
+    marginTop: 5,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    borderColor: colors.gray,
   },
 });
 export default styles;

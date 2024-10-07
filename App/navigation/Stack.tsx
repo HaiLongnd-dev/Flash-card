@@ -7,6 +7,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Navigator from './NavigationService';
 import SCREEN_NAME from './ScreenName';
 import RootScreen from '../screens/Root';
+import {AddNewTopicScreen} from '../screens';
 export type StackParamList = {
   HOME_SCREEN: undefined;
   ADD_CARD_SCREEN: undefined;
@@ -27,7 +28,6 @@ export type NavigationParams = {
     : undefined;
 };
 
-
 const Stack = createNativeStackNavigator<NavigationStackParamList>();
 
 function StackScreens() {
@@ -39,7 +39,10 @@ function StackScreens() {
         }}
         initialRouteName={SCREEN_NAME.MANUAL.ROOT}>
         <Stack.Screen name={SCREEN_NAME.MANUAL.ROOT} component={RootScreen} />
-        
+        <Stack.Screen
+          name={SCREEN_NAME.MANUAL.ADD_NEW_TOPIC}
+          component={AddNewTopicScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

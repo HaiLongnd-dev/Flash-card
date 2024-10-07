@@ -2,6 +2,7 @@ const MANUAL = {
   // Root screens
   ROOT: 'ROOT',
   // Other screen
+  ADD_NEW_TOPIC: 'ADD_NEW_TOPIC',
 } as const;
 
 const ROOT = {
