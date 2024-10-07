@@ -6,19 +6,20 @@ import {colors} from '../../themes/color';
 import SubmitButton from '../../components/submitButton';
 import Navigator from '../../navigation/NavigationService';
 import {TTopic} from '../../types/Topic';
-interface AddNewTopicViewProps {
-  addTopic: (topic: TTopic) => void;
+import {TCard} from '../../types/Card';
+import LanguageCategory from '../../components/languageCategory';
+interface AddNewCardViewProps {
+  topic;
+  cardList: TCard[];
+  addCard: (card: TCard) => void;
 }
 
-const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
-  const [topicName, setTopicName] = useState('');
-
+const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
+  const [cardContent, setCardContent] = useState('');
   const handleSubmit = () => {
-    let topic: TTopic = {title: topicName};
-    if (topic.title === '') {
-      return;
-    }
-    addTopic(topic);
+    let card: TCard = {content: cardContent};
+    addCard(card);
+    setCardContent('');
   };
   return (
     <View style={styles.container}>
@@ -31,27 +32,38 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
           </TouchableOpacity>
           <View style={styles.nameScreen}>
             <AppText fontWeight={900} color={colors.white} fontSize={21}>
-              ADD NEW TOPIC
+              ADD NEW CARD
             </AppText>
           </View>
         </View>
       </View>
       <View style={styles.addBox}>
         <View style={styles.addTopic}>
+          <AppText fontWeight={900} color={colors.black} fontSize={27}>
+            Topic: {topic.title}
+          </AppText>
           <AppText fontWeight={900} color={colors.black} fontSize={21}>
-            Topic name:
+            Card content:
           </AppText>
           <TextInput
             style={styles.inputTopic}
-            placeholder="Input topic name"
-            onChangeText={setTopicName}
-            value={topicName}
+            placeholder="Input card content"
+            onChangeText={setCardContent}
+            value={cardContent}
           />
           <SubmitButton submit={handleSubmit} />
+          {cardList ? (
+            <FlatList
+              data={cardList}
+              renderItem={({item}) => <LanguageCategory title={item.content} />}
+            />
+          ) : (
+            <></>
+          )}
         </View>
       </View>
     </View>
   );
 };
 
-export default AddNewTopicView;
+export default AddNewCardView;

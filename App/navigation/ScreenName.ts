@@ -3,6 +3,7 @@ const MANUAL = {
   ROOT: 'ROOT',
   // Other screen
   ADD_NEW_TOPIC: 'ADD_NEW_TOPIC',
+  ADD_NEW_CARD:'ADD_NEW_CARD'
 } as const;
 
 const ROOT = {

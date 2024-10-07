@@ -8,6 +8,7 @@ import Navigator from './NavigationService';
 import SCREEN_NAME from './ScreenName';
 import RootScreen from '../screens/Root';
 import {AddNewTopicScreen} from '../screens';
+import AddNewCardScreen from '../screens/AddNewCardScreen';
 export type StackParamList = {
   HOME_SCREEN: undefined;
   ADD_CARD_SCREEN: undefined;
@@ -42,6 +43,10 @@ function StackScreens() {
         <Stack.Screen
           name={SCREEN_NAME.MANUAL.ADD_NEW_TOPIC}
           component={AddNewTopicScreen}
+        />
+        <Stack.Screen
+          name={SCREEN_NAME.MANUAL.ADD_NEW_CARD}
+          component={AddNewCardScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
