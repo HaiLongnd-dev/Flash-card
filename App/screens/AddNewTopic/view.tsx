@@ -1,12 +1,25 @@
 import {FlatList, TextInput, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './style';
 import {AppText} from '../../components';
 import {colors} from '../../themes/color';
 import SubmitButton from '../../components/submitButton';
 import Navigator from '../../navigation/NavigationService';
-const AddNewTopicView = () => {
-  const handleSubmit = () => {};
+import {TTopic} from '../../types/Topic';
+interface AddNewTopicViewProps {
+  addTopic: (topic: TTopic) => void;
+}
+
+const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
+  const [topicName, setTopicName] = useState('');
+
+  const handleSubmit = () => {
+    let topic: TTopic = {title: topicName};
+    if (topic.title === '') {
+      return;
+    }
+    addTopic(topic);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -28,7 +41,12 @@ const AddNewTopicView = () => {
           <AppText fontWeight={900} color={colors.black} fontSize={21}>
             Topic name:
           </AppText>
-          <TextInput style={styles.inputTopic} placeholder="Input topic name" />
+          <TextInput
+            style={styles.inputTopic}
+            placeholder="Input topic name"
+            onChangeText={setTopicName}
+            value={topicName}
+          />
           <SubmitButton submit={handleSubmit} />
         </View>
       </View>

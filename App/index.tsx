@@ -9,15 +9,16 @@ import {
 import {Provider} from 'react-redux';
 // import {persistor, store} from './redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
+import {store} from './redux/store';
 
 const Index = () => {
   return (
     <SafeAreaProvider>
-      {/* <Provider store={store}> */}
-      {/* <PersistGate loading={null} persistor={persistor}> */}
-      <StackScreens />
-      {/* </PersistGate> */}
-      {/* </Provider> */}
+      <Provider store={store}>
+        {/* <PersistGate loading={null} persistor={persistor}> */}
+        <StackScreens />
+        {/* </PersistGate> */}
+      </Provider>
     </SafeAreaProvider>
   );
 };

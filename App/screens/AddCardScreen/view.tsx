@@ -4,12 +4,12 @@ import styles from './style';
 import {AppText} from '../../components';
 import {colors} from '../../themes/color';
 import LanguageCategory from '../../components/languageCategory';
-import {TCategory} from '../../types/Category';
+import {TTopic} from '../../types/Topic';
 import NavigationScreenButton from '../../components/navigationScreenButton';
 import Navigator from '../../navigation/NavigationService';
 
 interface AddCardScreenViewProps {
-  data: TCategory[];
+  data: TTopic[];
 }
 const AddCardScreenView = ({data}: AddCardScreenViewProps) => {
   return (

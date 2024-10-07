@@ -8,12 +8,12 @@ interface languageCategoryViewProps {
   icon: SvgName;
   title: string;
 }
-const languageCategoryView = ({icon, title}: languageCategoryViewProps) => {
+const languageCategoryView = ({ title}: languageCategoryViewProps) => {
   return (
     <View>
       <TouchableOpacity style={styles.container}>
         <View style={styles.icon}>
-          <SvgComponent name={icon} />
+          <SvgComponent name={'ENGLISH'} />
         </View>
         <View style={styles.title}>
           <AppText fontSize={20}>{title}</AppText>

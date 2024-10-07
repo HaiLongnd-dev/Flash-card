@@ -1,7 +1,7 @@
 import {SvgName} from '../assets/svg';
 
-export type TCategory = {
+export type TTopic = {
   id?: string;
-  icon: SvgName;
+  icon?: SvgName;
   title: string;
 };
