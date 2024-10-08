@@ -24,7 +24,7 @@ export default function cardReducer(
         ...state,
         cards: state.cards.map(card =>
           card.id === action.payload
-            ? {...card, ...action.payload.params}
+            ? {...card, ...action.payload.params.card}
             : card,
         ),
       };

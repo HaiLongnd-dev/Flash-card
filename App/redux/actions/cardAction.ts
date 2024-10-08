@@ -23,7 +23,7 @@ export const removeTopicAction = (id: TCard['id']): IRemoveCardAction => ({
 });
 export const editTaskAction = (
   id: TCard['id'],
-  card: Partial<TCard>,
+  card: TCard,
 ): IEditCardAction => ({
   type: CardActionType.EDIT,
   payload: {params: {id, card}},
