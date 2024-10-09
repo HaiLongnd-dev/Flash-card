@@ -1,13 +1,11 @@
 import {FlatList, TextInput, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import styles from './style';
-import {AppText} from '../../components';
+import {AppText, SubmitButton} from '../../components';
 import {colors} from '../../themes/color';
-import SubmitButton from '../../components/submitButton';
 import Navigator from '../../navigation/NavigationService';
-import {TTopic} from '../../types/Topic';
 import {TCard} from '../../types/Card';
-import LanguageCategory from '../../components/languageCategory';
+import LanguageCategory from '../../components/Topic';
 interface AddNewCardViewProps {
   topic;
   cardList: TCard[];

@@ -1,12 +1,13 @@
 import {TextInput, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import styles from './style';
-import {AppText} from '../../components';
+import {AppText, SubmitButton} from '../../components';
 import {colors} from '../../themes/color';
-import SubmitButton from '../../components/submitButton';
 import Navigator from '../../navigation/NavigationService';
 import {TTopic} from '../../types/Topic';
 import SCREEN_NAME from '../../navigation/ScreenName';
+import SvgComponent from '../../assets/svg';
+import {AppContainer} from '../../components/Core/AppContainer';
 
 interface AddNewTopicViewProps {
   addTopic: (topic: TTopic) => void;
@@ -27,36 +28,32 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
     }, 100);
   };
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.titleBox}>
-          <TouchableOpacity style={styles.backBtn} onPress={Navigator.goBack}>
-            <AppText fontWeight={900} color={colors.white} fontSize={27}>
-              {'<'}
-            </AppText>
-          </TouchableOpacity>
-          <View style={styles.nameScreen}>
-            <AppText fontWeight={900} color={colors.white} fontSize={21}>
-              ADD NEW TOPIC
-            </AppText>
+    <AppContainer title="ADD NEW TOPIC">
+      <View style={styles.containerContent}>
+        <View style={styles.addBox}>
+          <View style={styles.addIconBox}>
+            <AppText>Icon:</AppText>
+            <TouchableOpacity
+              style={styles.icon}
+              onPress={() =>
+                Navigator.navigateTo(SCREEN_NAME.MANUAL.CHOOSE_ICON)
+              }>
+              <SvgComponent name="ACCOUNT" />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.addTopic}>
+            <AppText>Topic:</AppText>
+            <TextInput
+              style={styles.inputTopic}
+              placeholder="Input topic name"
+              onChangeText={setTopicName}
+              value={topicName}
+            />
           </View>
         </View>
+        <SubmitButton submit={handleSubmit} />
       </View>
-      <View style={styles.addBox}>
-        <View style={styles.addTopic}>
-          <AppText fontWeight={900} color={colors.black} fontSize={21}>
-            Topic name:
-          </AppText>
-          <TextInput
-            style={styles.inputTopic}
-            placeholder="Input topic name"
-            onChangeText={setTopicName}
-            value={topicName}
-          />
-          <SubmitButton submit={handleSubmit} />
-        </View>
-      </View>
-    </View>
+    </AppContainer>
   );
 };
 

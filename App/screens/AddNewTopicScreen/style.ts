@@ -6,9 +6,6 @@ const styles = StyleSheet.create({
   header: {
     paddingTop: 20,
     backgroundColor: '#4A0E5C',
-    height: '30%',
-    borderBottomLeftRadius: 25,
-    borderBottomRightRadius: 25,
   },
 
   titleBox: {
@@ -24,25 +21,27 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '90%',
   },
-  addBox: {
-    height: '100%',
-    width: '100%',
-    position: 'absolute',
-    top: '8%',
+  containerContent: {
     flex: 1,
     backgroundColor: colors.white,
-    borderRadius: 25,
-    shadowColor: colors.black,
-    elevation: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 20,
   },
-  addTopic: {
-    marginHorizontal: 20,
-    marginVertical: 20,
+  addBox: {
+    flexDirection: 'row',
   },
+  addIconBox: {},
+  icon: {
+    paddingHorizontal: 12,
+    paddingVertical: 12,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: colors.gray,
+  },
+  addTopic: {width: '85%', marginLeft: 5},
   inputTopic: {
     borderWidth: 1,
     backgroundColor: colors.white,
-    marginTop: 5,
     paddingHorizontal: 10,
     borderRadius: 5,
     borderColor: colors.gray,
