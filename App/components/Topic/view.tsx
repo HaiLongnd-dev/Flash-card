@@ -1,14 +1,14 @@
 import {TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import styles from './style';
-import {AppText} from '../core/AppText';
+import {AppText} from '../Core/AppText';
 import SvgComponent, {SvgName} from '../../assets/svg';
 
-interface languageCategoryViewProps {
+interface TopicViewProps {
   icon: SvgName;
   title: string;
 }
-const languageCategoryView = ({ title}: languageCategoryViewProps) => {
+const TopicView = ({title}: TopicViewProps) => {
   return (
     <View>
       <TouchableOpacity style={styles.container}>
@@ -23,4 +23,4 @@ const languageCategoryView = ({ title}: languageCategoryViewProps) => {
   );
 };
 
-export default languageCategoryView;
+export default TopicView;

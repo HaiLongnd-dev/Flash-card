@@ -7,7 +7,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Navigator from './NavigationService';
 import SCREEN_NAME from './ScreenName';
 import RootScreen from '../screens/Root';
-import {AddNewTopicScreen} from '../screens';
+import {AddNewTopicScreen, ChooseIconScreen} from '../screens';
 import AddNewCardScreen from '../screens/AddNewCardScreen';
 export type StackParamList = {
   HOME_SCREEN: undefined;
@@ -47,6 +47,10 @@ function StackScreens() {
         <Stack.Screen
           name={SCREEN_NAME.MANUAL.ADD_NEW_CARD}
           component={AddNewCardScreen}
+        />
+        <Stack.Screen
+          name={SCREEN_NAME.MANUAL.CHOOSE_ICON}
+          component={ChooseIconScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

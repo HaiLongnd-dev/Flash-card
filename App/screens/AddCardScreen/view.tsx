@@ -1,11 +1,10 @@
 import {FlatList, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import styles from './style';
-import {AppText} from '../../components';
+import {AppText, NavigationScreenButton} from '../../components';
 import {colors} from '../../themes/color';
-import LanguageCategory from '../../components/languageCategory';
+import LanguageCategory from '../../components/Topic';
 import {TTopic} from '../../types/Topic';
-import NavigationScreenButton from '../../components/navigationScreenButton';
 import Navigator from '../../navigation/NavigationService';
 
 interface AddCardScreenViewProps {

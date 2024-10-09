@@ -2,7 +2,7 @@ import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import styles from './style';
 import SearchIcon from '../../assets/svg/common/searchIcon';
-import Category from '../../components/category';
+import Category from '../../components/Category';
 import ScreenName from '../../navigation/ScreenName';
 import AccountIcon from '../../assets/svg/common/accountIcon';
 import {AppText} from '../../components';

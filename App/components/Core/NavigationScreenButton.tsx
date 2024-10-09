@@ -1,19 +1,18 @@
-import {TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View, StyleSheet} from 'react-native';
 import React from 'react';
-import styles from './style';
-import {AppText} from '../core/AppText';
+import {AppText} from '../Core/AppText';
 import SCREEN_NAME from '../../navigation/ScreenName';
 import Navigator from '../../navigation/NavigationService';
 import {colors} from '../../themes/color';
 
-interface NavigationScreenButtonViewProps {
+interface NavigationScreenButtonProps {
   nameButton: string;
   nameScreen: keyof typeof SCREEN_NAME.MANUAL;
 }
-const NavigationScreenButtonView = ({
+const NavigationScreenButton = ({
   nameButton,
   nameScreen,
-}: NavigationScreenButtonViewProps) => {
+}: NavigationScreenButtonProps) => {
   return (
     <View>
       <TouchableOpacity
@@ -31,4 +30,16 @@ const NavigationScreenButtonView = ({
   );
 };
 
-export default NavigationScreenButtonView;
+export default NavigationScreenButton;
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#4A0E5C',
+    marginTop: 10,
+    borderRadius: 5,
+    shadowColor: '#000',
+    elevation: 10,
+    padding: 10,
+  },
+  title: {justifyContent: 'center', alignItems: 'center'},
+});
