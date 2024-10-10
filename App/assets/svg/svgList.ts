@@ -2,6 +2,7 @@ import ACCOUNT from './common/accountIcon';
 import SEARCH from './common/searchIcon';
 import SETTING from './common/setting';
 import ENGLISH from './common/language/english';
+import CHECK from './common/check';
 // Category
 // Food
 import FOOD1 from './category/food/food1';
@@ -86,6 +87,7 @@ export const SVG_LIST = {
   SEARCH,
   SETTING,
   ENGLISH,
+  CHECK,
   // CATEGORY
   //FOOD
   FOOD1,

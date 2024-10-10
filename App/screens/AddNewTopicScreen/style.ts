@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: colors.gray,
   },
-  addTopic: {width: '85%', marginLeft: 5},
+  addTopic: {marginLeft: 5, flex: 1},
   inputTopic: {
     borderWidth: 1,
     backgroundColor: colors.white,

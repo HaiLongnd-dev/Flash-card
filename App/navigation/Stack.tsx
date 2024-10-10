@@ -18,6 +18,9 @@ export type StackParamList = {
 export interface NavigationStackParamList
   extends Record<string, object | undefined> {
   ROOT: NavigatorScreenParams<StackParamList>;
+  CHOOSE_ICON: {
+    callback: (iconName: string, iconColor: string) => void;
+  };
 }
 
 export type ScreenNameKeys = keyof NavigationStackParamList;

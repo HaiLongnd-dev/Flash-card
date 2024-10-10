@@ -20,7 +20,6 @@ const BackButton = () => {
   );
 };
 export const AppContainer = ({title, children}: IAppContainer) => {
-  const viewStyles = {};
   return (
     <View style={styles.container}>
       <View style={styles.header}>

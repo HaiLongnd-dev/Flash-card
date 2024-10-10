@@ -6,16 +6,23 @@ import {colors} from '../../themes/color';
 import Navigator from '../../navigation/NavigationService';
 import {TTopic} from '../../types/Topic';
 import SCREEN_NAME from '../../navigation/ScreenName';
-import SvgComponent from '../../assets/svg';
+import SvgComponent, {SvgName} from '../../assets/svg';
 import {AppContainer} from '../../components/Core/AppContainer';
+import {iconCategories} from '../ChooseIconScreen/Constant/listIcon';
+import {iconColors} from '../ChooseIconScreen/Constant/listColor';
 
 interface AddNewTopicViewProps {
   addTopic: (topic: TTopic) => void;
 }
 
 const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
-  const [topicName, setTopicName] = useState('');
+  const initIcon = iconCategories[0].data[0];
+  const initColor = iconColors[0];
 
+  const [iconName, setIconName] = useState(initIcon);
+  const [iconColor, setIconColor] = useState(initColor);
+
+  const [topicName, setTopicName] = useState('');
   const handleSubmit = () => {
     let topic: TTopic = {title: topicName};
     if (topic.title === '') {
@@ -24,7 +31,11 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
     addTopic(topic);
     setTopicName('');
     setTimeout(() => {
-      Navigator.navigateTo(SCREEN_NAME.MANUAL.ADD_NEW_CARD, topic);
+      Navigator.navigateTo(SCREEN_NAME.MANUAL.ADD_NEW_CARD, {
+        topic,
+        iconName,
+        iconColor,
+      });
     }, 100);
   };
   return (
@@ -34,11 +45,16 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
           <View style={styles.addIconBox}>
             <AppText>Icon:</AppText>
             <TouchableOpacity
-              style={styles.icon}
+              style={[styles.icon, {backgroundColor: iconColor}]}
               onPress={() =>
-                Navigator.navigateTo(SCREEN_NAME.MANUAL.CHOOSE_ICON)
+                Navigator.navigateTo(SCREEN_NAME.MANUAL.CHOOSE_ICON, {
+                  callback: (iconName: SvgName, iconColor: string) => {
+                    setIconName(iconName);
+                    setIconColor(iconColor);
+                  },
+                })
               }>
-              <SvgComponent name="ACCOUNT" />
+              <SvgComponent name={iconName} />
             </TouchableOpacity>
           </View>
           <View style={styles.addTopic}>

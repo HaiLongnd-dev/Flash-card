@@ -12,6 +12,7 @@ export const colors = {
   green_1: '#1C7852',
   yellow: '#EC952E',
   gray: '#3C3E40',
+  gray_2: '#cccccc',
 
   //common colors
   white: '#ffffff',
