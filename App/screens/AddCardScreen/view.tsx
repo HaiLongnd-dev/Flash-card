@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './style';
 import {AppText, NavigationScreenButton} from '../../components';
 import {colors} from '../../themes/color';
-import LanguageCategory from '../../components/Topic';
+import Topic from '../../components/Topic';
 import {TTopic} from '../../types/Topic';
 import Navigator from '../../navigation/NavigationService';
 
@@ -11,6 +11,8 @@ interface AddCardScreenViewProps {
   data: TTopic[];
 }
 const AddCardScreenView = ({data}: AddCardScreenViewProps) => {
+  console.log('=========data==========', data);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -32,19 +34,23 @@ const AddCardScreenView = ({data}: AddCardScreenViewProps) => {
           <AppText fontSize={21} color={colors.black} align="center">
             Choose a topic card
           </AppText>
+
+          <FlatList
+            data={data}
+            renderItem={({item}) => (
+              <Topic
+                color={item.iconColor}
+                icon={item.icon}
+                title={item.title}
+              />
+            )}
+          />
           <AppText fontSize={21} color={colors.black} align="center">
             ------- or -------
           </AppText>
           <NavigationScreenButton
             nameButton={'ADD NEW TOPIC'}
             nameScreen={'ADD_NEW_TOPIC'}
-          />
-
-          <FlatList
-            data={data}
-            renderItem={({item}) => (
-              <LanguageCategory icon={item.icon} title={item.title} />
-            )}
           />
         </View>
       </View>

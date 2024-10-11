@@ -48,7 +48,7 @@ const HomeScreenView = () => {
         <View style={styles.categoriesHeader}>
           <View>
             <AppText color={colors.black} style={styles.categoriesTitle}>
-              Flashcard categories
+              Flashcard topic
             </AppText>
           </View>
 

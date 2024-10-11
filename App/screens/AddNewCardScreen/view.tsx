@@ -5,7 +5,7 @@ import {AppText, SubmitButton} from '../../components';
 import {colors} from '../../themes/color';
 import Navigator from '../../navigation/NavigationService';
 import {TCard} from '../../types/Card';
-import LanguageCategory from '../../components/Topic';
+import Topic from '../../components/Topic';
 interface AddNewCardViewProps {
   topic;
   cardList: TCard[];
@@ -53,7 +53,7 @@ const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
           {cardList ? (
             <FlatList
               data={cardList}
-              renderItem={({item}) => <LanguageCategory title={item.content} />}
+              renderItem={({item}) => <Topic title={item.content} />}
             />
           ) : (
             <></>

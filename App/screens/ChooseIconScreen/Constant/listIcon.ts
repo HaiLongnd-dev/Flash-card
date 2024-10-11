@@ -1,6 +1,6 @@
 import {SvgName} from '../../../assets/svg';
 
-interface IIconCategories {
+export interface IIconCategories {
   title: string;
   data: SvgName[];
 }

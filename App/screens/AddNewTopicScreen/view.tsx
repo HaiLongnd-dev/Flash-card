@@ -19,23 +19,23 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
   const initIcon = iconCategories[0].data[0];
   const initColor = iconColors[0];
 
-  const [iconName, setIconName] = useState(initIcon);
-  const [iconColor, setIconColor] = useState(initColor);
+  const [iconName, setIconName] = useState<SvgName>(initIcon);
+  const [iconColor, setIconColor] = useState<string>(initColor);
 
-  const [topicName, setTopicName] = useState('');
+  const [topicName, setTopicName] = useState<string>('');
   const handleSubmit = () => {
-    let topic: TTopic = {title: topicName};
+    let topic: TTopic = {
+      title: topicName,
+      icon: iconName,
+      iconColor: iconColor,
+    };
     if (topic.title === '') {
       return;
     }
     addTopic(topic);
     setTopicName('');
     setTimeout(() => {
-      Navigator.navigateTo(SCREEN_NAME.MANUAL.ADD_NEW_CARD, {
-        topic,
-        iconName,
-        iconColor,
-      });
+      Navigator.navigateTo(SCREEN_NAME.MANUAL.ADD_NEW_CARD, topic);
     }, 100);
   };
   return (

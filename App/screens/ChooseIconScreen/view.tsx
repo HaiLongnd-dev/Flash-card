@@ -2,20 +2,20 @@ import React, {useEffect, useState} from 'react';
 import {AppContainer} from '../../components/Core/AppContainer';
 import {AppText} from '../../components';
 import {FlatList, TouchableOpacity, View} from 'react-native';
-import SvgComponent from '../../assets/svg';
+import SvgComponent, {SvgName} from '../../assets/svg';
 import styles from './style';
 import {iconColors} from './Constant/listColor';
-import {iconCategories} from './Constant/listIcon';
+import {iconCategories, IIconCategories} from './Constant/listIcon';
 import Navigator from '../../navigation/NavigationService';
 import {AddTopicRouteProp} from '.';
 type ChooseIconScreenViewProps = {route: AddTopicRouteProp};
 const ChooseIconScreenView = ({route}: ChooseIconScreenViewProps) => {
   const {callback} = route.params;
-  const iconName = iconCategories[0];
+  const iconName = iconCategories[0].data[0];
   const iconColor = iconColors[0];
-  const [selectedIcon, setSelectedIcon] = useState(iconName);
+  const [selectedIcon, setSelectedIcon] = useState<SvgName>(iconName);
   const [selectedColor, setSelectedColor] = useState(iconColor);
-  const handleIcon = (name, color) => {
+  const handleIcon = (name: SvgName, color: string) => {
     setSelectedIcon(name);
     setSelectedColor(color);
     Navigator.goBack();
