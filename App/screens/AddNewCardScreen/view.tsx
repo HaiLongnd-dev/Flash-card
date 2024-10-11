@@ -6,6 +6,7 @@ import {colors} from '../../themes/color';
 import Navigator from '../../navigation/NavigationService';
 import {TCard} from '../../types/Card';
 import Topic from '../../components/Topic';
+import {AppContainer} from '../../components/Core/AppContainer';
 interface AddNewCardViewProps {
   topic;
   cardList: TCard[];
@@ -13,29 +14,18 @@ interface AddNewCardViewProps {
 }
 
 const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
-  const [cardContent, setCardContent] = useState('');
+  const [cardContent, setCardContent] = useState<TCard['content']>('');
   const handleSubmit = () => {
-    let card: TCard = {content: cardContent};
+    let card: TCard = {
+      id: Math.random(),
+      content: cardContent,
+    };
     addCard(card);
     setCardContent('');
   };
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.titleBox}>
-          <TouchableOpacity style={styles.backBtn} onPress={Navigator.goBack}>
-            <AppText fontWeight={900} color={colors.white} fontSize={27}>
-              {'<'}
-            </AppText>
-          </TouchableOpacity>
-          <View style={styles.nameScreen}>
-            <AppText fontWeight={900} color={colors.white} fontSize={21}>
-              ADD NEW CARD
-            </AppText>
-          </View>
-        </View>
-      </View>
-      <View style={styles.addBox}>
+    <AppContainer backButton={true} backHome={true} title="ADD FLASHCARD">
+      <View>
         <View style={styles.addTopic}>
           <AppText fontWeight={900} color={colors.black} fontSize={27}>
             Topic: {topic.title}
@@ -53,14 +43,23 @@ const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
           {cardList ? (
             <FlatList
               data={cardList}
-              renderItem={({item}) => <Topic title={item.content} />}
+              renderItem={({item}) => (
+                <View style={styles.listCard}>
+                  <AppText fontWeight={900} fontSize={20} align="center">
+                    Flashcard list
+                  </AppText>
+                  <AppText style={styles.card} fontSize={18}>
+                    {item.content}
+                  </AppText>
+                </View>
+              )}
             />
           ) : (
             <></>
           )}
         </View>
       </View>
-    </View>
+    </AppContainer>
   );
 };
 

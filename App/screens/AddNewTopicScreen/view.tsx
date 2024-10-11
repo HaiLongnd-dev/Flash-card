@@ -25,6 +25,7 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
   const [topicName, setTopicName] = useState<string>('');
   const handleSubmit = () => {
     let topic: TTopic = {
+      id: Math.random(),
       title: topicName,
       icon: iconName,
       iconColor: iconColor,
@@ -39,7 +40,7 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
     }, 100);
   };
   return (
-    <AppContainer title="ADD NEW TOPIC">
+    <AppContainer backButton={true} title="ADD NEW TOPIC">
       <View style={styles.containerContent}>
         <View style={styles.addBox}>
           <View style={styles.addIconBox}>

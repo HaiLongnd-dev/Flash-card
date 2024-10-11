@@ -22,7 +22,7 @@ const ChooseIconScreenView = ({route}: ChooseIconScreenViewProps) => {
     callback(name, selectedColor);
   };
   return (
-    <AppContainer title="CHOOSE ICON">
+    <AppContainer backButton={true} title="CHOOSE ICON">
       <View style={styles.container}>
         <View style={styles.colorBox}>
           <View style={styles.colorTitle}>

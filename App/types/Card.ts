@@ -1,5 +1,5 @@
 export type TCard = {
-  id?: string;
+  id?: number;
   content: string;
   desc?: string;
 };
