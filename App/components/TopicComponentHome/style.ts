@@ -7,9 +7,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     shadowColor: '#000',
     elevation: 10,
+    width: 105,
   },
   icon: {
-    paddingVertical: 20,
+    paddingVertical:20,
     paddingHorizontal: 40,
   },
   title: {justifyContent: 'center', alignItems: 'center', paddingBottom: 20},

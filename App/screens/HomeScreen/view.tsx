@@ -1,14 +1,22 @@
-import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {
+  FlatList,
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import styles from './style';
 import SearchIcon from '../../assets/svg/common/searchIcon';
-import Category from '../../components/Category';
-import ScreenName from '../../navigation/ScreenName';
-import AccountIcon from '../../assets/svg/common/accountIcon';
 import {AppText} from '../../components';
 import {colors} from '../../themes/color';
-
-const HomeScreenView = () => {
+import {TTopic} from '../../types/Topic';
+import TopicComponentHome from '../../components/TopicComponentHome';
+interface HomeScreenViewProps {
+  listTopic: TTopic[];
+}
+const HomeScreenView = ({listTopic}: HomeScreenViewProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -59,15 +67,11 @@ const HomeScreenView = () => {
           </View>
         </View>
         <View style={styles.categoriesContainer}>
-          <Category
-            icon={<AccountIcon />}
-            title={'Math'}
-            categoryScreen={ScreenName.ROOT.ADD_CARD_SCREEN}
-          />
-          <Category
-            icon={<AccountIcon />}
-            title={'Math'}
-            categoryScreen={ScreenName.ROOT.ADD_CARD_SCREEN}
+          <FlatList
+            data={listTopic}
+            renderItem={({item}) => (
+              <TopicComponentHome icon={item.icon} title={item.title} />
+            )}
           />
         </View>
       </View>
