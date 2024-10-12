@@ -2,10 +2,9 @@ import {StyleSheet} from 'react-native';
 import {colors} from '../../themes/color';
 
 const styles = StyleSheet.create({
-  
+  container: {paddingHorizontal: 10, flex: 1, backgroundColor: colors.white},
   addTopic: {
-    marginHorizontal: 20,
-    marginVertical: 20,
+    marginVertical: 10,
   },
   inputTopic: {
     borderWidth: 1,

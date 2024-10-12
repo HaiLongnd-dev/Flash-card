@@ -1,4 +1,5 @@
 import {TCard} from '../../types/Card';
+import {TTopic} from '../../types/Topic';
 import {
   CardActionType,
   IAddCardAction,
@@ -7,9 +8,10 @@ import {
   IRemoveCardAction,
 } from './types/cardActionType';
 
-export const getListCardAction = (): IGetListCardAction => {
+export const getListCardAction = (card: TCard): IGetListCardAction => {
   return {
     type: CardActionType.GET_LIST,
+    payload: {params: {card}},
   };
 };
 export const addCardAction = (card: TCard): IAddCardAction => ({

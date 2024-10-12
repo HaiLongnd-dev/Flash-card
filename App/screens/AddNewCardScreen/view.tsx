@@ -3,10 +3,9 @@ import React, {useState} from 'react';
 import styles from './style';
 import {AppText, SubmitButton} from '../../components';
 import {colors} from '../../themes/color';
-import Navigator from '../../navigation/NavigationService';
 import {TCard} from '../../types/Card';
-import Topic from '../../components/Topic';
 import {AppContainer} from '../../components/Core/AppContainer';
+import {TTopic} from '../../types/Topic';
 interface AddNewCardViewProps {
   topic;
   cardList: TCard[];
@@ -17,15 +16,16 @@ const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
   const [cardContent, setCardContent] = useState<TCard['content']>('');
   const handleSubmit = () => {
     let card: TCard = {
-      id: Math.random(),
+      idTopic: topic.id,
+      id: Math.random() * 10000,
       content: cardContent,
     };
     addCard(card);
-    setCardContent('');
   };
+
   return (
     <AppContainer backButton={true} backHome={true} title="ADD FLASHCARD">
-      <View>
+      <View style={styles.container}>
         <View style={styles.addTopic}>
           <AppText fontWeight={900} color={colors.black} fontSize={27}>
             Topic: {topic.title}
@@ -41,19 +41,19 @@ const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
           />
           <SubmitButton submit={handleSubmit} />
           {cardList ? (
-            <FlatList
-              data={cardList}
-              renderItem={({item}) => (
-                <View style={styles.listCard}>
-                  <AppText fontWeight={900} fontSize={20} align="center">
-                    Flashcard list
-                  </AppText>
+            <View style={styles.listCard}>
+              <AppText fontWeight={900} fontSize={20} align="center">
+                Flashcard list
+              </AppText>
+              <FlatList
+                data={cardList}
+                renderItem={({item}) => (
                   <AppText style={styles.card} fontSize={18}>
                     {item.content}
                   </AppText>
-                </View>
-              )}
-            />
+                )}
+              />
+            </View>
           ) : (
             <></>
           )}

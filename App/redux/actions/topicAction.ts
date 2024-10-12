@@ -21,7 +21,7 @@ export const removeTopicAction = (id: TTopic['id']): IRemoveTopicAction => ({
   type: TopicActionType.REMOVE,
   payload: {params: {id}},
 });
-export const editTaskAction = (
+export const editTopicAction = (
   id: TTopic['id'],
   topic: Partial<TTopic>,
 ): IEditTopicAction => ({

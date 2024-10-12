@@ -3,6 +3,8 @@ import SEARCH from './common/searchIcon';
 import SETTING from './common/setting';
 import ENGLISH from './common/language/english';
 import CHECK from './common/check';
+import ARROW_LEFT from './common/arrowLeft';
+
 // Category
 // Food
 import FOOD1 from './category/food/food1';
@@ -88,6 +90,7 @@ export const SVG_LIST = {
   SETTING,
   ENGLISH,
   CHECK,
+  ARROW_LEFT,
   // CATEGORY
   //FOOD
   FOOD1,

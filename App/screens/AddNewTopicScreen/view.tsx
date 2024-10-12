@@ -29,6 +29,7 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
       title: topicName,
       icon: iconName,
       iconColor: iconColor,
+      cards: [],
     };
     if (topic.title === '') {
       return;
@@ -36,7 +37,7 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
     addTopic(topic);
     setTopicName('');
     setTimeout(() => {
-      Navigator.navigateTo(SCREEN_NAME.MANUAL.ADD_NEW_CARD, topic);
+      Navigator.navigateTo(SCREEN_NAME.MANUAL.ADD_NEW_CARD, {topic});
     }, 100);
   };
   return (

@@ -6,5 +6,5 @@ export type TTopic = {
   icon?: SvgName;
   iconColor?: string;
   title: string;
-  card?: TCard[];
+  cards?: TCard[];
 };

@@ -39,29 +39,19 @@ export const AppContainer = ({
         onPress={() => {
           setModalVisible(true);
         }}>
-        <AppText fontWeight={900} color={colors.white} fontSize={27}>
-          <SvgComponent name="CHECK" size={40} color={colors.white} />
-        </AppText>
+        <SvgComponent name="CHECK" size={30} color={colors.white} />
       </TouchableOpacity>
     );
   };
   const BackButton = () => {
     return (
       <TouchableOpacity style={styles.backBtn} onPress={Navigator.goBack}>
-        <AppText fontWeight={900} color={colors.white} fontSize={27}>
-          {'<'}
-        </AppText>
+        <SvgComponent name="ARROW_LEFT" size={30} color={colors.white} />
       </TouchableOpacity>
     );
   };
   return (
     <View style={styles.container}>
-      <ConfirmModal
-        message="Are you want to continue?"
-        visible={modalVisible}
-        onConfirm={handleConfirm}
-        onCancel={handleCancel}
-      />
       <View style={styles.header}>
         <View style={styles.titleBox}>
           {backButton ? <BackButton /> : <></>}
@@ -74,6 +64,12 @@ export const AppContainer = ({
         </View>
       </View>
       {children}
+      <ConfirmModal
+        message="Are you want to continue?"
+        visible={modalVisible}
+        onConfirm={handleConfirm}
+        onCancel={handleCancel}
+      />
     </View>
   );
 };
@@ -86,7 +82,7 @@ const styles = StyleSheet.create({
 
   titleBox: {
     flexDirection: 'row',
-    marginHorizontal: 20,
+    marginHorizontal: 10,
     marginBottom: 20,
   },
   backBtn: {
@@ -95,6 +91,7 @@ const styles = StyleSheet.create({
   nameScreen: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: '90%',
+    // width: '90%',
+    flex: 1,
   },
 });

@@ -9,6 +9,7 @@ import SCREEN_NAME from './ScreenName';
 import RootScreen from '../screens/Root';
 import {AddNewTopicScreen, ChooseIconScreen} from '../screens';
 import AddNewCardScreen from '../screens/AddNewCardScreen';
+import {TTopic} from '../types/Topic';
 export type StackParamList = {
   HOME_SCREEN: undefined;
   ADD_CARD_SCREEN: undefined;
@@ -21,6 +22,7 @@ export interface NavigationStackParamList
   CHOOSE_ICON: {
     callback: (iconName: string, iconColor: string) => void;
   };
+  ADD_NEW_CARD: {topic: TTopic};
 }
 
 export type ScreenNameKeys = keyof NavigationStackParamList;

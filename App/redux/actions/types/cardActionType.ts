@@ -1,4 +1,5 @@
 import {TCard} from '../../../types/Card';
+import {TTopic} from '../../../types/Topic';
 import {IActionBase} from './actionTypeBase';
 
 export const CardActionType = {
@@ -20,7 +21,7 @@ export interface IEditCardAction
 export interface IRemoveCardAction extends IActionBase<{id: TCard['id']}> {
   type: typeof CardActionType.REMOVE;
 }
-export interface IGetListCardAction extends IActionBase<{}> {
+export interface IGetListCardAction extends IActionBase<{card: TCard}> {
   type: typeof CardActionType.GET_LIST;
 }
 
