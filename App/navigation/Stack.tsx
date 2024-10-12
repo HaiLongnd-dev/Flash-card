@@ -7,7 +7,12 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Navigator from './NavigationService';
 import SCREEN_NAME from './ScreenName';
 import RootScreen from '../screens/Root';
-import {AddNewTopicScreen, ChooseIconScreen} from '../screens';
+import {
+  AddNewTopicScreen,
+  ChooseIconScreen,
+  FlashcardListScreen,
+  FlashcardScreen,
+} from '../screens';
 import AddNewCardScreen from '../screens/AddNewCardScreen';
 import {TTopic} from '../types/Topic';
 export type StackParamList = {
@@ -23,6 +28,7 @@ export interface NavigationStackParamList
     callback: (iconName: string, iconColor: string) => void;
   };
   ADD_NEW_CARD: {topic: TTopic};
+  FLASHCARD_LIST: {topic: TTopic};
 }
 
 export type ScreenNameKeys = keyof NavigationStackParamList;
@@ -56,6 +62,14 @@ function StackScreens() {
         <Stack.Screen
           name={SCREEN_NAME.MANUAL.CHOOSE_ICON}
           component={ChooseIconScreen}
+        />
+        <Stack.Screen
+          name={SCREEN_NAME.MANUAL.FLASHCARD_LIST}
+          component={FlashcardListScreen}
+        />
+        <Stack.Screen
+          name={SCREEN_NAME.MANUAL.FLASHCARD}
+          component={FlashcardScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,13 +1,12 @@
 import React from 'react';
 import TopicView from './view';
 import {SvgName} from '../../assets/svg';
+import { TTopic } from '../../types/Topic';
 interface TopicProps {
-  icon?: SvgName;
-  title: string;
-  color?:string
+  topic:TTopic
 }
-const Topic = ({icon, title,color}: TopicProps) => {
-  return <TopicView icon={icon} title={title} color={color} />;
+const Topic = ({topic}: TopicProps) => {
+  return <TopicView topic={topic} />;
 };
 
 export default Topic;

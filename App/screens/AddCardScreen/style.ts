@@ -10,6 +10,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
-  button: {marginBottom: 20},
+  button: {marginBottom: 20, marginHorizontal: 10},
 });
 export default styles;

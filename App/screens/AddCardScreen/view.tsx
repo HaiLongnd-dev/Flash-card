@@ -19,12 +19,7 @@ const AddCardScreenView = ({data}: AddCardScreenViewProps) => {
             Choose a topic card
           </AppText>
         </View>
-        <FlatList
-          data={data}
-          renderItem={({item}) => (
-            <Topic color={item.iconColor} icon={item.icon} title={item.title} />
-          )}
-        />
+        <FlatList data={data} renderItem={({item}) => <Topic topic={item} />} />
       </View>
       <View style={styles.button}>
         {/* <AppText fontSize={21} color={colors.black} align="center">

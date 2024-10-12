@@ -8,8 +8,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch} from '../../redux/store';
 import {addCardAction} from '../../redux/actions/cardAction';
 import {getListCardByIdTopic} from '../../redux/selectors/cardSelector';
-import {editTopicAction} from '../../redux/actions/topicAction';
-import {TTopic} from '../../types/Topic';
 export type AddTopicRouteProp = RouteProp<
   NavigationStackParamList,
   typeof SCREEN_NAME.MANUAL.ADD_NEW_CARD
