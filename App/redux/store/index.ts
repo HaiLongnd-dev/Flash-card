@@ -16,7 +16,7 @@ const bindMiddleware = middleware => applyMiddleware(...middleware);
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['topic'],
+  whitelist: ['topic', 'card'],
   version: 1,
   stateReconciler: autoMergeLevel2,
 };

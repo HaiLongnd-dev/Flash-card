@@ -19,7 +19,7 @@ export const addCardAction = (card: TCard): IAddCardAction => ({
   payload: {params: {card}},
 });
 
-export const removeTopicAction = (id: TCard['id']): IRemoveCardAction => ({
+export const removeCardAction = (id: TCard['id']): IRemoveCardAction => ({
   type: CardActionType.REMOVE,
   payload: {params: {id}},
 });

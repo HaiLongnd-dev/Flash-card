@@ -4,6 +4,7 @@ import SETTING from './common/setting';
 import ENGLISH from './common/language/english';
 import CHECK from './common/check';
 import ARROW_LEFT from './common/arrowLeft';
+import ADD from './common/add';
 
 // Category
 // Food
@@ -91,6 +92,7 @@ export const SVG_LIST = {
   ENGLISH,
   CHECK,
   ARROW_LEFT,
+  ADD,
   // CATEGORY
   //FOOD
   FOOD1,

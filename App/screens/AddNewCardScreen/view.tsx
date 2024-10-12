@@ -45,6 +45,7 @@ const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
       content: cardContent,
     };
     addCard(card);
+    setCardContent('');
   };
 
   return (
@@ -87,7 +88,7 @@ const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
           )}
         </View>
         <ConfirmModal
-          message="Are you want to continue?"
+          message="Are you sure you want to stop?"
           visible={modalVisible}
           onConfirm={handleConfirm}
           onCancel={handleCancel}
