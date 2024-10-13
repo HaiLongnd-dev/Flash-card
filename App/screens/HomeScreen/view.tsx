@@ -69,9 +69,7 @@ const HomeScreenView = ({listTopic}: HomeScreenViewProps) => {
         <View style={styles.categoriesContainer}>
           <FlatList
             data={listTopic}
-            renderItem={({item}) => (
-              <TopicComponentHome icon={item.icon} title={item.title} />
-            )}
+            renderItem={({item}) => <TopicComponentHome topic={item} />}
           />
         </View>
       </View>

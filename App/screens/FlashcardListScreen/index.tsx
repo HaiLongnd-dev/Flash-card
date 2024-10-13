@@ -48,6 +48,7 @@ const FlashcardListScreen = ({route}: TopicFlashcardViewProps) => {
     <>
       <FlashcardListScreenView
         cardList={cardList}
+        topic={topic}
         handleDelete={handleDelete}
         handleEdit={handleEdit}
       />

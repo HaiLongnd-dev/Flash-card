@@ -4,29 +4,26 @@ import Navigator from '../../navigation/NavigationService';
 import styles from './style';
 import {TTopic} from '../../types/Topic';
 import SvgComponent from '../../assets/svg';
+import SCREEN_NAME from '../../navigation/ScreenName';
 
 interface TopicComponentHomeViewProps {
-  icon: TTopic['icon'];
-  title: TTopic['title'];
-  topic?: string;
+  topic: TTopic;
 }
-const TopicComponentHomeView = ({
-  icon,
-  title,
-  topic,
-}: TopicComponentHomeViewProps) => {
+
+const showTopicListCard = (topic: TTopic) => {
+  Navigator.navigateTo(SCREEN_NAME.MANUAL.FLASHCARD_LIST, {topic});
+};
+const TopicComponentHomeView = ({topic}: TopicComponentHomeViewProps) => {
   return (
     <View>
       <TouchableOpacity
         style={styles.container}
-        onPress={() => {
-          Navigator.navigateTo(topic);
-        }}>
+        onPress={() => showTopicListCard(topic)}>
         <View style={styles.icon}>
-          <SvgComponent name={icon} />
+          <SvgComponent name={topic.icon} />
         </View>
         <View style={styles.title}>
-          <Text>{title}</Text>
+          <Text>{topic.title}</Text>
         </View>
       </TouchableOpacity>
     </View>

@@ -12,19 +12,27 @@ import {AppText} from '../../components';
 
 import ConfirmModal from '../../components/Core/ConfirmModal';
 import Navigator from '../../navigation/NavigationService';
+import SCREEN_NAME from '../../navigation/ScreenName';
+import {TTopic} from '../../types/Topic';
+
 interface FlashcardListScreenViewProps {
+  topic;
   cardList: TCard[];
   handleDelete: (id: TCard['id']) => void;
   handleEdit: (id: TCard['id']) => void;
 }
 const FlashcardListScreenView = ({
+  topic,
   cardList,
   handleDelete,
   handleEdit,
 }: FlashcardListScreenViewProps) => {
+  const addFlashcard = (topic: TTopic) => {
+    Navigator.navigateTo(SCREEN_NAME.MANUAL.ADD_NEW_CARD, {topic});
+  };
   const RightButton = () => {
     return (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => addFlashcard(topic)}>
         <SvgComponent name="ADD" color={colors.white} size={30} />
       </TouchableOpacity>
     );
