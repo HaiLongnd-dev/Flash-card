@@ -5,7 +5,8 @@ import AddNewTopicScreen from './AddNewTopicScreen';
 import ChooseIconScreen from './ChooseIconScreen';
 import FlashcardScreen from './FlashcardScreen';
 import FlashcardListScreen from './FlashcardListScreen';
-
+import TopicListScreen from './TopicListScreen';
+TopicListScreen;
 export {
   HomeScreen,
   AccountScreen,
@@ -14,4 +15,5 @@ export {
   ChooseIconScreen,
   FlashcardScreen,
   FlashcardListScreen,
+  TopicListScreen,
 };

@@ -1,7 +1,12 @@
 import {TouchableOpacity, View} from 'react-native';
 import {TCard} from '../../../types/Card';
 import {AppText} from '../../../components';
-
+import SvgComponent from '../../../assets/svg';
+import {colors} from '../../../themes/color';
+export const HIDDEN_ITEM_LAYOUT = {
+  width: 80,
+  height: 80,
+};
 interface RenderHiddenItemProps {
   item: TCard;
   handleEdit: (item: TCard['id']) => void;
@@ -13,14 +18,26 @@ const RenderHiddenItem = (
 ) => (
   <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
     <TouchableOpacity
-      style={{backgroundColor: 'blue', padding: 20}}
+      style={{
+        backgroundColor: 'blue',
+        width: HIDDEN_ITEM_LAYOUT.width,
+        height: HIDDEN_ITEM_LAYOUT.height,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
       onPress={() => handleEdit(item.id)}>
-      <AppText style={{color: 'white'}}>Edit</AppText>
+      <SvgComponent name="EDIT" color={colors.white} />
     </TouchableOpacity>
     <TouchableOpacity
-      style={{backgroundColor: 'red', padding: 20}}
+      style={{
+        backgroundColor: 'red',
+        width: HIDDEN_ITEM_LAYOUT.width,
+        height: HIDDEN_ITEM_LAYOUT.height,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
       onPress={() => handleDelete(item.id)}>
-      <AppText style={{color: 'white'}}>Delete</AppText>
+      <SvgComponent name="DELETE" color={colors.white} />
     </TouchableOpacity>
   </View>
 );

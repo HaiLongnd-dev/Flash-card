@@ -3,14 +3,15 @@ import {AppContainer} from '../../components/Core/AppContainer';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import {TCard} from '../../types/Card';
 import {RenderItem} from './Components/RenderItem';
-import {RenderHiddenItem} from './Components/RenderHidenItem';
+import {
+  HIDDEN_ITEM_LAYOUT,
+  RenderHiddenItem,
+} from './Components/RenderHidenItem';
 import styles from './style';
 import {TouchableOpacity, View} from 'react-native';
 import SvgComponent from '../../assets/svg';
 import {colors} from '../../themes/color';
 import {AppText} from '../../components';
-
-import ConfirmModal from '../../components/Core/ConfirmModal';
 import Navigator from '../../navigation/NavigationService';
 import SCREEN_NAME from '../../navigation/ScreenName';
 import {TTopic} from '../../types/Topic';
@@ -58,7 +59,7 @@ const FlashcardListScreenView = ({
               handleDelete={handleDelete}
             />
           )}
-          rightOpenValue={-150}
+          rightOpenValue={-(HIDDEN_ITEM_LAYOUT.width * 2)}
           style={styles.list}
         />
       )}

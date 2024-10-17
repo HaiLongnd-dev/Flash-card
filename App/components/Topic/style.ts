@@ -9,6 +9,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderWidth: 1,
     borderColor: colors.gray,
+    justifyContent: 'space-between',
+  },
+  leftContainer: {
+    flexDirection: 'row',
+  },
+  rightContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
+  button: {
+    padding: 15,
+    borderWidth: 1,
+    borderColor: colors.gray_2,
+    marginRight: 10,
+    borderRadius: 10,
   },
   icon: {
     paddingVertical: 20,

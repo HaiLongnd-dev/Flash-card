@@ -9,7 +9,6 @@ import {getListCardByIdTopic} from '../../redux/selectors/cardSelector';
 import {TCard} from '../../types/Card';
 import {removeCardAction} from '../../redux/actions/cardAction';
 import ConfirmModal from '../../components/Core/ConfirmModal';
-import Navigator from '../../navigation/NavigationService';
 export type TopicFlashcardRouteProp = RouteProp<
   NavigationStackParamList,
   typeof SCREEN_NAME.MANUAL.FLASHCARD_LIST

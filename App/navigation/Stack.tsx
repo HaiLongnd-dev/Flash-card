@@ -12,6 +12,7 @@ import {
   ChooseIconScreen,
   FlashcardListScreen,
   FlashcardScreen,
+  TopicListScreen,
 } from '../screens';
 import AddNewCardScreen from '../screens/AddNewCardScreen';
 import {TTopic} from '../types/Topic';
@@ -70,6 +71,10 @@ function StackScreens() {
         <Stack.Screen
           name={SCREEN_NAME.MANUAL.FLASHCARD}
           component={FlashcardScreen}
+        />
+        <Stack.Screen
+          name={SCREEN_NAME.MANUAL.TOPIC_LIST}
+          component={TopicListScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

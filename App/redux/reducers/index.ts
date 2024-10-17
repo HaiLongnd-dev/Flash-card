@@ -6,7 +6,7 @@ import cardReducer, {ICardState} from './cardReducer';
 const rootPersistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['topics','cards'],
+  whitelist: ['topic','card'],
   timeout: 10000,
 };
 export interface IGlobalState {

@@ -13,10 +13,16 @@ import {AppText} from '../../components';
 import {colors} from '../../themes/color';
 import {TTopic} from '../../types/Topic';
 import TopicComponentHome from '../../components/TopicComponentHome';
+import Navigator from '../../navigation/NavigationService';
+import SCREEN_NAME from '../../navigation/ScreenName';
+
 interface HomeScreenViewProps {
   listTopic: TTopic[];
 }
 const HomeScreenView = ({listTopic}: HomeScreenViewProps) => {
+  const showTopicList = () => {
+    Navigator.navigateTo(SCREEN_NAME.MANUAL.TOPIC_LIST);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -61,7 +67,7 @@ const HomeScreenView = ({listTopic}: HomeScreenViewProps) => {
           </View>
 
           <View style={styles.categoriesBtn}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={showTopicList}>
               <AppText style={styles.categoriesBtnText}>View all</AppText>
             </TouchableOpacity>
           </View>
