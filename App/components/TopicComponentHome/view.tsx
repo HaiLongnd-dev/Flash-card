@@ -20,7 +20,7 @@ const TopicComponentHomeView = ({topic}: TopicComponentHomeViewProps) => {
         style={styles.container}
         onPress={() => showTopicListCard(topic)}>
         <View style={styles.icon}>
-          <SvgComponent name={topic.icon} />
+          <SvgComponent name={topic.icon} color={topic.iconColor} />
         </View>
         <View style={styles.title}>
           <Text>{topic.title}</Text>

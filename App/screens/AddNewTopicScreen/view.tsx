@@ -32,7 +32,6 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
       title: topicName,
       icon: iconName,
       iconColor: iconColor,
-      cards: [],
     };
     if (topic.title === '' || checkLength(topicName)) {
       return;

@@ -10,6 +10,7 @@ import RootScreen from '../screens/Root';
 import {
   AddNewTopicScreen,
   ChooseIconScreen,
+  EditTopicScreen,
   FlashcardListScreen,
   FlashcardScreen,
   StudyScreen,
@@ -82,6 +83,10 @@ function StackScreens() {
         <Stack.Screen
           name={SCREEN_NAME.MANUAL.STUDY_SCREEN}
           component={StudyScreen}
+        />
+        <Stack.Screen
+          name={SCREEN_NAME.MANUAL.EDIT_TOPIC}
+          component={EditTopicScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -9,6 +9,7 @@ const MANUAL = {
   FLASHCARD: 'FLASHCARD',
   TOPIC_LIST: 'TOPIC_LIST',
   STUDY_SCREEN: 'STUDY_SCREEN',
+  EDIT_TOPIC: 'EDIT_TOPIC',
 } as const;
 
 const ROOT = {

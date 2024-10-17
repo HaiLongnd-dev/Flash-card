@@ -17,6 +17,7 @@ interface AddNewCardViewProps {
 
 const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
   const [cardContent, setCardContent] = useState<TCard['content']>('');
+  const [cardDescription, setCardDescription] = useState<TCard['desc']>('');
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -46,12 +47,18 @@ const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
       idTopic: topic.id,
       id: Math.random() * 10000,
       content: cardContent,
+      desc: cardDescription,
     };
-    if (cardContent === '' || checkLength(cardContent)) {
+    if (
+      cardContent === '' ||
+      checkLength(cardContent) ||
+      cardDescription === ''
+    ) {
       return;
     }
     addCard(card);
     setCardContent('');
+    setCardDescription('');
   };
 
   return (
@@ -81,6 +88,22 @@ const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
           ) : (
             <></>
           )}
+          <AppText fontWeight={900} color={colors.black} fontSize={21}>
+            Card description:
+          </AppText>
+          <TextInput
+            style={styles.inputTopic}
+            placeholder="Input card description"
+            onChangeText={setCardDescription}
+            value={cardDescription}
+          />
+          {checkLength(cardContent) ? (
+            <AppText color={colors.red}>
+              Exceeds the specified number of characters!
+            </AppText>
+          ) : (
+            <></>
+          )}
           <SubmitButton submit={handleSubmit} />
           {cardList ? (
             <View style={styles.listCard}>
@@ -90,9 +113,14 @@ const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
               <FlatList
                 data={cardList}
                 renderItem={({item}) => (
-                  <AppText style={styles.card} fontSize={18}>
-                    {item.content}
-                  </AppText>
+                  <View style={styles.listContent}>
+                    <AppText style={styles.card} fontSize={18}>
+                      {item.content}
+                    </AppText>
+                    <AppText style={styles.card} fontSize={18}>
+                      {item.desc}
+                    </AppText>
+                  </View>
                 )}
               />
             </View>

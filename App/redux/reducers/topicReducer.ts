@@ -1,4 +1,4 @@
-import { TTopic } from '../../types/Topic';
+import {TTopic} from '../../types/Topic';
 import * as actions from '../actions/types/topicActionType';
 export interface ITopicState {
   topics: TTopic[];
@@ -15,16 +15,16 @@ export default function topicReducer(
         ...state,
       };
     case actions.TopicActionType.ADD:
-      return{
+      return {
         ...state,
-        topics:[...state.topics,action.payload.params.topic]
-      }
+        topics: [...state.topics, action.payload.params.topic],
+      };
     case actions.TopicActionType.EDIT:
       return {
         ...state,
         topics: state.topics.map(topic =>
-          topic.id === action.payload
-            ? {...topic, ...action.payload.params}
+          topic.id === action.payload.params.id
+            ? {...topic, ...action.payload.params.topic}
             : topic,
         ),
       };

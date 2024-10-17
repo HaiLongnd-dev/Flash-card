@@ -21,5 +21,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   card: {marginHorizontal: 10},
+  listContent: {
+    flexDirection: 'row',
+  },
 });
 export default styles;

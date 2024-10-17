@@ -7,6 +7,7 @@ import FlashcardScreen from './FlashcardScreen';
 import FlashcardListScreen from './FlashcardListScreen';
 import TopicListScreen from './TopicListScreen';
 import StudyScreen from './StudyScreen';
+import EditTopicScreen from './EditTopicScreen';
 export {
   HomeScreen,
   AccountScreen,
@@ -17,4 +18,5 @@ export {
   FlashcardListScreen,
   TopicListScreen,
   StudyScreen,
+  EditTopicScreen,
 };

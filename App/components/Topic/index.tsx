@@ -6,6 +6,7 @@ import {AppDispatch} from '../../redux/store';
 import ConfirmModal from '../../components/Core/ConfirmModal';
 import {removeTopicAction} from '../../redux/actions/topicAction';
 import {useDispatch} from 'react-redux';
+import Navigator from '../../navigation/NavigationService';
 
 interface TopicProps {
   topic: TTopic;
@@ -31,7 +32,7 @@ const Topic = ({topic, editTopicOpt}: TopicProps) => {
     setModalVisible(false);
   };
   const handleEdit = (id: TTopic['id']) => {
-    console.log('Edit topic with id: ', id);
+    Navigator.navigateTo('EDIT_TOPIC', topic);
   };
   return (
     <>
