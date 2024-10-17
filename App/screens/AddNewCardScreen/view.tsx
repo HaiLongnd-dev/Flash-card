@@ -28,6 +28,9 @@ const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
   const handleCancel = () => {
     setModalVisible(false);
   };
+  const checkLength = (cardContent: string) => {
+    if (cardContent.length > 20) return true;
+  };
   const BackHome = () => {
     return (
       <TouchableOpacity
@@ -44,6 +47,9 @@ const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
       id: Math.random() * 10000,
       content: cardContent,
     };
+    if (cardContent === '' || checkLength(cardContent)) {
+      return;
+    }
     addCard(card);
     setCardContent('');
   };
@@ -68,6 +74,13 @@ const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
             onChangeText={setCardContent}
             value={cardContent}
           />
+          {checkLength(cardContent) ? (
+            <AppText color={colors.red}>
+              Exceeds the specified number of characters!
+            </AppText>
+          ) : (
+            <></>
+          )}
           <SubmitButton submit={handleSubmit} />
           {cardList ? (
             <View style={styles.listCard}>

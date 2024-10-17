@@ -6,7 +6,7 @@ import ChooseIconScreen from './ChooseIconScreen';
 import FlashcardScreen from './FlashcardScreen';
 import FlashcardListScreen from './FlashcardListScreen';
 import TopicListScreen from './TopicListScreen';
-TopicListScreen;
+import StudyScreen from './StudyScreen';
 export {
   HomeScreen,
   AccountScreen,
@@ -16,4 +16,5 @@ export {
   FlashcardScreen,
   FlashcardListScreen,
   TopicListScreen,
+  StudyScreen,
 };

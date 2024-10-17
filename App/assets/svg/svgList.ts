@@ -7,7 +7,8 @@ import ARROW_LEFT from './common/arrowLeft';
 import ADD from './common/add';
 import EDIT from './common/edit';
 import DELETE from './common/delete';
-
+import ARROW_DOWN from './common/arrow_down';
+import ARROW_UP from './common/arrow_up';
 // Category
 // Food
 import FOOD1 from './category/food/food1';
@@ -97,6 +98,8 @@ export const SVG_LIST = {
   ADD,
   EDIT,
   DELETE,
+  ARROW_DOWN,
+  ARROW_UP,
   // CATEGORY
   //FOOD
   FOOD1,

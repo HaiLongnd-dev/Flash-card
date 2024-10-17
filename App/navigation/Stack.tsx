@@ -12,10 +12,12 @@ import {
   ChooseIconScreen,
   FlashcardListScreen,
   FlashcardScreen,
+  StudyScreen,
   TopicListScreen,
 } from '../screens';
 import AddNewCardScreen from '../screens/AddNewCardScreen';
 import {TTopic} from '../types/Topic';
+import {TCard} from '../types/Card';
 export type StackParamList = {
   HOME_SCREEN: undefined;
   ADD_CARD_SCREEN: undefined;
@@ -30,6 +32,7 @@ export interface NavigationStackParamList
   };
   ADD_NEW_CARD: {topic: TTopic};
   FLASHCARD_LIST: {topic: TTopic};
+  STUDY_SCREEN: {props: {}};
 }
 
 export type ScreenNameKeys = keyof NavigationStackParamList;
@@ -75,6 +78,10 @@ function StackScreens() {
         <Stack.Screen
           name={SCREEN_NAME.MANUAL.TOPIC_LIST}
           component={TopicListScreen}
+        />
+        <Stack.Screen
+          name={SCREEN_NAME.MANUAL.STUDY_SCREEN}
+          component={StudyScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

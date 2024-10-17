@@ -1,5 +1,4 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../themes/color';
 
 const styles = StyleSheet.create({
   container: {
@@ -8,8 +7,7 @@ const styles = StyleSheet.create({
   },
   addTopic: {
     paddingHorizontal: 20,
-    paddingVertical: 10,
   },
-  button: {marginBottom: 20, marginHorizontal: 10},
+  button: {marginHorizontal: 10},
 });
 export default styles;

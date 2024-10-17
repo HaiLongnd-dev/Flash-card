@@ -23,6 +23,9 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
   const [iconColor, setIconColor] = useState<string>(initColor);
 
   const [topicName, setTopicName] = useState<string>('');
+  const checkLength = (topicName: string) => {
+    if (topicName.length > 20) return true;
+  };
   const handleSubmit = () => {
     let topic: TTopic = {
       id: Math.random(),
@@ -31,7 +34,7 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
       iconColor: iconColor,
       cards: [],
     };
-    if (topic.title === '') {
+    if (topic.title === '' || checkLength(topicName)) {
       return;
     }
     addTopic(topic);
@@ -40,6 +43,7 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
       Navigator.navigateTo(SCREEN_NAME.MANUAL.ADD_NEW_CARD, {topic});
     }, 100);
   };
+
   return (
     <AppContainer backButton={true} title="ADD NEW TOPIC">
       <View style={styles.containerContent}>
@@ -67,6 +71,13 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
               onChangeText={setTopicName}
               value={topicName}
             />
+            {checkLength(topicName) ? (
+              <AppText color={colors.red}>
+                Exceeds the specified number of characters!
+              </AppText>
+            ) : (
+              <></>
+            )}
           </View>
         </View>
         <SubmitButton submit={handleSubmit} />

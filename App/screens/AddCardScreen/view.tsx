@@ -14,6 +14,15 @@ const AddCardScreenView = ({data}: AddCardScreenViewProps) => {
   return (
     <AppContainer title="ADD FLASHCARD" backButton={true}>
       <View style={styles.container}>
+        <View style={styles.button}>
+          <NavigationScreenButton
+            nameButton={'ADD NEW TOPIC'}
+            nameScreen={'ADD_NEW_TOPIC'}
+          />
+          <AppText fontSize={21} color={colors.black} align="center">
+            ------- or -------
+          </AppText>
+        </View>
         <View style={styles.addTopic}>
           <AppText fontSize={21} color={colors.black} align="center">
             Choose a topic card
@@ -22,15 +31,6 @@ const AddCardScreenView = ({data}: AddCardScreenViewProps) => {
         <FlatList
           data={[...data].reverse()}
           renderItem={({item}) => <Topic topic={item} />}
-        />
-      </View>
-      <View style={styles.button}>
-        {/* <AppText fontSize={21} color={colors.black} align="center">
-          ------- or -------
-        </AppText> */}
-        <NavigationScreenButton
-          nameButton={'ADD NEW TOPIC'}
-          nameScreen={'ADD_NEW_TOPIC'}
         />
       </View>
     </AppContainer>

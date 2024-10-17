@@ -11,7 +11,7 @@ import styles from './style';
 import {TouchableOpacity, View} from 'react-native';
 import SvgComponent from '../../assets/svg';
 import {colors} from '../../themes/color';
-import {AppText} from '../../components';
+import {AppText, NavigationScreenButton} from '../../components';
 import Navigator from '../../navigation/NavigationService';
 import SCREEN_NAME from '../../navigation/ScreenName';
 import {TTopic} from '../../types/Topic';
@@ -49,19 +49,28 @@ const FlashcardListScreenView = ({
           Have no card!
         </AppText>
       ) : (
-        <SwipeListView
-          data={cardList}
-          renderItem={RenderItem}
-          renderHiddenItem={(data, rowMap) => (
-            <RenderHiddenItem
-              item={data.item}
-              handleEdit={handleEdit}
-              handleDelete={handleDelete}
+        <>
+          <SwipeListView
+            data={cardList}
+            renderItem={RenderItem}
+            renderHiddenItem={(data, rowMap) => (
+              <RenderHiddenItem
+                item={data.item}
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+              />
+            )}
+            rightOpenValue={-(HIDDEN_ITEM_LAYOUT.width * 2)}
+            style={styles.list}
+          />
+          <View style={styles.button}>
+            <NavigationScreenButton
+              nameButton="LET'S STUDY! "
+              nameScreen="STUDY_SCREEN"
+              props={cardList}
             />
-          )}
-          rightOpenValue={-(HIDDEN_ITEM_LAYOUT.width * 2)}
-          style={styles.list}
-        />
+          </View>
+        </>
       )}
     </AppContainer>
   );

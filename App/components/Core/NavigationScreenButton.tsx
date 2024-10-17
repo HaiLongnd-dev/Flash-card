@@ -8,17 +8,19 @@ import {colors} from '../../themes/color';
 interface NavigationScreenButtonProps {
   nameButton: string;
   nameScreen: keyof typeof SCREEN_NAME.MANUAL;
+  props?: {};
 }
 const NavigationScreenButton = ({
   nameButton,
   nameScreen,
+  props,
 }: NavigationScreenButtonProps) => {
   return (
     <View>
       <TouchableOpacity
         style={styles.container}
         onPress={() => {
-          Navigator.navigateTo(SCREEN_NAME.MANUAL[nameScreen]);
+          Navigator.navigateTo(SCREEN_NAME.MANUAL[nameScreen], {props});
         }}>
         <View style={styles.title}>
           <AppText color={colors.white} fontSize={20}>

@@ -37,7 +37,7 @@ const TopicView = ({
           />
         </View>
         <View style={styles.title}>
-          <AppText fontSize={20}>{topic.title}</AppText>
+          <AppText fontSize={20} >{topic.title}</AppText>
         </View>
       </View>
       {editTopicOpt ? (
