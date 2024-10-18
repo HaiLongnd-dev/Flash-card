@@ -1,12 +1,35 @@
-import {Text, View} from 'react-native';
 import React from 'react';
+import {Button, StyleSheet, View} from 'react-native';
+import Animated, {useSharedValue, withSpring} from 'react-native-reanimated';
 
-const AccountScreenView = () => {
+export default function App() {
+  const width = useSharedValue<number>(100);
+
+  const handlePress = () => {
+    width.value = withSpring(width.value + 50);
+  };
+  const handleReverse = () => {
+    width.value = withSpring(100);
+  };
+
   return (
-    <View>
-      <Text>AccountScreenView</Text>
+    <View style={styles.container}>
+      <Animated.View style={{...styles.box, width}} />
+      <Button onPress={handlePress} title="Click me" />
+      <Button onPress={handleReverse} title="Click me" />
     </View>
   );
-};
+}
 
-export default AccountScreenView;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  box: {
+    height: 100,
+    backgroundColor: '#b58df1',
+    borderRadius: 20,
+    marginVertical: 64,
+  },
+});
