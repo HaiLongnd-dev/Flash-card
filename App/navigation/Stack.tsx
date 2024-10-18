@@ -33,7 +33,8 @@ export interface NavigationStackParamList
   };
   ADD_NEW_CARD: {topic: TTopic};
   FLASHCARD_LIST: {topic: TTopic};
-  STUDY_SCREEN: {props: {}};
+  STUDY_SCREEN: {cardList: TCard[]};
+  EDIT_TOPIC: {topic: TTopic};
 }
 
 export type ScreenNameKeys = keyof NavigationStackParamList;

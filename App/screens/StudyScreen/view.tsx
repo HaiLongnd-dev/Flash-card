@@ -14,7 +14,7 @@ import {TCard} from '../../types/Card';
 import SvgComponent from '../../assets/svg';
 
 interface StudyScreenViewProps {
-  cardList;
+  cardList: TCard[];
 }
 const {width} = Dimensions.get('window');
 const ITEM_WIDTH = width * 0.8;
@@ -46,7 +46,7 @@ const StudyScreenView = ({cardList}: StudyScreenViewProps) => {
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
-          onScroll={handleScroll}
+          onScroll={event => handleScroll(event)}
           renderItem={({item}) => renderItem(item)}
           keyExtractor={item => item.id.toString()}
           snapToInterval={ITEM_WIDTH}

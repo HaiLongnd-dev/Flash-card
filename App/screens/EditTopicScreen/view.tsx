@@ -1,4 +1,4 @@
-import {Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {TextInput, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import {AppContainer} from '../../components/Core/AppContainer';
 import {AppText} from '../../components';
@@ -11,7 +11,7 @@ import {colors} from '../../themes/color';
 import ConfirmModal from '../../components/Core/ConfirmModal';
 
 interface EditTopicScreenViewProps {
-  topic;
+  topic: TTopic;
   editTopic: (id: TTopic['id'], topic: Partial<TTopic>) => void;
 }
 

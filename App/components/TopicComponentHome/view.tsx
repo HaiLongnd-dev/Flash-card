@@ -5,6 +5,7 @@ import styles from './style';
 import {TTopic} from '../../types/Topic';
 import SvgComponent from '../../assets/svg';
 import SCREEN_NAME from '../../navigation/ScreenName';
+import {colors} from '../../themes/color';
 
 interface TopicComponentHomeViewProps {
   topic: TTopic;
@@ -20,7 +21,12 @@ const TopicComponentHomeView = ({topic}: TopicComponentHomeViewProps) => {
         style={styles.container}
         onPress={() => showTopicListCard(topic)}>
         <View style={styles.icon}>
-          <SvgComponent name={topic.icon} color={topic.iconColor} />
+          <SvgComponent
+            name={topic.icon}
+            color={
+              topic.iconColor === '#FFFFFF' ? colors.black : topic.iconColor
+            }
+          />
         </View>
         <View style={styles.title}>
           <Text>{topic.title}</Text>

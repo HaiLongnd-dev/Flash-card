@@ -17,7 +17,8 @@ type EditTopicScreenProps = {
 };
 
 const EditTopicScreen = ({route}: EditTopicScreenProps) => {
-  const topic = route.params;
+  const {topic} = route.params;
+
   const dispatch = useDispatch<AppDispatch>();
   const editTopic = (id: TTopic['id'], topic: Partial<TTopic>) => {
     dispatch(editTopicAction(id, topic));

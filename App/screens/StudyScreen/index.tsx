@@ -12,8 +12,8 @@ export type StudyScreenProps = {
   route: StudyScreenRouteProp;
 };
 const StudyScreen = ({route}: StudyScreenProps) => {
-  const {props} = route.params;
-  return <StudyScreenView cardList={props} />;
+  const {cardList} = route.params;
+  return <StudyScreenView cardList={cardList} />;
 };
 
 export default StudyScreen;

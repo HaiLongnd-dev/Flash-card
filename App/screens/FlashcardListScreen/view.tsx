@@ -11,13 +11,13 @@ import styles from './style';
 import {TouchableOpacity, View} from 'react-native';
 import SvgComponent from '../../assets/svg';
 import {colors} from '../../themes/color';
-import {AppText, NavigationScreenButton} from '../../components';
+import {AppButton, AppText} from '../../components';
 import Navigator from '../../navigation/NavigationService';
 import SCREEN_NAME from '../../navigation/ScreenName';
 import {TTopic} from '../../types/Topic';
 
 interface FlashcardListScreenViewProps {
-  topic;
+  topic: TTopic;
   cardList: TCard[];
   handleDelete: (id: TCard['id']) => void;
   handleEdit: (id: TCard['id']) => void;
@@ -37,6 +37,9 @@ const FlashcardListScreenView = ({
         <SvgComponent name="ADD" color={colors.white} size={30} />
       </TouchableOpacity>
     );
+  };
+  const handleButton = () => {
+    Navigator.navigateTo(SCREEN_NAME.MANUAL.STUDY_SCREEN, {cardList});
   };
   return (
     <AppContainer
@@ -64,11 +67,7 @@ const FlashcardListScreenView = ({
             style={styles.list}
           />
           <View style={styles.button}>
-            <NavigationScreenButton
-              nameButton="LET'S STUDY! "
-              nameScreen="STUDY_SCREEN"
-              props={cardList}
-            />
+            <AppButton nameButton="LET'S STUDY! " handleButton={handleButton} />
           </View>
         </>
       )}

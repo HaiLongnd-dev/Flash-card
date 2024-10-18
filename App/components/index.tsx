@@ -1,5 +1,5 @@
 import {AppText} from './Core/AppText';
-import NavigationScreenButton from './Core/NavigationScreenButton';
+import AppButton from './Core/AppButton';
 import SubmitButton from './Core/SubmitButton';
 
-export {AppText, SubmitButton, NavigationScreenButton};
+export {AppText, SubmitButton, AppButton};

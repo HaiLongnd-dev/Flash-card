@@ -1,12 +1,14 @@
 import {FlatList, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import styles from './style';
-import {NavigationScreenButton} from '../../components';
+import {AppButton} from '../../components';
 import Topic from '../../components/Topic';
 import {TTopic} from '../../types/Topic';
 import {AppContainer} from '../../components/Core/AppContainer';
 import SvgComponent from '../../assets/svg';
 import {colors} from '../../themes/color';
+import Navigator from '../../navigation/NavigationService';
+import SCREEN_NAME from '../../navigation/ScreenName';
 
 interface TopicLisScreenViewProps {
   data: TTopic[];
@@ -24,6 +26,9 @@ const TopicLisScreenView = ({data}: TopicLisScreenViewProps) => {
       </TouchableOpacity>
     );
   };
+  const handleButton = () => {
+    Navigator.navigateTo(SCREEN_NAME.MANUAL.ADD_NEW_TOPIC);
+  };
   return (
     <AppContainer
       haveRightButton={true}
@@ -39,10 +44,7 @@ const TopicLisScreenView = ({data}: TopicLisScreenViewProps) => {
         />
       </View>
       <View style={styles.button}>
-        <NavigationScreenButton
-          nameButton={'ADD NEW TOPIC'}
-          nameScreen={'ADD_NEW_TOPIC'}
-        />
+        <AppButton nameButton={'ADD NEW TOPIC'} handleButton={handleButton} />
       </View>
     </AppContainer>
   );

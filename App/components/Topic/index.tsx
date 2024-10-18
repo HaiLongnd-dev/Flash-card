@@ -31,15 +31,15 @@ const Topic = ({topic, editTopicOpt}: TopicProps) => {
   const handleCancel = () => {
     setModalVisible(false);
   };
-  const handleEdit = (id: TTopic['id']) => {
-    Navigator.navigateTo('EDIT_TOPIC', topic);
+  const handleEdit = (topic: TTopic) => {
+    Navigator.navigateTo('EDIT_TOPIC', {topic});
   };
   return (
     <>
       <TopicView
         editTopicOpt={editTopicOpt}
         topic={topic}
-        handleEdit={handleEdit}
+        handleEdit={() => handleEdit(topic)}
         handleDelete={handleDelete}
       />
       <ConfirmModal
