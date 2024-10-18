@@ -20,7 +20,7 @@ interface FlashcardListScreenViewProps {
   topic: TTopic;
   cardList: TCard[];
   handleDelete: (id: TCard['id']) => void;
-  handleEdit: (id: TCard['id']) => void;
+  handleEdit: (card: TCard) => void;
 }
 const FlashcardListScreenView = ({
   topic,
@@ -59,8 +59,9 @@ const FlashcardListScreenView = ({
             renderHiddenItem={(data, rowMap) => (
               <RenderHiddenItem
                 item={data.item}
-                handleEdit={handleEdit}
+                handleEdit={() => handleEdit(data.item)}
                 handleDelete={handleDelete}
+                rowMap={rowMap}
               />
             )}
             rightOpenValue={-(HIDDEN_ITEM_LAYOUT.width * 2)}

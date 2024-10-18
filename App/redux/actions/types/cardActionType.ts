@@ -15,7 +15,7 @@ export interface IAddCardAction extends IActionBase<{card: TCard}> {
   type: typeof CardActionType.ADD;
 }
 export interface IEditCardAction
-  extends IActionBase<{id: TCard['id']; card: TCard}> {
+  extends IActionBase<{id: TCard['id']; card: Partial<TCard>}> {
   type: typeof CardActionType.EDIT;
 }
 export interface IRemoveCardAction extends IActionBase<{id: TCard['id']}> {

@@ -8,6 +8,8 @@ import FlashcardListScreen from './FlashcardListScreen';
 import TopicListScreen from './TopicListScreen';
 import StudyScreen from './StudyScreen';
 import EditTopicScreen from './EditTopicScreen';
+import EditCardScreen from './EditCardScreen';
+
 export {
   HomeScreen,
   AccountScreen,
@@ -19,4 +21,5 @@ export {
   TopicListScreen,
   StudyScreen,
   EditTopicScreen,
+  EditCardScreen,
 };

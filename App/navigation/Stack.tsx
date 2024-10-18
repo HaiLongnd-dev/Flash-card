@@ -10,6 +10,7 @@ import RootScreen from '../screens/Root';
 import {
   AddNewTopicScreen,
   ChooseIconScreen,
+  EditCardScreen,
   EditTopicScreen,
   FlashcardListScreen,
   FlashcardScreen,
@@ -35,6 +36,7 @@ export interface NavigationStackParamList
   FLASHCARD_LIST: {topic: TTopic};
   STUDY_SCREEN: {cardList: TCard[]};
   EDIT_TOPIC: {topic: TTopic};
+  EDIT_CARD: {card: TCard};
 }
 
 export type ScreenNameKeys = keyof NavigationStackParamList;
@@ -88,6 +90,10 @@ function StackScreens() {
         <Stack.Screen
           name={SCREEN_NAME.MANUAL.EDIT_TOPIC}
           component={EditTopicScreen}
+        />
+        <Stack.Screen
+          name={SCREEN_NAME.MANUAL.EDIT_CARD}
+          component={EditCardScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

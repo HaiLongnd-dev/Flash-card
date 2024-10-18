@@ -23,9 +23,9 @@ export const removeCardAction = (id: TCard['id']): IRemoveCardAction => ({
   type: CardActionType.REMOVE,
   payload: {params: {id}},
 });
-export const editTaskAction = (
+export const editCardAction = (
   id: TCard['id'],
-  card: TCard,
+  card: Partial<TCard>,
 ): IEditCardAction => ({
   type: CardActionType.EDIT,
   payload: {params: {id, card}},

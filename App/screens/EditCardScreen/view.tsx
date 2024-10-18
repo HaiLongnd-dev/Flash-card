@@ -10,21 +10,24 @@ import Navigator from '../../navigation/NavigationService';
 import ConfirmModal from '../../components/Core/ConfirmModal';
 import SvgComponent from '../../assets/svg';
 import {TTopic} from '../../types/Topic';
-interface AddNewCardViewProps {
-  topic: TTopic;
-  cardList: TCard[];
-  addCard: (card: TCard) => void;
+interface EditCardScreenViewProps {
+  card: TCard;
+  editCard: (id: TCard['id'], card: Partial<TCard>) => void;
 }
-
-const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
-  const [cardContent, setCardContent] = useState<TCard['content']>('');
-  const [cardDescription, setCardDescription] = useState<TCard['desc']>('');
+const EditCardScreenView = ({card, editCard}: EditCardScreenViewProps) => {
+  const [cardContent, setCardContent] = useState(card.content);
+  const [cardDescription, setCardDescription] = useState(card.desc);
 
   const [modalVisible, setModalVisible] = useState(false);
 
+  let editedCard: Partial<TCard> = {
+    content: cardContent,
+    desc: cardDescription,
+  };
   const handleConfirm = () => {
-    Navigator.navigateTo(SCREEN_NAME.ROOT.HOME_SCREEN);
+    editCard(card.id, editedCard);
     setModalVisible(false);
+    Navigator.goBack();
   };
 
   const handleCancel = () => {
@@ -33,7 +36,7 @@ const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
   const checkLength = (cardContent: string) => {
     if (cardContent.length > 20) return true;
   };
-  const BackHome = () => {
+  const HandleButton = () => {
     return (
       <TouchableOpacity
         onPress={() => {
@@ -43,36 +46,16 @@ const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
       </TouchableOpacity>
     );
   };
-  const handleSubmit = () => {
-    let card: TCard = {
-      idTopic: topic.id,
-      id: Math.random() * 10000,
-      content: cardContent,
-      desc: cardDescription,
-    };
-    if (
-      cardContent === '' ||
-      checkLength(cardContent) ||
-      cardDescription === ''
-    ) {
-      return;
-    }
-    addCard(card);
-    setCardContent('');
-    setCardDescription('');
-  };
+  const handleSubmit = () => {};
 
   return (
     <AppContainer
       backButton={true}
       haveRightButton={true}
-      rightButton={<BackHome />}
+      rightButton={<HandleButton />}
       title="ADD FLASHCARD">
       <View style={styles.container}>
         <View style={styles.addTopic}>
-          <AppText fontWeight={900} color={colors.black} fontSize={27}>
-            Topic: {topic.title}
-          </AppText>
           <AppText fontWeight={900} color={colors.black} fontSize={21}>
             Card content:
           </AppText>
@@ -105,29 +88,6 @@ const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
           ) : (
             <></>
           )}
-          <SubmitButton submit={handleSubmit} />
-          {cardList ? (
-            <View style={styles.listCard}>
-              <AppText fontWeight={900} fontSize={20} align="center">
-                Flashcard list
-              </AppText>
-              <FlatList
-                data={cardList}
-                renderItem={({item}) => (
-                  <View style={styles.listContent}>
-                    <AppText style={styles.card} fontSize={18}>
-                      {item.content}
-                    </AppText>
-                    <AppText style={styles.card} fontSize={18}>
-                      {item.desc}
-                    </AppText>
-                  </View>
-                )}
-              />
-            </View>
-          ) : (
-            <></>
-          )}
         </View>
         <ConfirmModal
           message="Are you sure you want to stop?"
@@ -139,5 +99,4 @@ const AddNewCardView = ({topic, cardList, addCard}: AddNewCardViewProps) => {
     </AppContainer>
   );
 };
-
-export default AddNewCardView;
+export default EditCardScreenView;

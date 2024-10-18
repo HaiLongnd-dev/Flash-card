@@ -10,6 +10,7 @@ const MANUAL = {
   TOPIC_LIST: 'TOPIC_LIST',
   STUDY_SCREEN: 'STUDY_SCREEN',
   EDIT_TOPIC: 'EDIT_TOPIC',
+  EDIT_CARD: 'EDIT_CARD',
 } as const;
 
 const ROOT = {
