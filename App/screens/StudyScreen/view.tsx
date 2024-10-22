@@ -11,13 +11,22 @@ import {AppText} from '../../components';
 import {colors} from '../../themes/color';
 import {TCard} from '../../types/Card';
 import SvgComponent from '../../assets/svg';
-
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+import RenderItem from './Components/RenderItem';
 interface StudyScreenViewProps {
   cardList: TCard[];
 }
 
 const {width} = Dimensions.get('window');
 const {height} = Dimensions.get('window');
+const ITEM_LAYOUT = {
+  width: width,
+  height: 200,
+};
 const ITEM_WIDTH = width * 0.8;
 
 const StudyScreenView = ({cardList}: StudyScreenViewProps) => {
@@ -32,50 +41,6 @@ const StudyScreenView = ({cardList}: StudyScreenViewProps) => {
     setCurrentIndex(newIndex);
   };
 
-  const toggleCard = (id: TCard['id']) => {
-    if (selectedCardId === id) {
-      setSelectedCardId(null);
-    } else {
-      setSelectedCardId(id);
-    }
-  };
-
-  const renderItem = ({item}: {item: TCard}) => {
-    const isOpen = selectedCardId === item.id;
-
-    return (
-      <View style={styles.cardContainer}>
-        <View style={!isOpen ? styles.cardContent : styles.cardContentShown}>
-          <AppText color={colors.white} fontSize={40}>
-            {item.content}
-          </AppText>
-          {!isOpen ? (
-            <TouchableOpacity
-              style={styles.showDesc}
-              onPress={() => toggleCard(item.id)}>
-              <SvgComponent name="ARROW_DOWN" />
-            </TouchableOpacity>
-          ) : null}
-        </View>
-        {isOpen ? (
-          <View style={styles.cardDesc}>
-            <AppText color={colors.white} fontSize={25}>
-              {item.content}
-            </AppText>
-            <AppText color={colors.white} fontSize={16}>
-              {item.desc}
-            </AppText>
-            <TouchableOpacity
-              style={styles.hideDesc}
-              onPress={() => toggleCard(item.id)}>
-              <SvgComponent name="ARROW_UP" />
-            </TouchableOpacity>
-          </View>
-        ) : null}
-      </View>
-    );
-  };
-
   return (
     <AppContainer backButton={true} title="FLASHCARD">
       <View style={styles.container}>
@@ -85,7 +50,13 @@ const StudyScreenView = ({cardList}: StudyScreenViewProps) => {
           pagingEnabled
           showsHorizontalScrollIndicator={false}
           onScroll={event => handleScroll(event)}
-          renderItem={renderItem}
+          renderItem={({item}) => (
+            <RenderItem
+              item={item}
+              isOpen={selectedCardId === item.id}
+              setSelectedCardId={setSelectedCardId}
+            />
+          )}
           keyExtractor={item => item.id.toString()}
           snapToInterval={ITEM_WIDTH}
           contentContainerStyle={{
@@ -111,37 +82,18 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     flex: 1,
-    marginVertical: 25,
+    justifyContent: 'center',
+    marginVertical: 10,
+    alignItems: 'center',
   },
   cardContent: {
-    height: height - height * 0.7,
+    height: ITEM_LAYOUT.height,
     width: width - width * 0.2,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#4A0E5C',
     borderRadius: 10,
     marginHorizontal: 10,
-    marginVertical: 200,
-  },
-  cardContentShown: {
-    height: height - height * 0.7,
-    width: width - width * 0.2,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#4A0E5C',
-    borderRadius: 10,
-    marginHorizontal: 10,
-    marginTop: 50,
-  },
-  cardDesc: {
-    height: height - height * 0.7,
-    width: width - width * 0.2,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#4A0E5C',
-    borderRadius: 10,
-    marginHorizontal: 10,
-    marginVertical: 100,
   },
   page: {
     marginTop: 10,

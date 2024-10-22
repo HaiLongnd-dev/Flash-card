@@ -1,35 +1,37 @@
 import React from 'react';
-import {Button, StyleSheet, View} from 'react-native';
-import Animated, {useSharedValue, withSpring} from 'react-native-reanimated';
+import {View, Button} from 'react-native';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  withSequence,
+  withRepeat,
+} from 'react-native-reanimated';
 
 export default function App() {
-  const width = useSharedValue<number>(100);
-
-  const handlePress = () => {
-    width.value = withSpring(width.value + 50);
-  };
-  const handleReverse = () => {
-    width.value = withSpring(100);
-  };
-
+  const offset = useSharedValue(0);
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{translateY: offset.value * 10}],
+    };
+  });
   return (
-    <View style={styles.container}>
-      <Animated.View style={{...styles.box, width}} />
-      <Button onPress={handlePress} title="Click me" />
-      <Button onPress={handleReverse} title="Click me" />
+    <View>
+      <Animated.View
+        style={[
+          {width: 100, height: 100, backgroundColor: 'blue'},
+          animatedStyle,
+        ]}
+      />
+      <Button
+        title="Move"
+        onPress={() =>
+          (offset.value = withSequence(
+            withRepeat(withSpring(30, {duration: 500}), 3),
+          ))
+        }
+      />
+      <Button title="Move" onPress={() => (offset.value = withSpring(0))} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  box: {
-    height: 100,
-    backgroundColor: '#b58df1',
-    borderRadius: 20,
-    marginVertical: 64,
-  },
-});
