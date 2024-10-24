@@ -20,8 +20,6 @@ export default function cardReducer(
         cards: [...state.cards, action.payload.params.card],
       };
     case actions.CardActionType.EDIT:
-      console.log('state===', state);
-
       return {
         ...state,
         cards: state.cards.map(card =>

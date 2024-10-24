@@ -1,5 +1,4 @@
 import {TCard} from '../../../types/Card';
-import {TTopic} from '../../../types/Topic';
 import {IActionBase} from './actionTypeBase';
 
 export const CardActionType = {
@@ -7,12 +6,16 @@ export const CardActionType = {
   EDIT: 'CARD/EDIT',
   REMOVE: 'CARD/REMOVE',
   GET_LIST: 'CARD/GET_LIST',
+  SEARCH: 'CARD/SEARCH',
 } as const;
 export type CardActionType =
   (typeof CardActionType)[keyof typeof CardActionType];
 
 export interface IAddCardAction extends IActionBase<{card: TCard}> {
   type: typeof CardActionType.ADD;
+}
+export interface ISearchAction extends IActionBase<{word: string}> {
+  type: typeof CardActionType.SEARCH;
 }
 export interface IEditCardAction
   extends IActionBase<{id: TCard['id']; card: Partial<TCard>}> {
@@ -29,4 +32,5 @@ export type ICardAction =
   | IAddCardAction
   | IEditCardAction
   | IRemoveCardAction
-  | IGetListCardAction;
+  | IGetListCardAction
+  | ISearchAction;

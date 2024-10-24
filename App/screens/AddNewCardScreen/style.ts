@@ -20,9 +20,5 @@ const styles = StyleSheet.create({
     borderColor: colors.gray_2,
     borderRadius: 5,
   },
-  card: {marginHorizontal: 10},
-  listContent: {
-    flexDirection: 'row',
-  },
 });
 export default styles;

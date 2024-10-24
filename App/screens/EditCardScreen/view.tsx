@@ -1,7 +1,7 @@
 import {FlatList, TextInput, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import styles from './style';
-import {AppText, SubmitButton} from '../../components';
+import {AppText} from '../../components';
 import {colors} from '../../themes/color';
 import {TCard} from '../../types/Card';
 import {AppContainer} from '../../components/Core/AppContainer';
@@ -16,13 +16,13 @@ interface EditCardScreenViewProps {
 }
 const EditCardScreenView = ({card, editCard}: EditCardScreenViewProps) => {
   const [cardContent, setCardContent] = useState(card.content);
-  const [cardDescription, setCardDescription] = useState(card.desc);
+  // const [cardDescription, setCardDescription] = useState(card.desc);
 
   const [modalVisible, setModalVisible] = useState(false);
 
   let editedCard: Partial<TCard> = {
     content: cardContent,
-    desc: cardDescription,
+    // desc: cardDescription,
   };
   const handleConfirm = () => {
     editCard(card.id, editedCard);
@@ -75,7 +75,7 @@ const EditCardScreenView = ({card, editCard}: EditCardScreenViewProps) => {
           <AppText fontWeight={900} color={colors.black} fontSize={21}>
             Card description:
           </AppText>
-          <TextInput
+          {/* <TextInput
             style={styles.inputTopic}
             placeholder="Input card description"
             onChangeText={setCardDescription}
@@ -87,7 +87,7 @@ const EditCardScreenView = ({card, editCard}: EditCardScreenViewProps) => {
             </AppText>
           ) : (
             <></>
-          )}
+          )} */}
         </View>
         <ConfirmModal
           message="Are you sure you want to stop?"

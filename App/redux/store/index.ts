@@ -5,7 +5,7 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import rootReducer from '../reducers';
-// import rootSagas from '../sagas';
+import rootSagas from '../sagas';
 
 // Middleware binding function
 const bindMiddleware = middleware => applyMiddleware(...middleware);
@@ -35,7 +35,7 @@ const store = createStore(persistedReducer, bindMiddleware(middlewares));
 const persistor = persistStore(store);
 
 // Run root sagas
-// sagaMiddleware.run(rootSagas);
+sagaMiddleware.run(rootSagas);
 
 export {store, persistor};
 export type AppDispatch = typeof store.dispatch;

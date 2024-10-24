@@ -41,7 +41,7 @@ const RenderItem = ({item, isOpen, setSelectedCardId}: RenderItemProps) => {
     } else {
       CloseDesc();
     }
-  }, [isOpen, item.id]);
+  }, [isOpen]);
 
   const CloseDesc = () => {
     cardOffset.value = withTiming(ITEM_LAYOUT.height / 4, {duration: 500});

@@ -79,7 +79,7 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
             )}
           </View>
         </View>
-        <SubmitButton submit={handleSubmit} />
+        <SubmitButton availableSubmit={true} submit={handleSubmit} />
       </View>
     </AppContainer>
   );

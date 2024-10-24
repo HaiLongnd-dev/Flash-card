@@ -1,5 +1,6 @@
 import {CardActionType} from './cardActionType';
 import {TopicActionType} from './topicActionType';
+import {WordActionType} from './wordActionType';
 
 export type TCallback = ({
   success,
@@ -12,6 +13,6 @@ export type TCallback = ({
 }) => void;
 
 export interface IActionBase<T> {
-  type: TopicActionType | CardActionType;
+  type: TopicActionType | CardActionType | WordActionType;
   payload?: {params?: T; callback?: TCallback};
 }

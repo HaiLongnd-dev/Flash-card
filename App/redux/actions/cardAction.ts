@@ -1,11 +1,12 @@
 import {TCard} from '../../types/Card';
-import {TTopic} from '../../types/Topic';
+import {TCallback} from './types/actionTypeBase';
 import {
   CardActionType,
   IAddCardAction,
   IEditCardAction,
   IGetListCardAction,
   IRemoveCardAction,
+  ISearchAction,
 } from './types/cardActionType';
 
 export const getListCardAction = (card: TCard): IGetListCardAction => {
@@ -14,6 +15,17 @@ export const getListCardAction = (card: TCard): IGetListCardAction => {
     payload: {params: {card}},
   };
 };
+
+export const searchAction = (
+  word: string,
+  callback: TCallback,
+): ISearchAction => {
+  return {
+    type: CardActionType.SEARCH,
+    payload: {params: {word}, callback},
+  };
+};
+
 export const addCardAction = (card: TCard): IAddCardAction => ({
   type: CardActionType.ADD,
   payload: {params: {card}},
