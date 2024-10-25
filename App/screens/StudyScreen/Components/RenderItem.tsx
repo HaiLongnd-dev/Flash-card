@@ -81,6 +81,9 @@ const RenderItem = ({item, isOpen, setSelectedCardId}: RenderItemProps) => {
         <AppText color={colors.white} fontSize={40}>
           {item.content}
         </AppText>
+        <AppText color={colors.white} fontSize={16}>
+          {item.phonetic}
+        </AppText>
         {!isOpen ? (
           <TouchableOpacity
             style={styles.showDesc}
@@ -100,7 +103,7 @@ const RenderItem = ({item, isOpen, setSelectedCardId}: RenderItemProps) => {
           {item.content}
         </AppText>
         <AppText color={colors.white} fontSize={16}>
-          {item.desc}
+          {item.meaning}
         </AppText>
       </Animated.View>
     </View>

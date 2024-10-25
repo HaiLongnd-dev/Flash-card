@@ -1,15 +1,17 @@
-import {all, call, put, takeEvery, takeLatest} from 'redux-saga/effects';
+import {all, call, takeLatest} from 'redux-saga/effects';
 
 import {checkWordApi} from '../../services/Apis/FlashCardApi';
-import {ICheckWordAction} from '../actions/types/wordActionType';
 import {CardActionType, ISearchAction} from '../actions/types/cardActionType';
 
 function* checkWordSaga(action: ISearchAction) {
   const response = yield call(checkWordApi, action.payload.params.word);
-  console.log('response====', response);
+  let word = response?.data[0]?.word || null;
+  let phonetic = response?.data[0]?.phonetics[1]?.text || null;
+  let meaning =
+    response?.data[0]?.meanings[0]?.definitions[0]?.definition || null;
 
-  if (Array.isArray(response.data)) {
-    action.payload.callback({success: true, data: response.data});
+  if (typeof phonetic === `string`) {
+    action.payload.callback({success: true, data: {phonetic, meaning, word}});
   } else {
     action.payload.callback({success: false});
   }

@@ -9,13 +9,6 @@ import {AppDispatch} from '../../redux/store';
 import {addCardAction, searchAction} from '../../redux/actions/cardAction';
 import {getListCardByIdTopic} from '../../redux/selectors/cardSelector';
 import {TCallback} from '../../redux/actions/types/actionTypeBase';
-import {AppContainer} from '../../components/Core/AppContainer';
-import ConfirmModal from '../../components/Core/ConfirmModal';
-import Navigator from '../../navigation/NavigationService';
-import SvgComponent from '../../assets/svg';
-import {TouchableOpacity} from 'react-native';
-import {colors} from '../../themes/color';
-
 export type AddTopicRouteProp = RouteProp<
   NavigationStackParamList,
   typeof SCREEN_NAME.MANUAL.ADD_NEW_CARD
@@ -28,62 +21,27 @@ const AddNewCardScreen = ({route}: AddNewCardViewProps) => {
   const {topic} = route.params;
   const dispatch = useDispatch<AppDispatch>();
   const cardList: TCard[] = useSelector(getListCardByIdTopic(topic.id));
-  const [available, setAvailable] = useState(false);
-
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const handleConfirm = () => {
-    Navigator.navigateTo(SCREEN_NAME.ROOT.HOME_SCREEN);
-    setModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setModalVisible(false);
-  };
-  const checkLength = (cardContent: string) => {
-    if (cardContent.length > 20) return true;
-  };
-  const BackHome = () => {
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          setModalVisible(true);
-        }}>
-        <SvgComponent name="CHECK" size={30} color={colors.white} />
-      </TouchableOpacity>
-    );
-  };
+  const [available, setAvailable] = useState<boolean>();
   const addCard = (card: TCard) => {
     dispatch(addCardAction(card));
+    setAvailable(false);
   };
-  const checkWord = (word: string, setPhonetic: (data) => void) => {
+  const checkWord = (word: string, dataCallback: (data) => void) => {
     const callback: TCallback = ({success, data}) => {
-      setPhonetic(data[0].phonetics[1].text);
+      dataCallback(data);
+      setAvailable(success);
     };
     dispatch(searchAction(word, callback));
   };
 
   return (
-    <AppContainer
-      backButton={true}
-      haveRightButton={true}
-      rightButton={<BackHome />}
-      title="ADD FLASHCARD">
-      <AddNewCardView
-        topic={topic}
-        cardList={cardList}
-        addCard={addCard}
-        checkWord={checkWord}
-        checkLength={checkLength}
-        available={available}
-      />
-      <ConfirmModal
-        message="Are you sure you want to stop?"
-        visible={modalVisible}
-        onConfirm={handleConfirm}
-        onCancel={handleCancel}
-      />
-    </AppContainer>
+    <AddNewCardView
+      topic={topic}
+      cardList={cardList}
+      addCard={addCard}
+      checkWord={checkWord}
+      available={available}
+    />
   );
 };
 

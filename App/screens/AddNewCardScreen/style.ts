@@ -20,5 +20,15 @@ const styles = StyleSheet.create({
     borderColor: colors.gray_2,
     borderRadius: 5,
   },
+
+  listContent: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  center: {justifyContent: 'center', alignItems: 'center'},
+  wordColumn: {width: '50%'},
+  phoneticColumn: {
+    width: '50%',
+  },
 });
 export default styles;

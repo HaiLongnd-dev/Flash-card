@@ -8,14 +8,7 @@ import {
 import React, {useState} from 'react';
 import {AppContainer} from '../../components/Core/AppContainer';
 import {AppText} from '../../components';
-import {colors} from '../../themes/color';
 import {TCard} from '../../types/Card';
-import SvgComponent from '../../assets/svg';
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
 import RenderItem from './Components/RenderItem';
 interface StudyScreenViewProps {
   cardList: TCard[];

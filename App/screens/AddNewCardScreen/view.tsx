@@ -1,17 +1,22 @@
 import {FlatList, TextInput, TouchableOpacity, View} from 'react-native';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import styles from './style';
 import {AppText, SubmitButton} from '../../components';
 import {colors} from '../../themes/color';
 import {TCard} from '../../types/Card';
 import {TTopic} from '../../types/Topic';
 import RenderItem from './Components/renderItem';
+import Navigator from '../../navigation/NavigationService';
+import SvgComponent from '../../assets/svg';
+import SCREEN_NAME from '../../navigation/ScreenName';
+import {AppContainer} from '../../components/Core/AppContainer';
+import ConfirmModal from '../../components/Core/ConfirmModal';
+
 interface AddNewCardViewProps {
   topic: TTopic;
   cardList: TCard[];
   addCard: (card: TCard) => void;
   checkWord: (word: string, callback: (data) => void) => void;
-  checkLength: (content: string) => boolean;
   available: boolean;
 }
 
@@ -20,12 +25,26 @@ const AddNewCardView = ({
   cardList,
   addCard,
   checkWord,
-  checkLength,
   available,
 }: AddNewCardViewProps) => {
   const [cardContent, setCardContent] = useState<string>('');
-  const [cardPhonetic, setCardPhonetic] = useState<TCard['phonetic']>('');
-  const [submitAvailable, setSubmitAvailable] = useState<boolean>(false);
+  const [data, setData] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const ColumnHeader = () => (
+    <View style={styles.listContent}>
+      <View style={[styles.center, styles.wordColumn]}>
+        <AppText align="center" fontSize={18}>
+          Word
+        </AppText>
+      </View>
+      <View style={[styles.center, styles.phoneticColumn]}>
+        <AppText align="center" fontSize={18}>
+          Phonetic
+        </AppText>
+      </View>
+    </View>
+  );
   const debounce = (fn: Function, ms = 500) => {
     let timeoutId: ReturnType<typeof setTimeout>;
     return function (this: any, ...args: any[]) {
@@ -35,12 +54,31 @@ const AddNewCardView = ({
   };
   const debounceCheckWord = useCallback(
     debounce((text: string) => {
-      checkWord(text, setCardPhonetic);
-      setSubmitAvailable(available);
+      checkWord(text, setData);
     }, 1000),
     [],
   );
+  const handleConfirm = () => {
+    Navigator.navigateTo(SCREEN_NAME.ROOT.HOME_SCREEN);
+    setModalVisible(false);
+  };
 
+  const handleCancel = () => {
+    setModalVisible(false);
+  };
+  const checkLength = (cardContent: string) => {
+    if (cardContent.length > 20) return true;
+  };
+  const BackHome = () => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          setModalVisible(true);
+        }}>
+        <SvgComponent name="CHECK" size={30} color={colors.white} />
+      </TouchableOpacity>
+    );
+  };
   const handleChangeText = (text: string) => {
     setCardContent(text);
     debounceCheckWord(text);
@@ -50,8 +88,9 @@ const AddNewCardView = ({
     let card: TCard = {
       idTopic: topic.id,
       id: Math.random() * 10000,
-      content: cardContent,
-      phonetic: cardPhonetic,
+      content: `${data.word}`,
+      phonetic: `${data.phonetic}`,
+      meaning: `${data.meaning}`,
     };
     if (cardContent === '' || checkLength(cardContent)) {
       return;
@@ -61,42 +100,60 @@ const AddNewCardView = ({
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.addTopic}>
-        <AppText fontWeight={900} color={colors.black} fontSize={27}>
-          Topic: {topic.title}
-        </AppText>
-        <AppText fontWeight={900} color={colors.black} fontSize={21}>
-          Card content:
-        </AppText>
-        <TextInput
-          style={styles.inputTopic}
-          placeholder="Input card content"
-          onChangeText={handleChangeText}
-          value={cardContent}
-        />
-        {checkLength(cardContent) ? (
-          <AppText color={colors.red}>
-            Exceeds the specified number of characters!
+    <AppContainer
+      backButton={true}
+      haveRightButton={true}
+      rightButton={<BackHome />}
+      title="ADD FLASHCARD">
+      <View style={styles.container}>
+        <View style={styles.addTopic}>
+          <AppText fontWeight={900} color={colors.black} fontSize={27}>
+            Topic: {topic.title}
           </AppText>
-        ) : (
-          <></>
-        )}
-
-        <SubmitButton availableSubmit={submitAvailable} submit={handleSubmit} />
-        {cardList ? (
-          <View style={styles.listCard}>
-            <AppText fontWeight={900} fontSize={20} align="center">
-              Flashcard list
+          <AppText fontWeight={900} color={colors.black} fontSize={21}>
+            Card content:
+          </AppText>
+          <TextInput
+            style={styles.inputTopic}
+            placeholder="Input card content"
+            onChangeText={handleChangeText}
+            value={cardContent}
+          />
+          {checkLength(cardContent) ? (
+            <AppText color={colors.red}>
+              Exceeds the specified number of characters!
             </AppText>
-            <FlatList
-              data={cardList}
-              renderItem={({item}) => <RenderItem item={item} />}
-            />
-          </View>
-        ) : null}
+          ) : (
+            <></>
+          )}
+          {!available && cardContent.length > 0 ? (
+            <AppText color={colors.red}>This word does not exist!</AppText>
+          ) : (
+            <></>
+          )}
+
+          <SubmitButton availableSubmit={available} submit={handleSubmit} />
+          {cardList ? (
+            <View style={styles.listCard}>
+              <AppText fontWeight={900} fontSize={20} align="center">
+                Flashcard list
+              </AppText>
+              <FlatList
+                ListHeaderComponent={ColumnHeader}
+                data={cardList}
+                renderItem={({item}) => <RenderItem item={item} />}
+              />
+            </View>
+          ) : null}
+        </View>
       </View>
-    </View>
+      <ConfirmModal
+        message="Are you sure you want to stop?"
+        visible={modalVisible}
+        onConfirm={handleConfirm}
+        onCancel={handleCancel}
+      />
+    </AppContainer>
   );
 };
 

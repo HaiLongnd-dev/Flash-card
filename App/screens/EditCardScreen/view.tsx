@@ -1,5 +1,5 @@
 import {FlatList, TextInput, TouchableOpacity, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import styles from './style';
 import {AppText} from '../../components';
 import {colors} from '../../themes/color';
@@ -12,19 +12,45 @@ import SvgComponent from '../../assets/svg';
 import {TTopic} from '../../types/Topic';
 interface EditCardScreenViewProps {
   card: TCard;
+  available: boolean;
+
   editCard: (id: TCard['id'], card: Partial<TCard>) => void;
+  checkWord: (word: string, callback: (data) => void) => void;
 }
-const EditCardScreenView = ({card, editCard}: EditCardScreenViewProps) => {
+const EditCardScreenView = ({
+  card,
+  available,
+  editCard,
+  checkWord,
+}: EditCardScreenViewProps) => {
   const [cardContent, setCardContent] = useState(card.content);
-  // const [cardDescription, setCardDescription] = useState(card.desc);
+  const [data, setData] = useState(null);
 
   const [modalVisible, setModalVisible] = useState(false);
-
-  let editedCard: Partial<TCard> = {
-    content: cardContent,
-    // desc: cardDescription,
+  const debounce = (fn: Function, ms = 500) => {
+    let timeoutId: ReturnType<typeof setTimeout>;
+    return function (this: any, ...args: any[]) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => fn.apply(this, args), ms);
+    };
   };
+  const debounceCheckWord = useCallback(
+    debounce((text: string) => {
+      checkWord(text, setData);
+    }, 1000),
+    [],
+  );
+  const handleChangeText = (text: string) => {
+    setCardContent(text);
+    debounceCheckWord(text);
+  };
+
   const handleConfirm = () => {
+    let editedCard: Partial<TCard> = {
+      content: `${data.word}`,
+      phonetic: `${data.phonetic}`,
+      meaning: `${data.meaning}`,
+    };
     editCard(card.id, editedCard);
     setModalVisible(false);
     Navigator.goBack();
@@ -39,6 +65,7 @@ const EditCardScreenView = ({card, editCard}: EditCardScreenViewProps) => {
   const HandleButton = () => {
     return (
       <TouchableOpacity
+        disabled={!available}
         onPress={() => {
           setModalVisible(true);
         }}>
@@ -46,7 +73,6 @@ const EditCardScreenView = ({card, editCard}: EditCardScreenViewProps) => {
       </TouchableOpacity>
     );
   };
-  const handleSubmit = () => {};
 
   return (
     <AppContainer
@@ -62,7 +88,7 @@ const EditCardScreenView = ({card, editCard}: EditCardScreenViewProps) => {
           <TextInput
             style={styles.inputTopic}
             placeholder="Input card content"
-            onChangeText={setCardContent}
+            onChangeText={handleChangeText}
             value={cardContent}
           />
           {checkLength(cardContent) ? (
@@ -72,22 +98,6 @@ const EditCardScreenView = ({card, editCard}: EditCardScreenViewProps) => {
           ) : (
             <></>
           )}
-          <AppText fontWeight={900} color={colors.black} fontSize={21}>
-            Card description:
-          </AppText>
-          {/* <TextInput
-            style={styles.inputTopic}
-            placeholder="Input card description"
-            onChangeText={setCardDescription}
-            value={cardDescription}
-          />
-          {checkLength(cardContent) ? (
-            <AppText color={colors.red}>
-              Exceeds the specified number of characters!
-            </AppText>
-          ) : (
-            <></>
-          )} */}
         </View>
         <ConfirmModal
           message="Are you sure you want to stop?"
