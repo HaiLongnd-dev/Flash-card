@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import AddNewCardView from './view';
 import {NavigationStackParamList} from '../../navigation/Stack';
 import {RouteProp} from '@react-navigation/native';
@@ -26,16 +26,25 @@ const AddNewCardScreen = ({route}: AddNewCardViewProps) => {
     dispatch(addCardAction(card));
     setAvailable(false);
   };
-  const checkWord = (word: string, dataCallback: (data) => void) => {
+  const AddNewCardViewRef = useRef(null);
+  const checkWord = (word: string) => {
+    AddNewCardViewRef.current.setLoadingStatus(true);
     const callback: TCallback = ({success, data}) => {
-      dataCallback(data);
-      setAvailable(success);
+      if (success) {
+        AddNewCardViewRef.current.setNewDataFromIndex(data);
+        setAvailable(success);
+      } else {
+        AddNewCardViewRef.current.setNewDataFromIndex(null);
+        setAvailable(false);
+      }
+      AddNewCardViewRef.current.setLoadingStatus(false);
     };
     dispatch(searchAction(word, callback));
   };
 
   return (
     <AddNewCardView
+      ref={AddNewCardViewRef}
       topic={topic}
       cardList={cardList}
       addCard={addCard}
