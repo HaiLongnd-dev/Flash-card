@@ -24,7 +24,6 @@ const AddNewCardScreen = ({route}: AddNewCardViewProps) => {
   const cardList: TCard[] = useSelector(getListCardByIdTopic(topic.id));
   const addCard = (card: TCard) => {
     dispatch(addCardAction(card));
-    // setAvailable(false);
   };
   const AddNewCardViewRef = useRef<AddNewCardViewRef>(null);
   const checkWord = (word: string) => {
@@ -50,7 +49,6 @@ const AddNewCardScreen = ({route}: AddNewCardViewProps) => {
       cardList={cardList}
       addCard={addCard}
       checkWord={checkWord}
-      // available={available}
     />
   );
 };

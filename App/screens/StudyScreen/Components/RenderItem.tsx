@@ -74,16 +74,23 @@ const RenderItem = ({item, isOpen, setSelectedCardId}: RenderItemProps) => {
       zIndex: -1,
     };
   });
-
   return (
     <View style={styles.cardContainer}>
       <Animated.View style={[styles.cardContent, cardAnimatedStyle]}>
         <AppText color={colors.white} fontSize={40}>
           {item.content}
         </AppText>
-        <AppText color={colors.white} fontSize={16}>
-          {item.phonetic}
-        </AppText>
+        <View style={{flexDirection: 'row'}}>
+          <TouchableOpacity>
+            <SvgComponent name="SPEAKER" color={colors.white} />
+          </TouchableOpacity>
+          <AppText
+            style={{paddingHorizontal: 10}}
+            color={colors.white}
+            fontSize={16}>
+            {item.phonetic}
+          </AppText>
+        </View>
         {!isOpen ? (
           <TouchableOpacity
             style={styles.showDesc}

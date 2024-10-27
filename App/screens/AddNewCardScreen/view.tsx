@@ -52,6 +52,7 @@ const AddNewCardView = forwardRef<AddNewCardViewRef, AddNewCardViewProps>(
     useImperativeHandle(ref, () => ({
       setNewDataFromIndex: data => {
         setData(data);
+        setCardContent(`${data.word}: ${data.phonetic}`);
         setAvailable(true);
       },
       setLoadingStatus: (loadingStatus: boolean) => {
@@ -75,6 +76,7 @@ const AddNewCardView = forwardRef<AddNewCardViewRef, AddNewCardViewProps>(
     useEffect(() => {
       setAvailable(false);
     }, [cardContent]);
+
     const handleConfirm = () => {
       Navigator.navigateTo(SCREEN_NAME.ROOT.HOME_SCREEN);
       setModalVisible(false);
@@ -108,6 +110,7 @@ const AddNewCardView = forwardRef<AddNewCardViewRef, AddNewCardViewProps>(
         content: `${data.word}`,
         phonetic: `${data.phonetic}`,
         meaning: `${data.meaning}`,
+        audio: `${data.audio}`,
       };
       if (cardContent === '' || checkLength(cardContent)) {
         return;

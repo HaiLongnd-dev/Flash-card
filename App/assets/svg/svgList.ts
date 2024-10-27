@@ -9,6 +9,7 @@ import EDIT from './common/edit';
 import DELETE from './common/delete';
 import ARROW_DOWN from './common/arrow_down';
 import ARROW_UP from './common/arrow_up';
+import SPEAKER from './common/speaker';
 // Category
 // Food
 import FOOD1 from './category/food/food1';
@@ -100,6 +101,7 @@ export const SVG_LIST = {
   DELETE,
   ARROW_DOWN,
   ARROW_UP,
+  SPEAKER,
   // CATEGORY
   //FOOD
   FOOD1,

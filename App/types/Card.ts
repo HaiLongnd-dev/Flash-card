@@ -4,4 +4,5 @@ export type TCard = {
   content: string;
   phonetic?: string;
   meaning?: string;
+  audio?: string;
 };
