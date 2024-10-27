@@ -26,18 +26,21 @@ interface AddNewCardViewProps {
   cardList: TCard[];
   addCard: (card: TCard) => void;
   checkWord: (word: string, callback: (data) => void) => void;
-  available: boolean;
+  // available: boolean;
 }
-
-const AddNewCardView = forwardRef(
-  (
-    {topic, cardList, addCard, checkWord, available}: AddNewCardViewProps,
-    ref,
-  ) => {
+export interface AddNewCardViewRef {
+  setNewDataFromIndex: (data) => void;
+  setLoadingStatus: (loadingStatus: boolean) => void;
+  setStatusError: (status: boolean) => void;
+}
+const AddNewCardView = forwardRef<AddNewCardViewRef, AddNewCardViewProps>(
+  ({topic, cardList, addCard, checkWord}, ref) => {
     const [cardContent, setCardContent] = useState<string>('');
     const [data, setData] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
     const [loading, setLoading] = useState<boolean>(false);
+    const [isError, setIsError] = useState<boolean>(false);
+    const [available, setAvailable] = useState<boolean>(false);
 
     const debounce = (fn: Function, ms = 500) => {
       let timeoutId: ReturnType<typeof setTimeout>;
@@ -49,17 +52,29 @@ const AddNewCardView = forwardRef(
     useImperativeHandle(ref, () => ({
       setNewDataFromIndex: data => {
         setData(data);
+        setAvailable(true);
       },
       setLoadingStatus: (loadingStatus: boolean) => {
         setLoading(loadingStatus);
+      },
+      setStatusError: (status: boolean) => {
+        setIsError(status);
       },
     }));
     const debounceCheckWord = useCallback(
       debounce((text: string) => {
         checkWord(text, setData);
+        if (loading === false && isError === false && cardContent.length > 0) {
+          setAvailable(true);
+        } else {
+          setAvailable(false);
+        }
       }, 1000),
       [],
     );
+    useEffect(() => {
+      setAvailable(false);
+    }, [cardContent]);
     const handleConfirm = () => {
       Navigator.navigateTo(SCREEN_NAME.ROOT.HOME_SCREEN);
       setModalVisible(false);
@@ -128,7 +143,7 @@ const AddNewCardView = forwardRef(
             ) : (
               <></>
             )}
-            {!available && cardContent.length > 0 && (
+            {isError && cardContent.length > 0 && (
               <AppText color={colors.red}>This word does not exist!</AppText>
             )}
 

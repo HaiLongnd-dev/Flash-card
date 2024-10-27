@@ -8,11 +8,12 @@ export type TWordFoundResponse = {
   license?: {};
   sourceUrl?: {};
 };
-export type TWordNotFoundResponse = {
-  title: string;
-  message: string;
-  resolution: string;
-};
-export type TWordResponse = TWordFoundResponse[] | TWordNotFoundResponse;
+// export type TWordNotFoundResponse = {
+//   title: string;
+//   message: string;
+//   resolution: string;
+// };
+export type TWordResponse = TWordFoundResponse[];
+// TWordNotFoundResponse;
 
 export interface IResponseCheckWordApi extends IApiResponse<TWordResponse> {}
