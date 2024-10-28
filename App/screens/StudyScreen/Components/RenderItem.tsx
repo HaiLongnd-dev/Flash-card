@@ -16,6 +16,7 @@ import Animated, {
 import {AppText} from '../../../components';
 import {colors} from '../../../themes/color';
 import SvgComponent from '../../../assets/svg';
+import Sound from 'react-native-sound';
 const {width} = Dimensions.get('window');
 
 const ITEM_LAYOUT = {
@@ -74,6 +75,20 @@ const RenderItem = ({item, isOpen, setSelectedCardId}: RenderItemProps) => {
       zIndex: -1,
     };
   });
+  const playSound = (audio: TCard['audio']) => {
+    const sound = new Sound(audio, undefined, error => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Playing sound');
+        sound.play(() => {
+          // Release when it's done so we're not using up resources
+          sound.release();
+        });
+      }
+    });
+  };
+
   return (
     <View style={styles.cardContainer}>
       <Animated.View style={[styles.cardContent, cardAnimatedStyle]}>
@@ -81,7 +96,7 @@ const RenderItem = ({item, isOpen, setSelectedCardId}: RenderItemProps) => {
           {item.content}
         </AppText>
         <View style={{flexDirection: 'row'}}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => playSound(item.audio)}>
             <SvgComponent name="SPEAKER" color={colors.white} />
           </TouchableOpacity>
           <AppText
@@ -109,9 +124,11 @@ const RenderItem = ({item, isOpen, setSelectedCardId}: RenderItemProps) => {
         <AppText color={colors.white} fontSize={25}>
           {item.content}
         </AppText>
-        <AppText color={colors.white} fontSize={16}>
-          {item.meaning}
-        </AppText>
+        <View style={styles.meaning}>
+          <AppText align="center" color={colors.white} fontSize={16}>
+            {item.meaning}
+          </AppText>
+        </View>
       </Animated.View>
     </View>
   );
@@ -162,5 +179,9 @@ const styles = StyleSheet.create({
     bottom: -30,
     shadowColor: '#000',
     elevation: 10,
+  },
+  meaning: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
   },
 });
