@@ -1,10 +1,4 @@
-import {
-  FlatList,
-  View,
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity,
-} from 'react-native';
+import {FlatList, View, StyleSheet, Dimensions} from 'react-native';
 import React, {useState} from 'react';
 import {AppContainer} from '../../components/Core/AppContainer';
 import {AppText} from '../../components';
@@ -15,11 +9,6 @@ interface StudyScreenViewProps {
 }
 
 const {width} = Dimensions.get('window');
-const {height} = Dimensions.get('window');
-const ITEM_LAYOUT = {
-  width: width,
-  height: 200,
-};
 const ITEM_WIDTH = width * 0.8;
 
 const StudyScreenView = ({cardList}: StudyScreenViewProps) => {

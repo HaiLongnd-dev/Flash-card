@@ -10,7 +10,7 @@ function* checkWordSaga(action: ISearchAction) {
     let phonetic = response?.data[0]?.phonetics[1]?.text || null;
     let meaning =
       response?.data[0]?.meanings[0]?.definitions[0]?.definition || null;
-    let audio = response?.data[0]?.phonetics[1]?.audio || null;
+    let audio = response?.data[0]?.phonetics[0]?.audio || null;
 
     if (typeof phonetic === `string`) {
       action.payload.callback({

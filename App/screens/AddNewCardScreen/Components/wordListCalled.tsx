@@ -2,10 +2,14 @@ import {StyleSheet, Text, View} from 'react-native';
 import React, {forwardRef, useImperativeHandle, useState} from 'react';
 import {AppText} from '../../../components';
 import {colors} from '../../../themes/color';
+import {TCard} from '../../../types/Card';
 export interface wordListRef {
   setNewDataForList: (data) => void;
 }
-const WordListCalled = forwardRef<wordListRef>((props, ref) => {
+export interface wordListProps {
+  card?: TCard;
+}
+const WordListCalled = forwardRef<wordListRef, wordListProps>(({card}, ref) => {
   const [data, setData] = useState(null);
   useImperativeHandle(ref, () => ({
     setNewDataForList: data => {
@@ -16,13 +20,13 @@ const WordListCalled = forwardRef<wordListRef>((props, ref) => {
     <View style={styles.container}>
       <View style={styles.content}>
         <AppText fontSize={20} color={colors.white}>
-          {data?.word}
+          {data?.word || card?.content}
         </AppText>
         <AppText fontSize={15} color={colors.white}>
-          {data?.phonetic}
+          {data?.phonetic || card?.phonetic}
         </AppText>
         <AppText fontSize={15} color={colors.white}>
-          {data?.meaning}
+          {data?.meaning || card?.meaning}
         </AppText>
       </View>
     </View>

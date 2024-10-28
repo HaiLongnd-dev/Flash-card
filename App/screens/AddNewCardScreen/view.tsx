@@ -179,7 +179,6 @@ const AddNewCardView = forwardRef<AddNewCardViewRef, AddNewCardViewProps>(
           onCancel={handleCancel}
         />
         {loading && <LoadingCircle />}
-        {/* {showListCalled && <WordListCalled />} */}
       </AppContainer>
     );
   },

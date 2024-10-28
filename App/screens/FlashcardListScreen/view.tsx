@@ -59,13 +59,16 @@ const FlashcardListScreenView = ({
             renderHiddenItem={(data, rowMap) => (
               <RenderHiddenItem
                 item={data.item}
-                handleEdit={() => handleEdit(data.item)}
+                handleEdit={() => {
+                  handleEdit(data.item);
+                }}
                 handleDelete={handleDelete}
                 rowMap={rowMap}
               />
             )}
             rightOpenValue={-(HIDDEN_ITEM_LAYOUT.width * 2)}
             style={styles.list}
+            closeOnRowPress={true}
           />
           <View style={styles.button}>
             <AppButton nameButton="LET'S STUDY! " handleButton={handleButton} />

@@ -88,7 +88,7 @@ const RenderItem = ({item, isOpen, setSelectedCardId}: RenderItemProps) => {
       }
     });
   };
-
+  console.log('itemData', item);
   return (
     <View style={styles.cardContainer}>
       <Animated.View style={[styles.cardContent, cardAnimatedStyle]}>

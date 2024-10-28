@@ -19,35 +19,37 @@ const RenderHiddenItem = ({
   handleEdit,
   handleDelete,
   rowMap,
-}: RenderHiddenItemProps) => (
-  <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-    <TouchableOpacity
-      style={{
-        backgroundColor: 'blue',
-        width: HIDDEN_ITEM_LAYOUT.width,
-        height: HIDDEN_ITEM_LAYOUT.height,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-      onPress={() => {
-        if (rowMap[item.id]) {
-          rowMap[item.id].closeRow();
-        }
-        handleEdit(item.id);
-      }}>
-      <SvgComponent name="EDIT" color={colors.white} />
-    </TouchableOpacity>
-    <TouchableOpacity
-      style={{
-        backgroundColor: 'red',
-        width: HIDDEN_ITEM_LAYOUT.width,
-        height: HIDDEN_ITEM_LAYOUT.height,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-      onPress={() => handleDelete(item.id)}>
-      <SvgComponent name="DELETE" color={colors.white} />
-    </TouchableOpacity>
-  </View>
-);
+}: RenderHiddenItemProps) => {
+  return (
+    <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+      <TouchableOpacity
+        style={{
+          backgroundColor: 'blue',
+          width: HIDDEN_ITEM_LAYOUT.width,
+          height: HIDDEN_ITEM_LAYOUT.height,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        onPress={() => {
+          if (rowMap[item.id]) {
+            rowMap[item.id].closeRow();
+          }
+          handleEdit(item.id);
+        }}>
+        <SvgComponent name="EDIT" color={colors.white} />
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{
+          backgroundColor: 'red',
+          width: HIDDEN_ITEM_LAYOUT.width,
+          height: HIDDEN_ITEM_LAYOUT.height,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        onPress={() => handleDelete(item.id)}>
+        <SvgComponent name="DELETE" color={colors.white} />
+      </TouchableOpacity>
+    </View>
+  );
+};
 export {RenderHiddenItem};
