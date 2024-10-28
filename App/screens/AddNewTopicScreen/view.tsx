@@ -10,9 +10,17 @@ import SvgComponent, {SvgName} from '../../assets/svg';
 import {AppContainer} from '../../components/Core/AppContainer';
 import {iconCategories} from '../ChooseIconScreen/Constant/listIcon';
 import {iconColors} from '../ChooseIconScreen/Constant/listColor';
+import {useFormik} from 'formik';
+import {ADD_TOPIC_FORM_SCHEME} from './Validate/validateForm';
 
 interface AddNewTopicViewProps {
   addTopic: (topic: TTopic) => void;
+}
+
+interface FormikProps {
+  icon: SvgName;
+  iconColor: string;
+  title: string;
 }
 
 const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
@@ -26,16 +34,13 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
   const checkLength = (topicName: string) => {
     if (topicName.length > 20) return true;
   };
-  const handleSubmit = () => {
+  const handleSubmitForm = (values: FormikProps) => {
     let topic: TTopic = {
       id: Math.random(),
-      title: topicName,
-      icon: iconName,
-      iconColor: iconColor,
+      title: values.title,
+      icon: values.icon,
+      iconColor: values.iconColor,
     };
-    if (topic.title === '' || checkLength(topicName)) {
-      return;
-    }
     addTopic(topic);
     setTopicName('');
     setTimeout(() => {
@@ -43,6 +48,16 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
     }, 100);
   };
 
+  const initialValues: FormikProps = {
+    icon: iconCategories[0].data[0],
+    iconColor: iconColors[0],
+    title: '',
+  };
+  const formik = useFormik({
+    initialValues: initialValues,
+    onSubmit: handleSubmitForm,
+    validationSchema: ADD_TOPIC_FORM_SCHEME,
+  });
   return (
     <AppContainer backButton={true} title="ADD NEW TOPIC">
       <View style={styles.containerContent}>
@@ -50,16 +65,16 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
           <View style={styles.addIconBox}>
             <AppText>Icon:</AppText>
             <TouchableOpacity
-              style={[styles.icon, {backgroundColor: iconColor}]}
+              style={[styles.icon, {backgroundColor: formik.values.iconColor}]}
               onPress={() =>
                 Navigator.navigateTo(SCREEN_NAME.MANUAL.CHOOSE_ICON, {
                   callback: (iconName: SvgName, iconColor: string) => {
-                    setIconName(iconName);
-                    setIconColor(iconColor);
+                    formik.setFieldValue('icon', iconName);
+                    formik.setFieldValue('iconColor', iconColor);
                   },
                 })
               }>
-              <SvgComponent name={iconName} />
+              <SvgComponent name={formik.values.icon} />
             </TouchableOpacity>
           </View>
           <View style={styles.addTopic}>
@@ -67,19 +82,15 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
             <TextInput
               style={styles.inputTopic}
               placeholder="Input topic name"
-              onChangeText={setTopicName}
-              value={topicName}
+              onChangeText={formik.handleChange('title')}
+              value={formik.values.title}
             />
-            {checkLength(topicName) ? (
-              <AppText color={colors.red}>
-                Exceeds the specified number of characters!
-              </AppText>
-            ) : (
-              <></>
+            {formik.errors.title && (
+              <AppText color={colors.red}>{formik.errors.title}</AppText>
             )}
           </View>
         </View>
-        <SubmitButton availableSubmit={true} submit={handleSubmit} />
+        <SubmitButton availableSubmit={true} submit={formik.handleSubmit} />
       </View>
     </AppContainer>
   );

@@ -11,7 +11,7 @@ const AddNewTopicScreen = () => {
   const addTopic = (topic: TTopic) => {
     dispatch(addTopicAction(topic));
   };
-  return <AddNewTopicView addTopic={addTopic}/>;
+  return <AddNewTopicView addTopic={addTopic} />;
 };
 
 export default AddNewTopicScreen;
