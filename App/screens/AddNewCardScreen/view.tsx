@@ -20,13 +20,13 @@ import {AppContainer} from '../../components/Core/AppContainer';
 import ConfirmModal from '../../components/Core/ConfirmModal';
 import ColumnHeader from './Components/columnHeader';
 import LoadingCircle from '../../components/Core/LoadingAnimation';
+import WordListCalled, {wordListRef} from './Components/wordListCalled';
 
 interface AddNewCardViewProps {
   topic: TTopic;
   cardList: TCard[];
   addCard: (card: TCard) => void;
   checkWord: (word: string, callback: (data) => void) => void;
-  // available: boolean;
 }
 export interface AddNewCardViewRef {
   setNewDataFromIndex: (data) => void;
@@ -41,6 +41,7 @@ const AddNewCardView = forwardRef<AddNewCardViewRef, AddNewCardViewProps>(
     const [loading, setLoading] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);
     const [available, setAvailable] = useState<boolean>(false);
+    const [showListCalled, setShowListCalled] = useState<boolean>(false);
 
     const debounce = (fn: Function, ms = 500) => {
       let timeoutId: ReturnType<typeof setTimeout>;
@@ -49,10 +50,14 @@ const AddNewCardView = forwardRef<AddNewCardViewRef, AddNewCardViewProps>(
         timeoutId = setTimeout(() => fn.apply(this, args), ms);
       };
     };
+
+    const WordListCalledRef = useRef<wordListRef | null>(null);
+
     useImperativeHandle(ref, () => ({
       setNewDataFromIndex: data => {
         setData(data);
-        setCardContent(`${data.word}: ${data.phonetic}`);
+        setShowListCalled(true);
+        WordListCalledRef.current.setNewDataForList(data);
         setAvailable(true);
       },
       setLoadingStatus: (loadingStatus: boolean) => {
@@ -75,6 +80,7 @@ const AddNewCardView = forwardRef<AddNewCardViewRef, AddNewCardViewProps>(
     );
     useEffect(() => {
       setAvailable(false);
+      setShowListCalled(false);
     }, [cardContent]);
 
     const handleConfirm = () => {
@@ -117,6 +123,7 @@ const AddNewCardView = forwardRef<AddNewCardViewRef, AddNewCardViewProps>(
       }
       addCard(card);
       setCardContent('');
+      setShowListCalled(false);
     };
 
     return (
@@ -139,13 +146,13 @@ const AddNewCardView = forwardRef<AddNewCardViewRef, AddNewCardViewProps>(
               onChangeText={handleChangeText}
               value={cardContent}
             />
-            {checkLength(cardContent) ? (
+            {checkLength(cardContent) && (
               <AppText color={colors.red}>
                 Exceeds the specified number of characters!
               </AppText>
-            ) : (
-              <></>
             )}
+            {showListCalled && <WordListCalled ref={WordListCalledRef} />}
+
             {isError && cardContent.length > 0 && (
               <AppText color={colors.red}>This word does not exist!</AppText>
             )}
@@ -172,6 +179,7 @@ const AddNewCardView = forwardRef<AddNewCardViewRef, AddNewCardViewProps>(
           onCancel={handleCancel}
         />
         {loading && <LoadingCircle />}
+        {/* {showListCalled && <WordListCalled />} */}
       </AppContainer>
     );
   },
