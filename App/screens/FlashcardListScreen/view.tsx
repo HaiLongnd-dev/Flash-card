@@ -41,6 +41,9 @@ const FlashcardListScreenView = ({
   const handleButton = () => {
     Navigator.navigateTo(SCREEN_NAME.MANUAL.STUDY_SCREEN, {cardList});
   };
+  const convertedFlashcardList = cardList.map(item => {
+    return {...item, key: item.id};
+  });
   return (
     <AppContainer
       haveRightButton={true}
@@ -54,7 +57,7 @@ const FlashcardListScreenView = ({
       ) : (
         <>
           <SwipeListView
-            data={cardList}
+            data={convertedFlashcardList}
             renderItem={RenderItem}
             renderHiddenItem={(data, rowMap) => (
               <RenderHiddenItem

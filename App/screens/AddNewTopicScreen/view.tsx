@@ -24,12 +24,6 @@ interface FormikProps {
 }
 
 const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
-  const initIcon = iconCategories[0].data[0];
-  const initColor = iconColors[0];
-
-  const [iconName, setIconName] = useState<SvgName>(initIcon);
-  const [iconColor, setIconColor] = useState<string>(initColor);
-
   const [topicName, setTopicName] = useState<string>('');
   const checkLength = (topicName: string) => {
     if (topicName.length > 20) return true;
