@@ -11,6 +11,8 @@ import {removeCardAction} from '../../redux/actions/cardAction';
 import ConfirmModal from '../../components/Core/ConfirmModal';
 import Navigator from '../../navigation/NavigationService';
 import ScreenName from '../../navigation/ScreenName';
+import {startStudyAction} from '../../redux/actions/studyAction';
+import {TStudy} from '../../types/Study';
 export type TopicFlashcardRouteProp = RouteProp<
   NavigationStackParamList,
   typeof SCREEN_NAME.MANUAL.FLASHCARD_LIST
@@ -45,6 +47,9 @@ const FlashcardListScreen = ({route}: TopicFlashcardViewProps) => {
   const handleEdit = (card: TCard) => {
     Navigator.navigateTo(ScreenName.MANUAL.EDIT_CARD, {card});
   };
+  const startStudy = (startTime: TStudy['startTime'], id: TStudy['id']) => {
+    dispatch(startStudyAction(startTime, id));
+  };
   return (
     <>
       <FlashcardListScreenView
@@ -52,6 +57,7 @@ const FlashcardListScreen = ({route}: TopicFlashcardViewProps) => {
         topic={topic}
         handleDelete={handleDelete}
         handleEdit={handleEdit}
+        startStudy={startStudy}
       />
       <ConfirmModal
         message="Are you sure to delete this card?"

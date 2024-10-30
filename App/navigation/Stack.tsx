@@ -20,6 +20,7 @@ import {
 import AddNewCardScreen from '../screens/AddNewCardScreen';
 import {TTopic} from '../types/Topic';
 import {TCard} from '../types/Card';
+import {TStudy} from '../types/Study';
 export type StackParamList = {
   HOME_SCREEN: undefined;
   ADD_CARD_SCREEN: undefined;
@@ -34,7 +35,7 @@ export interface NavigationStackParamList
   };
   ADD_NEW_CARD: {topic: TTopic};
   FLASHCARD_LIST: {topic: TTopic};
-  STUDY_SCREEN: {cardList: TCard[]};
+  STUDY_SCREEN: {idSession: TStudy['id']; cardList: TCard[]};
   EDIT_TOPIC: {topic: TTopic};
   EDIT_CARD: {card: TCard};
 }

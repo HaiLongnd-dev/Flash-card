@@ -15,18 +15,21 @@ import {AppButton, AppText} from '../../components';
 import Navigator from '../../navigation/NavigationService';
 import SCREEN_NAME from '../../navigation/ScreenName';
 import {TTopic} from '../../types/Topic';
+import {TStudy} from '../../types/Study';
 
 interface FlashcardListScreenViewProps {
   topic: TTopic;
   cardList: TCard[];
   handleDelete: (id: TCard['id']) => void;
   handleEdit: (card: TCard) => void;
+  startStudy: (startTime: TStudy['startTime'], id: TStudy['id']) => void;
 }
 const FlashcardListScreenView = ({
   topic,
   cardList,
   handleDelete,
   handleEdit,
+  startStudy,
 }: FlashcardListScreenViewProps) => {
   const addFlashcard = (topic: TTopic) => {
     Navigator.navigateTo(SCREEN_NAME.MANUAL.ADD_NEW_CARD, {topic});
@@ -39,7 +42,13 @@ const FlashcardListScreenView = ({
     );
   };
   const handleButton = () => {
-    Navigator.navigateTo(SCREEN_NAME.MANUAL.STUDY_SCREEN, {cardList});
+    let idSession = Math.random() * 10000;
+    let startTimeSession = Date.now();
+    startStudy(startTimeSession, idSession);
+    Navigator.navigateTo(SCREEN_NAME.MANUAL.STUDY_SCREEN, {
+      cardList,
+      idSession,
+    });
   };
   const convertedFlashcardList = cardList.map(item => {
     return {...item, key: item.id};

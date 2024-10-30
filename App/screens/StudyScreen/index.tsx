@@ -3,6 +3,9 @@ import StudyScreenView from './view';
 import SCREEN_NAME from '../../navigation/ScreenName';
 import {RouteProp} from '@react-navigation/native';
 import {NavigationStackParamList} from '../../navigation/Stack';
+import {useDispatch} from 'react-redux';
+import {AppDispatch} from '../../redux/store';
+import {stopStudyAction} from '../../redux/actions/studyAction';
 
 export type StudyScreenRouteProp = RouteProp<
   NavigationStackParamList,
@@ -12,8 +15,13 @@ export type StudyScreenProps = {
   route: StudyScreenRouteProp;
 };
 const StudyScreen = ({route}: StudyScreenProps) => {
+  const {idSession} = route.params;
   const {cardList} = route.params;
-  return <StudyScreenView cardList={cardList} />;
+  const dispatch = useDispatch<AppDispatch>();
+  const stopStudy = () => {
+    dispatch(stopStudyAction(idSession));
+  };
+  return <StudyScreenView cardList={cardList} stopStudy={stopStudy} />;
 };
 
 export default StudyScreen;
