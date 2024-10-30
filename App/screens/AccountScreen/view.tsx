@@ -1,52 +1,67 @@
+import {FlatList, Image, TextInput, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-  withRepeat,
-  useDerivedValue,
-} from 'react-native-reanimated';
+import styles from './style';
+import SearchIcon from '../../assets/svg/common/searchIcon';
+import {AppText} from '../../components';
+import {colors} from '../../themes/color';
+import {TTopic} from '../../types/Topic';
+import TopicComponentHome from '../../components/TopicComponentHome';
+import Navigator from '../../navigation/NavigationService';
+import SCREEN_NAME from '../../navigation/ScreenName';
+import SvgComponent from '../../assets/svg';
 
-export default function App() {
-  const scale = useSharedValue<number>(1);
-
-  // highlight-start
-  const rotate = useDerivedValue(() => {
-    return `${scale.value * 2}rad`;
-  });
-  // highlight-end
-
-  const scaleStyles = useAnimatedStyle(() => ({
-    transform: [{scale: scale.value}],
-  }));
-
-  React.useEffect(() => {
-    scale.value = withRepeat(
-      withTiming(scale.value * 2, {duration: 1000}),
-      -1,
-      true,
-    );
-  }, []);
-
+interface AccountScreenViewProps {}
+const AccountScreenView = () => {
   return (
     <View style={styles.container}>
-      <Animated.View style={[styles.ball, scaleStyles]} />
+      <View style={styles.header}>
+        <View style={styles.headerBox}>
+          <TouchableOpacity
+            style={styles.backBtn}
+            onPress={() => Navigator.goBack()}>
+            <SvgComponent name="ARROW_LEFT" color={colors.white} size={30} />
+          </TouchableOpacity>
+          <View style={styles.avaBox}>
+            <Image
+              style={styles.ava}
+              source={require('../../assets/images/ava.jpg')}
+            />
+          </View>
+          <View style={styles.userNameBox}>
+            <AppText style={styles.userName}> Hải Long</AppText>
+            <AppText fontSize={12} color={colors.white}>
+              Nghe An, Viet Nam
+            </AppText>
+          </View>
+        </View>
+      </View>
+      <View style={styles.countingBox}>
+        <View style={styles.cardAdded}>
+          <View style={styles.icon}>
+            <SvgComponent name="LIGHTNING" color={colors.black} size={30} />
+          </View>
+          <View style={styles.detail}>
+            <AppText fontWeight={600} fontSize={20}>
+              27
+            </AppText>
+            <AppText>Cards added</AppText>
+          </View>
+        </View>
+        <SvgComponent name="LINE" size={50} />
+        <View style={styles.hoursSpent}>
+          <View style={styles.icon}>
+            <SvgComponent name="CLOCK" color={colors.black} size={30} />
+          </View>
+          <View style={styles.detail}>
+            <AppText fontWeight={600} fontSize={20}>
+              27
+            </AppText>
+            <AppText>Hours Spent</AppText>
+          </View>
+        </View>
+      </View>
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-  },
-  ball: {
-    height: 50,
-    width: 50,
-    backgroundColor: '#b58df1',
-    borderRadius: 50,
-  },
-});
+export default AccountScreenView;

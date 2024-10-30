@@ -10,6 +10,10 @@ import DELETE from './common/delete';
 import ARROW_DOWN from './common/arrow_down';
 import ARROW_UP from './common/arrow_up';
 import SPEAKER from './common/speaker';
+import LIGHTNING from './common/lightning';
+import CLOCK from './common/clock';
+import LINE from './common/line';
+
 // Category
 // Food
 import FOOD1 from './category/food/food1';
@@ -102,6 +106,9 @@ export const SVG_LIST = {
   ARROW_DOWN,
   ARROW_UP,
   SPEAKER,
+  LIGHTNING,
+  CLOCK,
+  LINE,
   // CATEGORY
   //FOOD
   FOOD1,

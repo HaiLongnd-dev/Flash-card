@@ -31,7 +31,7 @@ export const AppContainer = ({
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.titleBox}>
-          {backButton ? <BackButton /> : <></>}
+          {backButton && <BackButton />}
           <View style={styles.nameScreen}>
             <AppText fontWeight={900} color={colors.white} fontSize={21}>
               {title}
@@ -53,6 +53,8 @@ const styles = StyleSheet.create({
   header: {
     paddingTop: 20,
     backgroundColor: '#4A0E5C',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   titleBox: {
