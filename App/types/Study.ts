@@ -1,19 +1,15 @@
 export enum DayOfWeek {
-  Sun = 0,
-  Mon = 1,
-  Tues = 2,
-  Wed = 3,
-  Thurs = 4,
-  Fri = 5,
-  Sat = 6,
+  "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
 }
 export type TStudySession = {
-  id: number;
-  startTime: number;
-  isStudying: boolean;
-  date: DayOfWeek;
+  id?: number;
+  record?: {
+    startTime?: Date,
+    endTime?: Date
+  },
+  date: string;
 };
-export type TStudyHistory = {
-  totalStudyTime: number;
-  studyRecord: {date: DayOfWeek; timeStudied: number}[];
-};
+// export type TStudyHistory = {
+//   totalStudyTime: number;
+//   studyRecord: { date: DayOfWeek; timeStudied: number }[];
+// };

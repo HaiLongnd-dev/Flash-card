@@ -1,16 +1,14 @@
-import {TStudyHistory, TStudySession} from '../../types/Study';
+import { TStudySession } from '../../types/Study';
 import * as actions from '../actions/types/studyActionType';
+import { getFinalStudyTime, handlerStudyTime } from '../helper/handlerStudyTime';
 export interface IStudyState {
   studySession: TStudySession[];
-  studyHistory: TStudyHistory;
+  totalStudyTime: number
 }
 
 const initState: IStudyState = {
   studySession: [],
-  studyHistory: {
-    totalStudyTime: 0,
-    studyRecord: [],
-  },
+  totalStudyTime: 0
 };
 export default function studyReducer(
   state: IStudyState = initState,
@@ -18,56 +16,32 @@ export default function studyReducer(
 ): IStudyState {
   switch (action.type) {
     case actions.StudyActionType.START_STUDY:
+      const newSession = handlerStudyTime()
+      action.payload.callback({ success: true, data: { recordId: newSession['id'] } })
+
       return {
         ...state,
-        studySession: [...state.studySession, action.payload.params.session],
+        studySession: [...state.studySession, newSession],
       };
 
     case actions.StudyActionType.STOP_STUDY:
-      if (
-        state.studySession.some(
-          session => session.id === action.payload.params.session.id,
-        )
-      ) {
-        const studySession = state.studySession.find(
-          session => session.id === action.payload.params.session.id,
-        );
-        const endTime = Date.now();
-        const timeStudied = Math.floor(
-          (endTime - studySession.startTime) / 1000 / 3600,
-        );
-        const totalStudied = state.studyHistory.studyRecord.reduce(
-          (acc, session) => acc + (session.timeStudied || 0),
-          0,
-        );
+      let shouldStopStudyEntity = state.studySession.filter(
+        session => session.id === action.payload.params.recordId,
+      )[0]
+      shouldStopStudyEntity.record.endTime = new Date()
 
-        const updatedStudyRecord = state.studyHistory.studyRecord.map(record =>
-          record.date === studySession.date
-            ? {...record, timeStudied: record.timeStudied + timeStudied}
-            : record,
-        );
+      console.log("shouldStopStudyEntity", shouldStopStudyEntity);
+      console.log("current study time", state.totalStudyTime);
+      console.log("new total study time", state.totalStudyTime + getFinalStudyTime(shouldStopStudyEntity));
 
-        if (
-          !updatedStudyRecord.some(record => record.date === studySession.date)
-        ) {
-          updatedStudyRecord.push({
-            date: studySession.date,
-            timeStudied: timeStudied,
-          });
-        }
-
-        return {
-          ...state,
-          studySession: state.studySession.map(session =>
-            session.id === action.payload.params.session.id
-              ? {...session, isStudying: false}
-              : session,
-          ),
-          studyHistory: {
-            totalStudyTime: totalStudied,
-            studyRecord: updatedStudyRecord,
-          },
-        };
+      return {
+        ...state,
+        studySession: state.studySession.map(session =>
+          session.id === action.payload.params.recordId
+            ? shouldStopStudyEntity
+            : session,
+        ),
+        totalStudyTime: state.totalStudyTime + getFinalStudyTime(shouldStopStudyEntity)
       }
       return state;
 

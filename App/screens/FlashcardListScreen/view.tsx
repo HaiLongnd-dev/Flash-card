@@ -22,41 +22,30 @@ interface FlashcardListScreenViewProps {
   cardList: TCard[];
   handleDelete: (id: TCard['id']) => void;
   handleEdit: (card: TCard) => void;
-  startStudy: (session: TStudySession) => void;
+  handleButton: (session: TStudySession) => void;
 }
 const FlashcardListScreenView = ({
   topic,
   cardList,
   handleDelete,
   handleEdit,
-  startStudy,
+  handleButton,
 }: FlashcardListScreenViewProps) => {
   const addFlashcard = (topic: TTopic) => {
     Navigator.navigateTo(SCREEN_NAME.MANUAL.ADD_NEW_CARD, {topic});
   };
   const RightButton = () => {
     return (
-      <TouchableOpacity onPress={() => addFlashcard(topic)}>
+      <TouchableOpacity onPress={() => {addFlashcard(topic)}}>
         <SvgComponent name="ADD" color={colors.white} size={30} />
       </TouchableOpacity>
     );
   };
-  const handleButton = () => {
-    let session: TStudySession = {
-      id: Math.random() * 10000,
-      startTime: Date.now(),
-      date: new Date().getDay() as DayOfWeek,
-      isStudying: true,
-    };
-    startStudy(session);
-    Navigator.navigateTo(SCREEN_NAME.MANUAL.STUDY_SCREEN, {
-      cardList,
-      session,
-    });
-  };
+
   const convertedFlashcardList = cardList.map(item => {
     return {...item, key: item.id};
   });
+  
   return (
     <AppContainer
       haveRightButton={true}
