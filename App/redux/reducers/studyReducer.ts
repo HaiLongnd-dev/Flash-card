@@ -68,7 +68,7 @@ export default function studyReducer(
 
       const shouldStopStudy = handlerStopSession(shouldStopStudyEntity)
 
-      console.log("shouldStopStudyEntity", shouldStopStudyEntity);
+      console.log("shouldStopStudy", shouldStopStudy);
       console.log("current study time", state.totalStudyTime);
       // console.log("new total study time", state.totalStudyTime + getFinalStudyTime(state.studySession));
 

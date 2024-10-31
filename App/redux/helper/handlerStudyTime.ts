@@ -34,7 +34,7 @@ export const handlerStopSession = (shouldStopSession: TStudySession): TStudySess
         stopSession = {
             ...stopSession,
             records: [{
-                ...stopSession.records[0],
+                startTime: stopSession.records[0].startTime,
                 endTime: new Date()
             }],
         }
