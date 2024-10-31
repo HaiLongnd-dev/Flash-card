@@ -1,6 +1,6 @@
 import { TStudySession } from '../../types/Study';
 import * as actions from '../actions/types/studyActionType';
-import { getFinalStudyTime, handlerStopSesstion, handlerStudyTime } from '../helper/handlerStudyTime';
+import { getFinalStudyTime, handlerStopSession, handlerStudyTime } from '../helper/handlerStudyTime';
 export interface IStudyState {
   studySession: TStudySession[];
   totalStudyTime: number
@@ -66,7 +66,7 @@ export default function studyReducer(
         session => session.id === action.payload.params.recordId,
       )[0]
 
-      const shouldStopStudy = handlerStopSesstion(shouldStopStudyEntity)
+      const shouldStopStudy = handlerStopSession(shouldStopStudyEntity)
 
       console.log("shouldStopStudyEntity", shouldStopStudyEntity);
       console.log("current study time", state.totalStudyTime);
