@@ -22,7 +22,7 @@ interface FlashcardListScreenViewProps {
   cardList: TCard[];
   handleDelete: (id: TCard['id']) => void;
   handleEdit: (card: TCard) => void;
-  handleButton: (session: TStudySession) => void;
+  handleButton: () => void;
 }
 const FlashcardListScreenView = ({
   topic,
@@ -45,7 +45,7 @@ const FlashcardListScreenView = ({
   const convertedFlashcardList = cardList.map(item => {
     return {...item, key: item.id};
   });
-  
+
   return (
     <AppContainer
       haveRightButton={true}
