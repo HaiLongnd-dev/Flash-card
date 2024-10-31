@@ -1,6 +1,6 @@
 import { DayOfWeek, TStudySession, RecordValue } from "../../types/Study";
 
-export const handlerStudyTime = (listRecord: TStudySession[]): TStudySession => {
+export const handlerStudyTime = (listRecord: TStudySession[]): {listData:TStudySession} => {
     const currentDate = new Date();
     const dayIndex = currentDate.getDay();
     let currentDayOfWeekValue = listRecord.filter((rec) => rec.date === DayOfWeek[dayIndex])[0]

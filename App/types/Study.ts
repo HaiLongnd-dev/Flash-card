@@ -1,5 +1,5 @@
-export const DayOfWeek = {
-  Sunday: "Sunday", Monday: "Monday", Tuesday: "Tuesday", Wednesday: "Wednesday", Thursday: "Thursday", Friday: "Friday", Saturday: "Saturday"
+export enum DayOfWeek {
+  "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
 }
 
 export type RecordValue = {
