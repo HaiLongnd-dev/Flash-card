@@ -1,13 +1,16 @@
-export enum DayOfWeek {
-  "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+export const DayOfWeek = {
+  Sunday: "Sunday", Monday: "Monday", Tuesday: "Tuesday", Wednesday: "Wednesday", Thursday: "Thursday", Friday: "Friday", Saturday: "Saturday"
 }
+
+export type RecordValue = {
+  startTime?: Date,
+  endTime?: Date
+}
+
 export type TStudySession = {
   id?: number;
-  record?: {
-    startTime?: Date,
-    endTime?: Date
-  },
-  date: string;
+  records: RecordValue[]
+  date: keyof typeof DayOfWeek;
 };
 // export type TStudyHistory = {
 //   totalStudyTime: number;
