@@ -70,7 +70,7 @@ export default function studyReducer(
 
       console.log("shouldStopStudyEntity", shouldStopStudyEntity);
       console.log("current study time", state.totalStudyTime);
-      console.log("new total study time", state.totalStudyTime + getFinalStudyTime(state.studySession));
+      // console.log("new total study time", state.totalStudyTime + getFinalStudyTime(state.studySession));
 
       return {
         ...state,
@@ -79,7 +79,7 @@ export default function studyReducer(
             ? shouldStopStudy
             : session,
         ),
-        totalStudyTime: getFinalStudyTime(state.studySession)
+        // totalStudyTime: getFinalStudyTime(state.studySession)
       }
       return state;
 
