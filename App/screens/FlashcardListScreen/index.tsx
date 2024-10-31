@@ -12,7 +12,7 @@ import ConfirmModal from '../../components/Core/ConfirmModal';
 import Navigator from '../../navigation/NavigationService';
 import ScreenName from '../../navigation/ScreenName';
 import {startStudyAction} from '../../redux/actions/studyAction';
-import {TStudy} from '../../types/Study';
+import {TStudySession} from '../../types/Study';
 export type TopicFlashcardRouteProp = RouteProp<
   NavigationStackParamList,
   typeof SCREEN_NAME.MANUAL.FLASHCARD_LIST
@@ -47,8 +47,10 @@ const FlashcardListScreen = ({route}: TopicFlashcardViewProps) => {
   const handleEdit = (card: TCard) => {
     Navigator.navigateTo(ScreenName.MANUAL.EDIT_CARD, {card});
   };
-  const startStudy = (startTime: TStudy['startTime'], id: TStudy['id']) => {
-    dispatch(startStudyAction(startTime, id));
+  const startStudy = (session: TStudySession) => {
+    console.log('2');
+    dispatch(startStudyAction(session));
+    console.log('3');
   };
   return (
     <>

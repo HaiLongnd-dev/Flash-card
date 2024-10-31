@@ -1,22 +1,20 @@
-import {TStudy} from '../../types/Study';
+import {TStudySession} from '../../types/Study';
 import {
   IStartStudy,
   IStopStudy,
   StudyActionType,
 } from './types/studyActionType';
 
-export const startStudyAction = (
-  startTime: TStudy['startTime'],
-  id: TStudy['id'],
-): IStartStudy => {
+export const startStudyAction = (session: TStudySession): IStartStudy => {
+  console.log('4');
   return {
     type: StudyActionType.START_STUDY,
-    payload: {params: {startTime, id}},
+    payload: {params: {session}},
   };
 };
-export const stopStudyAction = (idSession: TStudy['id']): IStopStudy => {
+export const stopStudyAction = (session: TStudySession): IStopStudy => {
   return {
     type: StudyActionType.STOP_STUDY,
-    payload: {params: idSession},
+    payload: {params: {session}},
   };
 };

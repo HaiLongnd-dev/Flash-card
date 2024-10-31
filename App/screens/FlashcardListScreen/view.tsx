@@ -15,14 +15,14 @@ import {AppButton, AppText} from '../../components';
 import Navigator from '../../navigation/NavigationService';
 import SCREEN_NAME from '../../navigation/ScreenName';
 import {TTopic} from '../../types/Topic';
-import {TStudy} from '../../types/Study';
+import {DayOfWeek, TStudySession} from '../../types/Study';
 
 interface FlashcardListScreenViewProps {
   topic: TTopic;
   cardList: TCard[];
   handleDelete: (id: TCard['id']) => void;
   handleEdit: (card: TCard) => void;
-  startStudy: (startTime: TStudy['startTime'], id: TStudy['id']) => void;
+  startStudy: (session: TStudySession) => void;
 }
 const FlashcardListScreenView = ({
   topic,
@@ -42,12 +42,16 @@ const FlashcardListScreenView = ({
     );
   };
   const handleButton = () => {
-    let idSession = Math.random() * 10000;
-    let startTimeSession = Date.now();
-    startStudy(startTimeSession, idSession);
+    let session: TStudySession = {
+      id: Math.random() * 10000,
+      startTime: Date.now(),
+      date: new Date().getDay() as DayOfWeek,
+      isStudying: true,
+    };
+    startStudy(session);
     Navigator.navigateTo(SCREEN_NAME.MANUAL.STUDY_SCREEN, {
       cardList,
-      idSession,
+      session,
     });
   };
   const convertedFlashcardList = cardList.map(item => {

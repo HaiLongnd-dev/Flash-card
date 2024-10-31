@@ -15,11 +15,11 @@ export type StudyScreenProps = {
   route: StudyScreenRouteProp;
 };
 const StudyScreen = ({route}: StudyScreenProps) => {
-  const {idSession} = route.params;
+  const {studySession} = route.params;
   const {cardList} = route.params;
   const dispatch = useDispatch<AppDispatch>();
   const stopStudy = () => {
-    dispatch(stopStudyAction(idSession));
+    dispatch(stopStudyAction(studySession));
   };
   return <StudyScreenView cardList={cardList} stopStudy={stopStudy} />;
 };

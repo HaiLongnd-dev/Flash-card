@@ -39,7 +39,7 @@ const StudyScreenView = ({cardList, stopStudy}: StudyScreenViewProps) => {
   };
 
   const handleConfirm = () => {
-    stopStudy;
+    stopStudy();
     Navigator.navigateTo(SCREEN_NAME.ROOT.HOME_SCREEN);
     setModalVisible(false);
   };

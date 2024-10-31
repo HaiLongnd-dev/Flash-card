@@ -1,10 +1,17 @@
-import {TStudy} from '../../types/Study';
+import {TStudyHistory, TStudySession} from '../../types/Study';
 import * as actions from '../actions/types/studyActionType';
 export interface IStudyState {
-  studyState: TStudy[];
+  studySession: TStudySession[];
+  studyHistory: TStudyHistory;
 }
 
-const initState: IStudyState = {studyState: []};
+const initState: IStudyState = {
+  studySession: [],
+  studyHistory: {
+    totalStudyTime: 0,
+    studyRecord: [],
+  },
+};
 export default function studyReducer(
   state: IStudyState = initState,
   action: actions.IStudyAction,
@@ -13,46 +20,53 @@ export default function studyReducer(
     case actions.StudyActionType.START_STUDY:
       return {
         ...state,
-        studyState: [
-          ...state.studyState,
-          {
-            id: action.payload.params.id,
-            startTime: action.payload.params.startTime,
-            isStudying: true,
-          },
-        ],
+        studySession: [...state.studySession, action.payload.params.session],
       };
 
     case actions.StudyActionType.STOP_STUDY:
       if (
-        state.studyState.some(session => session.id === action.payload.params)
+        state.studySession.some(
+          session => session.id === action.payload.params.session.id,
+        )
       ) {
-        const studySession = state.studyState.find(
-          session => session.id === action.payload.params,
+        const studySession = state.studySession.find(
+          session => session.id === action.payload.params.session.id,
         );
         const endTime = Date.now();
-        const studyTime = (endTime - studySession.startTime) / 1000;
+        const timeStudied = Math.floor(
+          (endTime - studySession.startTime) / 1000 / 3600,
+        );
+        const totalStudied = state.studyHistory.studyRecord.reduce(
+          (acc, session) => acc + (session.timeStudied || 0),
+          0,
+        );
 
-        const today = new Date();
-        const formatDate = `${today.getDate()}/${
-          today.getMonth() + 1
-        }/${today.getFullYear()}`;
+        const updatedStudyRecord = state.studyHistory.studyRecord.map(record =>
+          record.date === studySession.date
+            ? {...record, timeStudied: record.timeStudied + timeStudied}
+            : record,
+        );
 
-        const updatedHistory = [
-          ...(studySession.studyHistory || []),
-          {
-            date: formatDate,
-            time: studyTime,
-          },
-        ];
+        if (
+          !updatedStudyRecord.some(record => record.date === studySession.date)
+        ) {
+          updatedStudyRecord.push({
+            date: studySession.date,
+            timeStudied: timeStudied,
+          });
+        }
 
         return {
           ...state,
-          studyState: state.studyState.map(session =>
-            session.id === action.payload.params
-              ? {...session, isStudying: false, studyHistory: updatedHistory}
+          studySession: state.studySession.map(session =>
+            session.id === action.payload.params.session.id
+              ? {...session, isStudying: false}
               : session,
           ),
+          studyHistory: {
+            totalStudyTime: totalStudied,
+            studyRecord: updatedStudyRecord,
+          },
         };
       }
       return state;

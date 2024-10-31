@@ -1,17 +1,15 @@
-import {FlatList, Image, TextInput, TouchableOpacity, View} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import styles from './style';
-import SearchIcon from '../../assets/svg/common/searchIcon';
 import {AppText} from '../../components';
 import {colors} from '../../themes/color';
-import {TTopic} from '../../types/Topic';
-import TopicComponentHome from '../../components/TopicComponentHome';
 import Navigator from '../../navigation/NavigationService';
-import SCREEN_NAME from '../../navigation/ScreenName';
 import SvgComponent from '../../assets/svg';
 
-interface AccountScreenViewProps {}
-const AccountScreenView = () => {
+interface AccountScreenViewProps {
+  cardAdded: number;
+}
+const AccountScreenView = ({cardAdded}: AccountScreenViewProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -42,7 +40,7 @@ const AccountScreenView = () => {
           </View>
           <View style={styles.detail}>
             <AppText fontWeight={600} fontSize={20}>
-              27
+              {cardAdded}
             </AppText>
             <AppText>Cards added</AppText>
           </View>
