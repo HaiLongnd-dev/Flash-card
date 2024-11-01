@@ -8,13 +8,12 @@ const AccountScreen = () => {
   const {cards} = useSelector(selectAllCards);
   const cardAdded = cards.length;
 
-  const selectAllStudySession = (state: IGlobalState) =>
-    state.study.studyHistory;
-  const {studyRecord} = useSelector(selectAllStudySession);
-  console.log('studyRecord======', studyRecord);
-  // const studySession = studyState.map(item => item.studyHistory);
+  const selectAllStudySession = (state: IGlobalState) => state.study;
+  const {totalStudyTime} = useSelector(selectAllStudySession);
 
-  return <AccountScreenView cardAdded={cardAdded} />;
+  return (
+    <AccountScreenView cardAdded={cardAdded} totalStudyTime={totalStudyTime} />
+  );
 };
 
 export default AccountScreen;

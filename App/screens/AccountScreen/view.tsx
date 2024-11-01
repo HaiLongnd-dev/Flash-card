@@ -8,8 +8,12 @@ import SvgComponent from '../../assets/svg';
 
 interface AccountScreenViewProps {
   cardAdded: number;
+  totalStudyTime: number;
 }
-const AccountScreenView = ({cardAdded}: AccountScreenViewProps) => {
+const AccountScreenView = ({
+  cardAdded,
+  totalStudyTime,
+}: AccountScreenViewProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -52,7 +56,7 @@ const AccountScreenView = ({cardAdded}: AccountScreenViewProps) => {
           </View>
           <View style={styles.detail}>
             <AppText fontWeight={600} fontSize={20}>
-              27
+              {totalStudyTime}
             </AppText>
             <AppText>Hours Spent</AppText>
           </View>
