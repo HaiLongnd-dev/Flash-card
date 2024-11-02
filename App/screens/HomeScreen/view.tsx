@@ -18,8 +18,9 @@ import SCREEN_NAME from '../../navigation/ScreenName';
 
 interface HomeScreenViewProps {
   listTopic: TTopic[];
+  clearAllData: () => void;
 }
-const HomeScreenView = ({listTopic}: HomeScreenViewProps) => {
+const HomeScreenView = ({listTopic, clearAllData}: HomeScreenViewProps) => {
   const showTopicList = () => {
     Navigator.navigateTo(SCREEN_NAME.MANUAL.TOPIC_LIST);
   };
@@ -36,6 +37,9 @@ const HomeScreenView = ({listTopic}: HomeScreenViewProps) => {
           <View style={styles.userNameBox}>
             <AppText style={styles.userName}> Welcome back Long</AppText>
           </View>
+          <TouchableOpacity onPress={clearAllData}>
+            <AppText>CLEAR</AppText>
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.searchBox}>

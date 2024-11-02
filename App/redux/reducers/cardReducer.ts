@@ -1,5 +1,6 @@
 import {TCard} from '../../types/Card';
-import * as actions from '../actions/types/cardActionType';
+import * as cardActions from '../actions/types/cardActionType';
+import * as appActions from '../actions/types/appActionType';
 export interface ICardState {
   cards: TCard[];
 }
@@ -7,19 +8,19 @@ export interface ICardState {
 const initState: ICardState = {cards: []};
 export default function cardReducer(
   state: ICardState = initState,
-  action: actions.ICardAction,
+  action: cardActions.ICardAction | appActions.IAppAction,
 ): ICardState {
   switch (action.type) {
-    case actions.CardActionType.GET_LIST:
+    case cardActions.CardActionType.GET_LIST:
       return {
         ...state,
       };
-    case actions.CardActionType.ADD:
+    case cardActions.CardActionType.ADD:
       return {
         ...state,
         cards: [...state.cards, action.payload.params.card],
       };
-    case actions.CardActionType.EDIT:
+    case cardActions.CardActionType.EDIT:
       return {
         ...state,
         cards: state.cards.map(card =>
@@ -29,7 +30,7 @@ export default function cardReducer(
         ),
       };
 
-    case actions.CardActionType.REMOVE:
+    case cardActions.CardActionType.REMOVE:
       return {
         ...state,
         cards: state.cards.filter(
@@ -37,6 +38,8 @@ export default function cardReducer(
         ),
       };
 
+    case appActions.AppActionType.CLEAR_ALL_DATA:
+      return initState;
     default:
       return state;
   }
