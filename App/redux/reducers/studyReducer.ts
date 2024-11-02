@@ -7,9 +7,12 @@ import {
   handlerStopSession,
   handlerStudyTime,
 } from '../helper/handlerStudyTime';
+import {useHandlerStartDayOfWeek} from '../../hooks/useHandlerStartDayOfWeek';
+import {date} from 'yup';
 export interface IStudyState {
   studySession: TStudySession[];
   totalStudyTime: number;
+  date: Date;
 }
 
 const initAllDayOfWeek: TStudySession[] = [
@@ -60,6 +63,7 @@ const initAllDayOfWeek: TStudySession[] = [
 const initState: IStudyState = {
   studySession: initAllDayOfWeek,
   totalStudyTime: 0,
+  date: null,
 };
 export default function studyReducer(
   state: IStudyState = initState,
@@ -115,6 +119,13 @@ export default function studyReducer(
         ...state,
         totalStudyTime: getFinalStudyTime(state.studySession),
       };
+    case studyActions.StudyActionType.GET_MONDAY_DATE:
+      if (useHandlerStartDayOfWeek) {
+        return {
+          ...state,
+          date: action.payload.params.date,
+        };
+      }
     case studyActions.StudyActionType.CLEAR_ALL_RECORD:
       return {
         ...state,

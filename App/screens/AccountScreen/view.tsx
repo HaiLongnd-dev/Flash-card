@@ -9,15 +9,15 @@ import SvgComponent from '../../assets/svg';
 interface AccountScreenViewProps {
   cardAdded: number;
   totalStudyTime: number;
-  getTotalStudiedTime: () => void;
+  getTotalTimeAction: () => void;
 }
 const AccountScreenView = ({
   cardAdded,
   totalStudyTime,
-  getTotalStudiedTime,
+  getTotalTimeAction,
 }: AccountScreenViewProps) => {
   useEffect(() => {
-    getTotalStudiedTime;
+    getTotalTimeAction;
   }, []);
   return (
     <View style={styles.container}>

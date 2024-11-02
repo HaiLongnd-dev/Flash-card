@@ -3,6 +3,7 @@ import {TCallback} from './types/actionTypeBase';
 import {
   IClearAllRecord,
   ICountTotalStudiedTime,
+  IGetMondayDate,
   IStartStudy,
   IStopStudy,
   StudyActionType,
@@ -24,6 +25,12 @@ export const stopStudyAction = (recordId: TStudySession['id']): IStopStudy => {
 export const countTotalStudiedTimeAction = (): ICountTotalStudiedTime => {
   return {
     type: StudyActionType.COUNT_TOTAL_STUDIED_TIME,
+  };
+};
+export const getMondayAction = (date: Date): IGetMondayDate => {
+  return {
+    type: StudyActionType.GET_MONDAY_DATE,
+    payload: {params: {date}},
   };
 };
 export const clearAllRecordAction = (): IClearAllRecord => {
