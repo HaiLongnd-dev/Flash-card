@@ -1,5 +1,5 @@
 import {Image, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './style';
 import {AppText} from '../../components';
 import {colors} from '../../themes/color';
@@ -9,11 +9,16 @@ import SvgComponent from '../../assets/svg';
 interface AccountScreenViewProps {
   cardAdded: number;
   totalStudyTime: number;
+  getTotalStudiedTime: () => void;
 }
 const AccountScreenView = ({
   cardAdded,
   totalStudyTime,
+  getTotalStudiedTime,
 }: AccountScreenViewProps) => {
+  useEffect(() => {
+    getTotalStudiedTime;
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
