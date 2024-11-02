@@ -17,7 +17,7 @@ export type TStudySession = {
   id?: number;
   records: RecordValue[];
   date: keyof typeof DayOfWeek;
-  totalStudyByDate?: number;
+  totalStudiedTimeByDay?: number;
 };
 // export type TStudyHistory = {
 //   totalStudyTime: number;
