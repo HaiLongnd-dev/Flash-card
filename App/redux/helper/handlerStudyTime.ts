@@ -39,22 +39,19 @@ export const handlerStudyTime = (
   return currentDayOfWeekValue;
 };
 
-export const getTotalStudyHours = (listRecord: TStudySession[]): number => {
-  const totalTime = listRecord.reduce((outerTotal, session) => {
-    const sessionTotal = session.records.reduce((recordTotal, record) => {
-      const {startTime, endTime} = record;
-      if (endTime) {
-        const duration =
-          (endTime.getTime() - startTime.getTime()) / (1000 * 60 * 60);
-        return recordTotal + duration;
-      }
-      return recordTotal;
-    }, 0);
-    return outerTotal + sessionTotal;
+export const getTotalStudiedTimeByDay = (
+  sessionRecorded: TStudySession['records'],
+): number => {
+  const totalTimeStudied = sessionRecorded.reduce((total, session) => {
+    const {startTime, endTime} = session;
+    const end = endTime instanceof Date ? endTime : new Date();
+    return total + (end.getTime() - startTime.getTime());
   }, 0);
 
-  return parseFloat(totalTime.toFixed(2));
+  const timeStudied = Math.floor(totalTimeStudied / (1000 * 60));
+  return timeStudied;
 };
+
 export const handlerStopSession = (
   shouldStopSession: TStudySession,
 ): TStudySession => {
@@ -69,6 +66,9 @@ export const handlerStopSession = (
           endTime: new Date(),
         },
       ],
+      totalStudiedTimeByDay: getTotalStudiedTimeByDay(
+        shouldStopSession.records,
+      ),
     };
   } else {
     let listRecord: RecordValue[] = stopSession.records.map(rec =>

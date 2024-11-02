@@ -3,6 +3,7 @@ import * as studyActions from '../actions/types/studyActionType';
 import * as appActions from '../actions/types/appActionType';
 import {
   getFinalStudyTime,
+  getTotalStudiedTimeByDay,
   handlerStopSession,
   handlerStudyTime,
 } from '../helper/handlerStudyTime';
@@ -16,43 +17,43 @@ const initAllDayOfWeek: TStudySession[] = [
     id: 0,
     records: [],
     date: 'Monday',
-    totalStudyByDate: 0,
+    totalStudiedTimeByDay: 0,
   },
   {
     id: 1,
     records: [],
     date: 'Tuesday',
-    totalStudyByDate: 0,
+    totalStudiedTimeByDay: 0,
   },
   {
     id: 2,
     records: [],
     date: 'Wednesday',
-    totalStudyByDate: 0,
+    totalStudiedTimeByDay: 0,
   },
   {
     id: 3,
     records: [],
     date: 'Thursday',
-    totalStudyByDate: 0,
+    totalStudiedTimeByDay: 0,
   },
   {
     id: 4,
     records: [],
     date: 'Friday',
-    totalStudyByDate: 0,
+    totalStudiedTimeByDay: 0,
   },
   {
     id: 5,
     records: [],
     date: 'Saturday',
-    totalStudyByDate: 0,
+    totalStudiedTimeByDay: 0,
   },
   {
     id: 6,
     records: [],
     date: 'Sunday',
-    totalStudyByDate: 0,
+    totalStudiedTimeByDay: 0,
   },
 ];
 
@@ -92,8 +93,12 @@ export default function studyReducer(
       )[0];
       console.log('action.payload.params===', action.payload.params);
       const shouldStopStudy = handlerStopSession(shouldStopStudyEntity);
+      const countTotalTimeByDay = getTotalStudiedTimeByDay(
+        shouldStopStudy.records,
+      );
 
       console.log('shouldStopStudy', shouldStopStudy);
+      console.log('countTotalTimeByDay', countTotalTimeByDay);
       console.log('current study time', state.totalStudyTime);
       // console.log("new total study time", state.totalStudyTime + getFinalStudyTime(state.studySession));
 
@@ -104,7 +109,16 @@ export default function studyReducer(
             ? shouldStopStudy
             : session,
         ),
-        // totalStudyTime: getFinalStudyTime(state.studySession),
+      };
+    case studyActions.StudyActionType.COUNT_TOTAL_STUDIED_TIME:
+      return {
+        ...state,
+        totalStudyTime: getFinalStudyTime(state.studySession),
+      };
+    case studyActions.StudyActionType.CLEAR_ALL_RECORD:
+      return {
+        ...state,
+        studySession: initAllDayOfWeek,
       };
     case appActions.AppActionType.CLEAR_ALL_DATA:
       return initState;
