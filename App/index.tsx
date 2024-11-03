@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import StackScreens from './navigation/Stack';
 import {
@@ -8,7 +8,6 @@ import {
 } from 'react-native-safe-area-context';
 import {Provider} from 'react-redux';
 // import {persistor, store} from './redux/store';
-import {PersistGate} from 'redux-persist/integration/react';
 import {store} from './redux/store';
 
 const Index = () => {

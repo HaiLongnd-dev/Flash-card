@@ -6,7 +6,7 @@ export const getTotalStudiedTime = createSelector(
   [getStudySession],
   state => state.totalStudyTime,
 );
-export const getTotalStudiedTimeByWeek = createSelector(
+export const getStudySessionsByWeek = createSelector(
   [getStudySession],
   state => state.studySession,
 );

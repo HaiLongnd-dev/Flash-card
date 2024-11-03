@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './style';
 import SearchIcon from '../../assets/svg/common/searchIcon';
 import {AppText} from '../../components';
@@ -15,15 +15,26 @@ import {TTopic} from '../../types/Topic';
 import TopicComponentHome from '../../components/TopicComponentHome';
 import Navigator from '../../navigation/NavigationService';
 import SCREEN_NAME from '../../navigation/ScreenName';
+import {useHandlerStartDayOfWeek} from '../../hooks/useHandlerStartDayOfWeek';
 
 interface HomeScreenViewProps {
   listTopic: TTopic[];
   clearAllData: () => void;
+  clearAllSession: () => void;
 }
-const HomeScreenView = ({listTopic, clearAllData}: HomeScreenViewProps) => {
+const HomeScreenView = ({
+  listTopic,
+  clearAllData,
+  clearAllSession,
+}: HomeScreenViewProps) => {
   const showTopicList = () => {
     Navigator.navigateTo(SCREEN_NAME.MANUAL.TOPIC_LIST);
   };
+  useEffect(() => {
+    if (useHandlerStartDayOfWeek) {
+      clearAllSession();
+    }
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.header}>

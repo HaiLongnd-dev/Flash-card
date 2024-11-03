@@ -7,7 +7,10 @@ import {
   clearAllRecordAction,
   countTotalStudiedTimeAction,
 } from '../../redux/actions/studyAction';
-import {getTotalStudiedTime, getTotalStudiedTimeByWeek} from '../../redux/selectors/studySelector';
+import {
+  getTotalStudiedTime,
+  getStudySessionsByWeek,
+} from '../../redux/selectors/studySelector';
 
 const AccountScreen = () => {
   const selectAllCards = (state: IGlobalState) => state.card;
@@ -19,7 +22,7 @@ const AccountScreen = () => {
     dispatch(countTotalStudiedTimeAction);
   };
   const totalStudyTime = useSelector(getTotalStudiedTime);
-  const getTotalTimeByWeek = useSelector(getTotalStudiedTimeByWeek);
+  const getStudySessions = useSelector(getStudySessionsByWeek);
 
   return (
     <AccountScreenView
