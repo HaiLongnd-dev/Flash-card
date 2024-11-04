@@ -5,13 +5,11 @@ import {getMondayAction} from '../redux/actions/studyAction';
 
 interface useHandlerStartDayOfWeekProps {}
 export const useHandlerStartDayOfWeek = (): boolean => {
-  const date = useSelector(getStudyDate);
+  const date = new Date(useSelector(getStudyDate));
   const today = new Date();
   const dispatch = useDispatch<AppDispatch>();
-
-  if (date?.toString() === today?.toString()) return false;
-
-  if (today.getDate() === 1) {
+  if (date?.getDay() === today.getDay()) return false;
+  else if (today.getDay() === 1) {
     dispatch(getMondayAction(today));
     return true;
   }

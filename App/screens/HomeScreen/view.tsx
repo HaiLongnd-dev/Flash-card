@@ -30,11 +30,12 @@ const HomeScreenView = ({
   const showTopicList = () => {
     Navigator.navigateTo(SCREEN_NAME.MANUAL.TOPIC_LIST);
   };
+  const shouldClearSessions = useHandlerStartDayOfWeek();
   useEffect(() => {
-    if (useHandlerStartDayOfWeek) {
+    if (shouldClearSessions) {
       clearAllSession();
     }
-  }, []);
+  }, [shouldClearSessions]);
   return (
     <View style={styles.container}>
       <View style={styles.header}>

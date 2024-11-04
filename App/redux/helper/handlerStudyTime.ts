@@ -48,7 +48,9 @@ export const getTotalStudiedTimeByDay = (
     return total + (end.getTime() - startTime.getTime());
   }, 0);
 
-  const timeStudied = Math.floor(totalTimeStudied / (1000 * 60));
+  const timeStudied = parseFloat(
+    (totalTimeStudied / (1000 * 60 * 60)).toFixed(2),
+  );
   return timeStudied;
 };
 
@@ -78,6 +80,9 @@ export const handlerStopSession = (
     stopSession = {
       ...stopSession,
       records: listRecord,
+      totalStudiedTimeByDay: getTotalStudiedTimeByDay(
+        shouldStopSession.records,
+      ),
     };
   }
   return stopSession;

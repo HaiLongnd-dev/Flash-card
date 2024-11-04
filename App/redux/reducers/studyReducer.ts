@@ -8,7 +8,6 @@ import {
   handlerStudyTime,
 } from '../helper/handlerStudyTime';
 import {useHandlerStartDayOfWeek} from '../../hooks/useHandlerStartDayOfWeek';
-import {date} from 'yup';
 export interface IStudyState {
   studySession: TStudySession[];
   totalStudyTime: number;
@@ -19,43 +18,43 @@ const initAllDayOfWeek: TStudySession[] = [
   {
     id: 0,
     records: [],
-    date: 'Monday',
+    date: 'Mon',
     totalStudiedTimeByDay: 0,
   },
   {
     id: 1,
     records: [],
-    date: 'Tuesday',
+    date: 'Tue',
     totalStudiedTimeByDay: 0,
   },
   {
     id: 2,
     records: [],
-    date: 'Wednesday',
+    date: 'Wed',
     totalStudiedTimeByDay: 0,
   },
   {
     id: 3,
     records: [],
-    date: 'Thursday',
+    date: 'Thu',
     totalStudiedTimeByDay: 0,
   },
   {
     id: 4,
     records: [],
-    date: 'Friday',
+    date: 'Fri',
     totalStudiedTimeByDay: 0,
   },
   {
     id: 5,
     records: [],
-    date: 'Saturday',
+    date: 'Sat',
     totalStudiedTimeByDay: 0,
   },
   {
     id: 6,
     records: [],
-    date: 'Sunday',
+    date: 'Sun',
     totalStudiedTimeByDay: 0,
   },
 ];
@@ -95,17 +94,10 @@ export default function studyReducer(
       let shouldStopStudyEntity = state.studySession.filter(
         session => session.id === action.payload.params.recordId,
       )[0];
-      console.log('action.payload.params===', action.payload.params);
       const shouldStopStudy = handlerStopSession(shouldStopStudyEntity);
       const countTotalTimeByDay = getTotalStudiedTimeByDay(
         shouldStopStudy.records,
       );
-
-      console.log('shouldStopStudy', shouldStopStudy);
-      console.log('countTotalTimeByDay', countTotalTimeByDay);
-      console.log('current study time', state.totalStudyTime);
-      // console.log("new total study time", state.totalStudyTime + getFinalStudyTime(state.studySession));
-
       return {
         ...state,
         studySession: state.studySession.map(session =>
