@@ -22,8 +22,6 @@ const AccountScreen = () => {
     dispatch(countTotalStudiedTimeAction);
   };
   const totalStudyTime = useSelector(getTotalStudiedTime);
-  const getStudySessions = useSelector(getStudySessionsByWeek);
-
   return (
     <AccountScreenView
       cardAdded={cardAdded}

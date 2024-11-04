@@ -5,6 +5,7 @@ import {AppText} from '../../components';
 import {colors} from '../../themes/color';
 import Navigator from '../../navigation/NavigationService';
 import SvgComponent from '../../assets/svg';
+import StudyProgressChart from './Components/Chart';
 
 interface AccountScreenViewProps {
   cardAdded: number;
@@ -66,6 +67,9 @@ const AccountScreenView = ({
             <AppText>Hours Spent</AppText>
           </View>
         </View>
+      </View>
+      <View style={styles.chartBox}>
+        <StudyProgressChart />
       </View>
     </View>
   );
