@@ -58,8 +58,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   detail: {},
-  chartBox: {
-    marginTop: 40,
-  },
 });
 export default styles;

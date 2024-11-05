@@ -68,9 +68,7 @@ const AccountScreenView = ({
           </View>
         </View>
       </View>
-      <View style={styles.chartBox}>
-        <StudyProgressChart />
-      </View>
+      <StudyProgressChart />
     </View>
   );
 };
