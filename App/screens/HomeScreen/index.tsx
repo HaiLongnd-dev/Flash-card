@@ -9,6 +9,11 @@ import {
   clearAllRecordAction,
   getMondayAction,
 } from '../../redux/actions/studyAction';
+import {TCard} from '../../types/Card';
+import {
+  getListCard,
+  getListCardByIdTopic,
+} from '../../redux/selectors/cardSelector';
 
 const HomeScreen = () => {
   const listTopic: TTopic[] = useSelector(getListTopic);

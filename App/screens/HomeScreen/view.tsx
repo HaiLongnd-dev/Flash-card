@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './style';
 import SearchIcon from '../../assets/svg/common/searchIcon';
 import {AppText} from '../../components';
@@ -16,6 +16,7 @@ import TopicComponentHome from '../../components/TopicComponentHome';
 import Navigator from '../../navigation/NavigationService';
 import SCREEN_NAME from '../../navigation/ScreenName';
 import {useHandlerStartDayOfWeek} from '../../hooks/useHandlerStartDayOfWeek';
+import SearchList from './Components/SearchList';
 
 interface HomeScreenViewProps {
   listTopic: TTopic[];
@@ -36,6 +37,8 @@ const HomeScreenView = ({
       clearAllSession();
     }
   }, [shouldClearSessions]);
+  const [searchInput, setSearchInput] = useState('');
+  const [availableSearch, setAvailableSearch] = useState(false);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -71,9 +74,15 @@ const HomeScreenView = ({
           <View style={styles.icon}>
             <SearchIcon />
           </View>
-          <TextInput style={styles.searchInput} placeholder="Search Here" />
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search Here"
+            onFocus={() => setAvailableSearch(true)}
+            onBlur={() => setTimeout(() => setAvailableSearch(false), 100)}
+          />
         </View>
       </View>
+      {availableSearch && <SearchList />}
       <View style={styles.categories}>
         <View style={styles.categoriesHeader}>
           <View>
@@ -81,7 +90,6 @@ const HomeScreenView = ({
               Flashcard topic
             </AppText>
           </View>
-
           <View style={styles.categoriesBtn}>
             <TouchableOpacity onPress={showTopicList}>
               <AppText style={styles.categoriesBtnText}>View all</AppText>
