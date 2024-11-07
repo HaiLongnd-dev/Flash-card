@@ -1,11 +1,4 @@
-import {
-  FlatList,
-  Image,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {FlatList, Image, TextInput, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import styles from './style';
 import SearchIcon from '../../assets/svg/common/searchIcon';
@@ -17,6 +10,9 @@ import Navigator from '../../navigation/NavigationService';
 import SCREEN_NAME from '../../navigation/ScreenName';
 import {useHandlerStartDayOfWeek} from '../../hooks/useHandlerStartDayOfWeek';
 import SearchList from './Components/SearchList';
+import {TCard} from '../../types/Card';
+import {useSelector} from 'react-redux';
+import {getListCard} from '../../redux/selectors/cardSelector';
 
 interface HomeScreenViewProps {
   listTopic: TTopic[];
@@ -38,7 +34,28 @@ const HomeScreenView = ({
     }
   }, [shouldClearSessions]);
   const [searchInput, setSearchInput] = useState('');
+  const [cardListFiltered, setCardListFiltered] = useState<TCard[]>([]);
   const [availableSearch, setAvailableSearch] = useState(false);
+
+  const debounce = (fn: Function, ms = 500) => {
+    let timeoutId: ReturnType<typeof setTimeout>;
+    return function (this: any, ...args: any[]) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => fn.apply(this, args), ms);
+    };
+  };
+  const listCard: TCard[] = useSelector(getListCard);
+
+  const debounceSearch = debounce((text: string) => {
+    const filterCard = listCard.filter(item =>
+      item.content.toLowerCase().includes(text.toLowerCase()),
+    );
+    setCardListFiltered(filterCard);
+  }, 300);
+  const handleChangeText = (text: string) => {
+    debounceSearch(text);
+    setSearchInput(text);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -77,12 +94,17 @@ const HomeScreenView = ({
           <TextInput
             style={styles.searchInput}
             placeholder="Search Here"
+            onChangeText={handleChangeText}
             onFocus={() => setAvailableSearch(true)}
-            onBlur={() => setTimeout(() => setAvailableSearch(false), 100)}
           />
         </View>
       </View>
-      {availableSearch && <SearchList />}
+      {availableSearch && (
+        <SearchList
+          // setAvailableSearch={setAvailableSearch}
+          cardListFiltered={cardListFiltered}
+        />
+      )}
       <View style={styles.categories}>
         <View style={styles.categoriesHeader}>
           <View>
