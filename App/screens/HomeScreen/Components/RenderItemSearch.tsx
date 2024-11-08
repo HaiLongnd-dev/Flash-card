@@ -23,7 +23,7 @@ export const RenderItem = ({card}: RenderItemProps) => {
     Navigator.navigateTo(SCREEN_NAME.MANUAL.FLASHCARD_LIST, {topic});
   };
   return (
-    <TouchableOpacity onPress={showFlashcardList}>
+    <TouchableOpacity style={{zIndex: 100}} onPress={showFlashcardList}>
       <View style={styles.card}>
         <View style={styles.nameBox}>
           <AppText color={colors.white}>{card.content}</AppText>

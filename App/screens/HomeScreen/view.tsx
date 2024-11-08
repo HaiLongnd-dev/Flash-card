@@ -1,5 +1,12 @@
-import {FlatList, Image, TextInput, TouchableOpacity, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {
+  FlatList,
+  Image,
+  KeyboardAvoidingView,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from './style';
 import SearchIcon from '../../assets/svg/common/searchIcon';
 import {AppText} from '../../components';
@@ -56,8 +63,15 @@ const HomeScreenView = ({
     debounceSearch(text);
     setSearchInput(text);
   };
+  const inputRef = useRef(null);
+  useEffect(() => {
+    if (availableSearch === false) {
+      inputRef.current.blur();
+    }
+  }, [availableSearch]);
+
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <View style={styles.header}>
         <View style={styles.headerBox}>
           <View style={styles.avaBox}>
@@ -74,7 +88,10 @@ const HomeScreenView = ({
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.searchBox}>
+      <View
+        style={
+          !availableSearch ? styles.searchBox : styles.searchBoxHaveKeyboard
+        }>
         <View>
           <AppText color={colors.black} style={styles.searchBoxTitle}>
             Search Flashcard
@@ -96,12 +113,13 @@ const HomeScreenView = ({
             placeholder="Search Here"
             onChangeText={handleChangeText}
             onFocus={() => setAvailableSearch(true)}
+            ref={inputRef}
           />
         </View>
       </View>
       {availableSearch && (
         <SearchList
-          // setAvailableSearch={setAvailableSearch}
+          setAvailableSearch={setAvailableSearch}
           cardListFiltered={cardListFiltered}
         />
       )}
@@ -126,7 +144,7 @@ const HomeScreenView = ({
           />
         </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

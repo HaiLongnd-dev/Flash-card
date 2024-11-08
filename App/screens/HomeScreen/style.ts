@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     height: '30%',
     borderBottomLeftRadius: 25,
     borderBottomRightRadius: 25,
+    zIndex: -6,
   },
   headerBox: {
     flexDirection: 'row',
@@ -32,8 +33,7 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   searchBox: {
-    position: 'absolute',
-    top: '16%',
+    marginTop: -100,
     marginHorizontal: 30,
     backgroundColor: '#fff',
     paddingHorizontal: 30,
@@ -41,6 +41,18 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     shadowColor: '#000',
     elevation: 10,
+    zIndex: -5,
+  },
+  searchBoxHaveKeyboard: {
+    marginTop: -30,
+    marginHorizontal: 30,
+    backgroundColor: '#fff',
+    paddingHorizontal: 30,
+    paddingVertical: 15,
+    borderRadius: 25,
+    shadowColor: '#000',
+    elevation: 10,
+    zIndex: -5,
   },
   searchBoxTitle: {fontSize: 18, fontWeight: '500'},
   searchBoxDesc: {fontSize: 12, paddingTop: 8, lineHeight: 16},
@@ -55,7 +67,10 @@ const styles = StyleSheet.create({
   },
   icon: {padding: 15},
   searchInput: {},
-  categories: {position: 'absolute', top: '42%', marginHorizontal: 15},
+  categories: {
+    marginHorizontal: 15,
+    zIndex: -10,
+  },
   categoriesHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
