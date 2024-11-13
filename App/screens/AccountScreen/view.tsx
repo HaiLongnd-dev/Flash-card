@@ -6,6 +6,7 @@ import {colors} from '../../themes/color';
 import Navigator from '../../navigation/NavigationService';
 import SvgComponent from '../../assets/svg';
 import StudyProgressChart from './Components/Chart';
+import SCREEN_NAME from '../../navigation/ScreenName';
 
 interface AccountScreenViewProps {
   cardAdded: number;
@@ -41,6 +42,11 @@ const AccountScreenView = ({
               Nghe An, Viet Nam
             </AppText>
           </View>
+          <TouchableOpacity
+            style={styles.rightBtn}
+            onPress={() => Navigator.navigateTo(SCREEN_NAME.MANUAL.LOG_IN)}>
+            <SvgComponent name="OPTION" color={colors.white} size={30} />
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.countingBox}>

@@ -13,6 +13,10 @@ import SPEAKER from './common/speaker';
 import LIGHTNING from './common/lightning';
 import CLOCK from './common/clock';
 import LINE from './common/line';
+import LOG_OUT from './common/logout';
+import OPTION from './common/option';
+import LOCK from './common/lock';
+import UNLOCK from './common/unlock';
 
 // Category
 // Food
@@ -109,6 +113,10 @@ export const SVG_LIST = {
   LIGHTNING,
   CLOCK,
   LINE,
+  LOG_OUT,
+  OPTION,
+  LOCK,
+  UNLOCK,
   // CATEGORY
   //FOOD
   FOOD1,

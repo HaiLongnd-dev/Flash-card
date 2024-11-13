@@ -2,7 +2,7 @@ import {
   NavigationContainer,
   NavigatorScreenParams,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import Navigator from './NavigationService';
 import SCREEN_NAME from './ScreenName';
@@ -14,13 +14,14 @@ import {
   EditTopicScreen,
   FlashcardListScreen,
   FlashcardScreen,
+  LoginScreen,
   StudyScreen,
   TopicListScreen,
 } from '../screens';
 import AddNewCardScreen from '../screens/AddNewCardScreen';
-import { TTopic } from '../types/Topic';
-import { TCard } from '../types/Card';
-import { TStudySession } from '../types/Study';
+import {TTopic} from '../types/Topic';
+import {TCard} from '../types/Card';
+import {TStudySession} from '../types/Study';
 export type StackParamList = {
   HOME_SCREEN: undefined;
   ADD_CARD_SCREEN: undefined;
@@ -33,11 +34,11 @@ export interface NavigationStackParamList
   CHOOSE_ICON: {
     callback: (iconName: string, iconColor: string) => void;
   };
-  ADD_NEW_CARD: { topic: TTopic };
-  FLASHCARD_LIST: { topic: TTopic };
-  STUDY_SCREEN: { recordId: TStudySession['id']; cardList: TCard[] };
-  EDIT_TOPIC: { topic: TTopic };
-  EDIT_CARD: { card: TCard };
+  ADD_NEW_CARD: {topic: TTopic};
+  FLASHCARD_LIST: {topic: TTopic};
+  STUDY_SCREEN: {recordId: TStudySession['id']; cardList: TCard[]};
+  EDIT_TOPIC: {topic: TTopic};
+  EDIT_CARD: {card: TCard};
 }
 
 export type ScreenNameKeys = keyof NavigationStackParamList;
@@ -45,8 +46,8 @@ export type NavigationParams = {
   [K in keyof NavigationStackParamList]: NavigationStackParamList[K] extends NavigatorScreenParams<
     infer P
   >
-  ? NavigatorScreenParams<P>
-  : undefined;
+    ? NavigatorScreenParams<P>
+    : undefined;
 };
 
 const Stack = createNativeStackNavigator<NavigationStackParamList>();
@@ -95,6 +96,10 @@ function StackScreens() {
         <Stack.Screen
           name={SCREEN_NAME.MANUAL.EDIT_CARD}
           component={EditCardScreen}
+        />
+        <Stack.Screen
+          name={SCREEN_NAME.MANUAL.LOG_IN}
+          component={LoginScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

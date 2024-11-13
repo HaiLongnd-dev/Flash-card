@@ -2,7 +2,7 @@ export const colors = {
   // core colors
   primary: '#232325',
   secondary: '#ffffff',
-  background: '#000000',
+  background: '#4A0E5C',
   transparent: 'transparent',
   background_secondary: '#101010',
   blue: '#0F56B3',
@@ -13,6 +13,8 @@ export const colors = {
   yellow: '#EC952E',
   gray: '#3C3E40',
   gray_2: '#cccccc',
+  gray_3: '#F2F1F1',
+  gray_4: '#AAAAAA',
 
   //common colors
   white: '#ffffff',

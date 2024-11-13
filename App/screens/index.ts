@@ -9,7 +9,8 @@ import TopicListScreen from './TopicListScreen';
 import StudyScreen from './StudyScreen';
 import EditTopicScreen from './EditTopicScreen';
 import EditCardScreen from './EditCardScreen';
-
+import SignUpScreen from './SignUpScreen';
+import LoginScreen from './LoginScreen';
 export {
   HomeScreen,
   AccountScreen,
@@ -22,4 +23,6 @@ export {
   StudyScreen,
   EditTopicScreen,
   EditCardScreen,
+  SignUpScreen,
+  LoginScreen,
 };
