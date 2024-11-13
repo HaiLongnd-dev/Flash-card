@@ -4,6 +4,8 @@ import {AppButton, AppText} from '../../components';
 import {styles} from './style';
 import {colors} from '../../themes/color';
 import SvgComponent from '../../assets/svg';
+import Navigator from '../../navigation/NavigationService';
+import SCREEN_NAME from '../../navigation/ScreenName';
 
 const LoginScreenView = () => {
   const [showPassword, setShowPassword] = useState(true);
@@ -36,11 +38,17 @@ const LoginScreenView = () => {
             )}
           </TouchableOpacity>
         </View>
+        <View style={styles.forgot}>
+          <AppText>Forgot Password</AppText>
+        </View>
       </View>
       <AppButton nameButton="Sign In" handleButton={() => {}} />
       <View style={styles.signUp}>
         <AppText>Don't have an account?</AppText>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            Navigator.navigateTo(SCREEN_NAME.MANUAL.SIGN_UP);
+          }}>
           <AppText color={colors.background}> Sign Up</AppText>
         </TouchableOpacity>
       </View>

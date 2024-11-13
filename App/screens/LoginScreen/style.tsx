@@ -27,6 +27,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 10,
   },
+  forgot: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    width: '100%',
+  },
   signUp: {
     marginTop: 10,
     justifyContent: 'center',

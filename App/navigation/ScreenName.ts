@@ -11,7 +11,8 @@ const MANUAL = {
   STUDY_SCREEN: 'STUDY_SCREEN',
   EDIT_TOPIC: 'EDIT_TOPIC',
   EDIT_CARD: 'EDIT_CARD',
-  LOG_IN:'LOG_IN'
+  LOG_IN:'LOG_IN',
+  SIGN_UP:'SIGN_UP'
 } as const;
 
 const ROOT = {

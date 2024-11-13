@@ -13,7 +13,7 @@ const AppButton = ({nameButton, handleButton}: AppButtonProps) => {
       <TouchableOpacity style={styles.container} onPress={handleButton}>
         <View style={styles.title}>
           <AppText color={colors.white} fontSize={20}>
-            {nameButton}
+            {nameButton.toUpperCase()}
           </AppText>
         </View>
       </TouchableOpacity>

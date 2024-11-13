@@ -15,6 +15,7 @@ import {
   FlashcardListScreen,
   FlashcardScreen,
   LoginScreen,
+  SignUpScreen,
   StudyScreen,
   TopicListScreen,
 } from '../screens';
@@ -100,6 +101,10 @@ function StackScreens() {
         <Stack.Screen
           name={SCREEN_NAME.MANUAL.LOG_IN}
           component={LoginScreen}
+        />
+        <Stack.Screen
+          name={SCREEN_NAME.MANUAL.SIGN_UP}
+          component={SignUpScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
