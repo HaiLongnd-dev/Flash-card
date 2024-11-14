@@ -28,7 +28,6 @@ export const styles = StyleSheet.create({
     marginRight: 10,
   },
   forgot: {
-    justifyContent: 'flex-end',
     alignItems: 'flex-end',
     width: '100%',
   },
