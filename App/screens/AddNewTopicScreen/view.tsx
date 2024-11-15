@@ -34,6 +34,7 @@ const AddNewTopicView = ({addTopic}: AddNewTopicViewProps) => {
       title: values.title,
       icon: values.icon,
       iconColor: values.iconColor,
+      cards: [],
     };
     addTopic(topic);
     setTopicName('');

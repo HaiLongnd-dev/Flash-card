@@ -24,8 +24,8 @@ import WordListCalled, {wordListRef} from './Components/wordListCalled';
 
 interface AddNewCardViewProps {
   topic: TTopic;
-  cardList: TCard[];
-  addCard: (card: TCard) => void;
+  cardList?: TCard[];
+  addCard: (topicId: TTopic['id'], card: TCard) => void;
   checkWord: (word: string, callback: (data) => void) => void;
 }
 export interface AddNewCardViewRef {
@@ -121,11 +121,10 @@ const AddNewCardView = forwardRef<AddNewCardViewRef, AddNewCardViewProps>(
       if (cardContent === '' || checkLength(cardContent)) {
         return;
       }
-      addCard(card);
+      addCard(topic.id, card);
       setCardContent('');
       setShowListCalled(false);
     };
-
     return (
       <AppContainer
         backButton={true}

@@ -15,7 +15,6 @@ import {AppButton, AppText} from '../../components';
 import Navigator from '../../navigation/NavigationService';
 import SCREEN_NAME from '../../navigation/ScreenName';
 import {TTopic} from '../../types/Topic';
-import {DayOfWeek, TStudySession} from '../../types/Study';
 
 interface FlashcardListScreenViewProps {
   topic: TTopic;
@@ -36,15 +35,18 @@ const FlashcardListScreenView = ({
   };
   const RightButton = () => {
     return (
-      <TouchableOpacity onPress={() => {addFlashcard(topic)}}>
+      <TouchableOpacity
+        onPress={() => {
+          addFlashcard(topic);
+        }}>
         <SvgComponent name="ADD" color={colors.white} size={30} />
       </TouchableOpacity>
     );
   };
 
-  const convertedFlashcardList = cardList.map(item => {
-    return {...item, key: item.id};
-  });
+  // const convertedFlashcardList = cardList.map(item => {
+  //   return {...item, key: item.id};
+  // });
 
   return (
     <AppContainer
@@ -52,14 +54,14 @@ const FlashcardListScreenView = ({
       rightButton={<RightButton />}
       backButton={true}
       title="FLASHCARD LIST">
-      {cardList.length === 0 ? (
+      {/* {cardList.length === 0 ? (
         <AppText fontSize={20} align="center">
           Have no card!
         </AppText>
-      ) : (
+      ) : ( */}
         <>
           <SwipeListView
-            data={convertedFlashcardList}
+            data={cardList}
             renderItem={RenderItem}
             renderHiddenItem={(data, rowMap) => (
               <RenderHiddenItem
@@ -79,7 +81,7 @@ const FlashcardListScreenView = ({
             <AppButton nameButton="LET'S STUDY! " handleButton={handleButton} />
           </View>
         </>
-      )}
+      {/* )} */}
     </AppContainer>
   );
 };

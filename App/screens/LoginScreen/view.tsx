@@ -30,6 +30,8 @@ const LoginScreenView = () => {
             formik.values.email,
             formik.values.password,
           );
+        formik.resetForm();
+
         Navigator.navigateTo(SCREEN_NAME.MANUAL.ROOT); // Navigate to the main screen on successful login
       } catch (error) {
         setIsError(true);
@@ -93,7 +95,7 @@ const LoginScreenView = () => {
       </View>
       <AppButton nameButton="Sign In" handleButton={formik.handleSubmit} />
       {isError && (
-        <View style={styles.flexEnd}>
+        <View style={styles.warning}>
           <AppText style={{color: colors.red}}>
             The Username or Password is Incorrect!
           </AppText>

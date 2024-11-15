@@ -39,6 +39,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 10,
   },
+
   flexEnd: {
     width: '100%',
     alignItems: 'flex-end',
@@ -48,5 +49,9 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
+  },
+  warning: {
+    marginTop: 10,
+    marginLeft:10
   },
 });

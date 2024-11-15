@@ -1,6 +1,8 @@
 import {TTopic} from '../../types/Topic';
 import * as typeActions from '../actions/types/topicActionType';
 import * as appActions from '../actions/types/appActionType';
+import * as cardActions from '../actions/types/cardActionType';
+
 export interface ITopicState {
   topics: TTopic[];
 }
@@ -8,7 +10,10 @@ export interface ITopicState {
 const initState: ITopicState = {topics: []};
 export default function topicReducer(
   state: ITopicState = initState,
-  action: typeActions.ITopicAction | appActions.IAppAction,
+  action:
+    | typeActions.ITopicAction
+    | appActions.IAppAction
+    | cardActions.ICardAction,
 ): ITopicState {
   switch (action.type) {
     case typeActions.TopicActionType.GET_LIST:
@@ -35,6 +40,24 @@ export default function topicReducer(
         ...state,
         topics: state.topics.filter(
           topic => topic.id !== action.payload?.params?.id,
+        ),
+      };
+    case cardActions.CardActionType.GET_LIST:
+      return {
+        ...state,
+        topics: state.topics.map(topic =>
+          topic.id === action.payload.params.topic.id
+            ? {...topic, cards: action.payload.params.topic.cards}
+            : topic,
+        ),
+      };
+    case cardActions.CardActionType.ADD:
+      return {
+        ...state,
+        topics: state.topics.map(topic =>
+          topic.id === action.payload.params.topicId
+            ? {...topic, cards: [...topic.cards, action.payload.params.card]}
+            : topic,
         ),
       };
     case appActions.AppActionType.CLEAR_ALL_DATA:

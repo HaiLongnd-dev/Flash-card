@@ -43,7 +43,6 @@ const HomeScreenView = ({
   const [searchInput, setSearchInput] = useState('');
   const [cardListFiltered, setCardListFiltered] = useState<TCard[]>([]);
   const [availableSearch, setAvailableSearch] = useState(false);
-
   const debounce = (fn: Function, ms = 500) => {
     let timeoutId: ReturnType<typeof setTimeout>;
     return function (this: any, ...args: any[]) {

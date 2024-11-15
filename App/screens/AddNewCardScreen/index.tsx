@@ -7,8 +7,8 @@ import {TCard} from '../../types/Card';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch} from '../../redux/store';
 import {addCardAction, searchAction} from '../../redux/actions/cardAction';
-import {getListCardByIdTopic} from '../../redux/selectors/cardSelector';
 import {TCallback} from '../../redux/actions/types/actionTypeBase';
+import {TTopic} from '../../types/Topic';
 export type AddTopicRouteProp = RouteProp<
   NavigationStackParamList,
   typeof SCREEN_NAME.MANUAL.ADD_NEW_CARD
@@ -20,10 +20,10 @@ type AddNewCardViewProps = {
 
 const AddNewCardScreen = ({route}: AddNewCardViewProps) => {
   const {topic} = route.params;
+  const cardList = topic.cards;
   const dispatch = useDispatch<AppDispatch>();
-  const cardList: TCard[] = useSelector(getListCardByIdTopic(topic.id));
-  const addCard = (card: TCard) => {
-    dispatch(addCardAction(card));
+  const addCard = (topicId: TTopic['id'], card: TCard) => {
+    dispatch(addCardAction(topicId, card));
   };
   const AddNewCardViewRef = useRef<AddNewCardViewRef>(null);
   const checkWord = (word: string) => {

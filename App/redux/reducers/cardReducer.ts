@@ -11,16 +11,8 @@ export default function cardReducer(
   action: cardActions.ICardAction | appActions.IAppAction,
 ): ICardState {
   switch (action.type) {
-    case cardActions.CardActionType.GET_LIST:
-      return {
-        ...state,
-      };
-    case cardActions.CardActionType.ADD:
-      return {
-        ...state,
-        cards: [...state.cards, action.payload.params.card],
-      };
     case cardActions.CardActionType.EDIT:
+      console.log('here')
       return {
         ...state,
         cards: state.cards.map(card =>

@@ -1,5 +1,5 @@
 import {Image, TouchableOpacity, View} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './style';
 import {AppText} from '../../components';
 import {colors} from '../../themes/color';
@@ -8,6 +8,7 @@ import SvgComponent from '../../assets/svg';
 import StudyProgressChart from './Components/Chart';
 import SCREEN_NAME from '../../navigation/ScreenName';
 import auth from '@react-native-firebase/auth';
+import ConfirmModal from '../../components/Core/ConfirmModal';
 
 interface AccountScreenViewProps {
   cardAdded: number;
@@ -19,13 +20,20 @@ const AccountScreenView = ({
   totalStudyTime,
   getTotalTimeAction,
 }: AccountScreenViewProps) => {
+  const [modalVisible, setModalVisible] = useState(false);
   useEffect(() => {
     getTotalTimeAction;
   }, []);
   const logOut = () => {
+    setModalVisible(true);
+  };
+  const handleConfirm = () => {
     auth()
       .signOut()
       .then(() => console.log('User signed out!'));
+  };
+  const handleCancel = () => {
+    setModalVisible(false);
   };
   return (
     <View style={styles.container}>
@@ -79,6 +87,12 @@ const AccountScreenView = ({
         </View>
       </View>
       <StudyProgressChart />
+      <ConfirmModal
+        message="Are you sure to logout?"
+        onCancel={handleCancel}
+        onConfirm={handleConfirm}
+        visible={modalVisible}
+      />
     </View>
   );
 };

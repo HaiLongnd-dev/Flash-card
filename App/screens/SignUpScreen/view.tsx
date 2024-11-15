@@ -1,4 +1,4 @@
-import {Alert, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {TextInput, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import {AppButton, AppText} from '../../components';
 import {styles} from './style';
@@ -23,15 +23,11 @@ const SignUpScreenView = () => {
     const {email, password} = values;
 
     try {
-      // Create a new user with Firebase
       await auth().createUserWithEmailAndPassword(email, password);
-      Alert.alert('Success', 'User account created!');
 
-      // Navigate to the main screen after sign-up
       Navigator.navigateTo(SCREEN_NAME.MANUAL.ROOT);
     } catch (error) {
       console.log(error);
-      Alert.alert('Error', error.message);
     }
   };
   const initialValues: FormikProps = {
