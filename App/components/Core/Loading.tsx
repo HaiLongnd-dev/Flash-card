@@ -1,18 +1,24 @@
-import React from 'react';
-import {View, Text, ActivityIndicator, StyleSheet} from 'react-native';
+// Loading.js
+import React, {useEffect} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {firebase} from '@react-native-firebase/auth';
+import Navigator from '../../navigation/NavigationService';
+import SCREEN_NAME from '../../navigation/ScreenName';
 
-export const Loading = () => {
-  return (
-    <View style={styles.container}>
-      <Text>Loading</Text>
-      <ActivityIndicator size="large" />
-    </View>
-  );
+const Loading = () => {
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      user
+        ? Navigator.navigateTo(SCREEN_NAME.MANUAL.ROOT)
+        : Navigator.navigateTo(SCREEN_NAME.MANUAL.LOG_IN);
+    });
+
+    return () => unsubscribe(); // Clean up the listener on component unmount
+  }, [navigation]);
+
+  return null; // Return null or a loading spinner if needed
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+
+export default Loading;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, {Path} from 'react-native-svg';
 import {colors} from '../../../themes/color';
-const SVGComponent = (size = 25, color = colors.red) => (
+const SVGComponent = ({size = 25, color = colors.red}) => (
   <Svg
     width={size}
     height={size + 1}

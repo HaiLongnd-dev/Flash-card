@@ -7,6 +7,7 @@ import Navigator from '../../navigation/NavigationService';
 import SvgComponent from '../../assets/svg';
 import StudyProgressChart from './Components/Chart';
 import SCREEN_NAME from '../../navigation/ScreenName';
+import auth from '@react-native-firebase/auth';
 
 interface AccountScreenViewProps {
   cardAdded: number;
@@ -21,6 +22,11 @@ const AccountScreenView = ({
   useEffect(() => {
     getTotalTimeAction;
   }, []);
+  const logOut = () => {
+    auth()
+      .signOut()
+      .then(() => console.log('User signed out!'));
+  };
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -42,10 +48,8 @@ const AccountScreenView = ({
               Nghe An, Viet Nam
             </AppText>
           </View>
-          <TouchableOpacity
-            style={styles.rightBtn}
-            onPress={() => Navigator.navigateTo(SCREEN_NAME.MANUAL.LOG_IN)}>
-            <SvgComponent name="OPTION" color={colors.white} size={30} />
+          <TouchableOpacity style={styles.rightBtn} onPress={logOut}>
+            <SvgComponent name="LOG_OUT" color={colors.white} size={30} />
           </TouchableOpacity>
         </View>
       </View>

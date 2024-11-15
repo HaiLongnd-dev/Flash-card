@@ -23,6 +23,7 @@ import AddNewCardScreen from '../screens/AddNewCardScreen';
 import {TTopic} from '../types/Topic';
 import {TCard} from '../types/Card';
 import {TStudySession} from '../types/Study';
+import Loading from '../components/Core/Loading';
 export type StackParamList = {
   HOME_SCREEN: undefined;
   ADD_CARD_SCREEN: undefined;
@@ -60,7 +61,8 @@ function StackScreens() {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName={SCREEN_NAME.MANUAL.ROOT}>
+        initialRouteName={SCREEN_NAME.MANUAL.LOADING}>
+        <Stack.Screen name={SCREEN_NAME.MANUAL.LOADING} component={Loading} />
         <Stack.Screen name={SCREEN_NAME.MANUAL.ROOT} component={RootScreen} />
         <Stack.Screen
           name={SCREEN_NAME.MANUAL.ADD_NEW_TOPIC}

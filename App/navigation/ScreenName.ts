@@ -1,4 +1,6 @@
 const MANUAL = {
+  //Loading screen
+  LOADING:'LOADING',
   // Root screens
   ROOT: 'ROOT',
   // Other screen
