@@ -9,6 +9,7 @@ import {AppDispatch} from '../../redux/store';
 import {addCardAction, searchAction} from '../../redux/actions/cardAction';
 import {TCallback} from '../../redux/actions/types/actionTypeBase';
 import {TTopic} from '../../types/Topic';
+import {getListCardByIdTopic} from '../../redux/selectors';
 export type AddTopicRouteProp = RouteProp<
   NavigationStackParamList,
   typeof SCREEN_NAME.MANUAL.ADD_NEW_CARD
@@ -20,7 +21,7 @@ type AddNewCardViewProps = {
 
 const AddNewCardScreen = ({route}: AddNewCardViewProps) => {
   const {topic} = route.params;
-  const cardList = topic.cards;
+  const cardList = useSelector(getListCardByIdTopic(topic.id));
   const dispatch = useDispatch<AppDispatch>();
   const addCard = (topicId: TTopic['id'], card: TCard) => {
     dispatch(addCardAction(topicId, card));

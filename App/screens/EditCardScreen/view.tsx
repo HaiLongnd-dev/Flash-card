@@ -23,7 +23,7 @@ interface EditCardScreenViewProps {
   card: TCard;
   available: boolean;
 
-  editCard: (id: TCard['id'], card: Partial<TCard>) => void;
+  editCard: (id: TCard['id'], card: Partial<TCard>, topicId) => void;
   checkWord: (word: string, callback: (data) => void) => void;
 }
 export interface EditCardViewRef {
@@ -84,16 +84,12 @@ const EditCardScreenView = forwardRef<EditCardViewRef, EditCardScreenViewProps>(
         meaning: `${data.meaning}`,
         audio: `${data.audio}`,
       };
-      editCard(card.id, editedCard);
+      editCard(card.id, editedCard, card.idTopic);
       setModalVisible(false);
       Navigator.goBack();
     };
-
     const handleCancel = () => {
       setModalVisible(false);
-    };
-    const checkLength = (cardContent: string) => {
-      if (cardContent.length > 20) return true;
     };
     const HandleButton = () => {
       return (

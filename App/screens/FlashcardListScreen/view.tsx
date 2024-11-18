@@ -44,9 +44,9 @@ const FlashcardListScreenView = ({
     );
   };
 
-  // const convertedFlashcardList = cardList.map(item => {
-  //   return {...item, key: item.id};
-  // });
+  const convertedFlashcardList = cardList.map(item => {
+    return {...item, key: item.id};
+  });
 
   return (
     <AppContainer
@@ -54,14 +54,14 @@ const FlashcardListScreenView = ({
       rightButton={<RightButton />}
       backButton={true}
       title="FLASHCARD LIST">
-      {/* {cardList.length === 0 ? (
+      {cardList.length === 0 ? (
         <AppText fontSize={20} align="center">
           Have no card!
         </AppText>
-      ) : ( */}
+      ) : (
         <>
           <SwipeListView
-            data={cardList}
+            data={convertedFlashcardList}
             renderItem={RenderItem}
             renderHiddenItem={(data, rowMap) => (
               <RenderHiddenItem
@@ -81,7 +81,7 @@ const FlashcardListScreenView = ({
             <AppButton nameButton="LET'S STUDY! " handleButton={handleButton} />
           </View>
         </>
-      {/* )} */}
+      )}
     </AppContainer>
   );
 };

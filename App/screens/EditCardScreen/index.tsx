@@ -42,8 +42,8 @@ const EditCardScreen = ({route}: EditCardScreenProps) => {
 
   const {card} = route.params;
   const dispatch = useDispatch<AppDispatch>();
-  const editCard = (id: TCard['id'], card: Partial<TCard>) => {
-    dispatch(editCardAction(id, card));
+  const editCard = (id: TCard['id'], card: Partial<TCard>, idTopic) => {
+    dispatch(editCardAction(id, card, idTopic));
     setAvailable(false);
   };
 

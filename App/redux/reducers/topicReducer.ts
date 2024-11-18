@@ -42,6 +42,7 @@ export default function topicReducer(
           topic => topic.id !== action.payload?.params?.id,
         ),
       };
+    //CARD REDUCER
     case cardActions.CardActionType.GET_LIST:
       return {
         ...state,
@@ -60,6 +61,38 @@ export default function topicReducer(
             : topic,
         ),
       };
+    case cardActions.CardActionType.REMOVE:
+      return {
+        ...state,
+        topics: state.topics.map(topic =>
+          topic.id === action.payload.params.topicId
+            ? {
+                ...topic,
+                cards: topic.cards.filter(
+                  card => card.id != action.payload.params.id,
+                ),
+              }
+            : topic,
+        ),
+      };
+
+    case cardActions.CardActionType.EDIT:
+      return {
+        ...state,
+        topics: state.topics.map(topic =>
+          topic.id === action.payload.params.idTopic
+            ? {
+                ...topic,
+                cards: topic.cards.map(card =>
+                  card.id === action.payload.params.id
+                    ? {...card, ...action.payload.params.card}
+                    : card,
+                ),
+              }
+            : topic,
+        ),
+      };
+
     case appActions.AppActionType.CLEAR_ALL_DATA:
       console.log('clear');
       return initState;

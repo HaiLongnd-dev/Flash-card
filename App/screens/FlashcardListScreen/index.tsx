@@ -27,7 +27,7 @@ type TopicFlashcardViewProps = {
 const FlashcardListScreen = ({route}: TopicFlashcardViewProps) => {
   const {topic} = route.params;
   const dispatch = useDispatch<AppDispatch>();
-  const cardList: TCard[] = topic.cards;
+  const cardList = useSelector(getListCardByIdTopic(topic.id));
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedCardId, setSelectedCardId] = useState<TCard['id']>(null);
   const handleDelete = (id: TCard['id']) => {
@@ -37,7 +37,7 @@ const FlashcardListScreen = ({route}: TopicFlashcardViewProps) => {
 
   const handleConfirm = () => {
     if (selectedCardId !== null) {
-      dispatch(removeCardAction(selectedCardId));
+      dispatch(removeCardAction(selectedCardId, topic.id));
     }
     setModalVisible(false);
     setSelectedCardId(null);

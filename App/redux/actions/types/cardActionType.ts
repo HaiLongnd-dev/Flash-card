@@ -20,10 +20,15 @@ export interface ISearchAction extends IActionBase<{word: string}> {
   type: typeof CardActionType.SEARCH;
 }
 export interface IEditCardAction
-  extends IActionBase<{id: TCard['id']; card: Partial<TCard>}> {
+  extends IActionBase<{
+    id: TCard['id'];
+    card: Partial<TCard>;
+    idTopic: TTopic['id'];
+  }> {
   type: typeof CardActionType.EDIT;
 }
-export interface IRemoveCardAction extends IActionBase<{id: TCard['id']}> {
+export interface IRemoveCardAction
+  extends IActionBase<{id: TCard['id']; topicId: TTopic['id']}> {
   type: typeof CardActionType.REMOVE;
 }
 export interface IGetListCardAction extends IActionBase<{topic: TTopic}> {
